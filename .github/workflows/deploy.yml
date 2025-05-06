@@ -26,7 +26,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: aws-ec2
+    runs-on: ec2-portfolio-instance
 
     steps:
       - name: Login to Docker Hub
