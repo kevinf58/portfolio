@@ -1,0 +1,45 @@
+# CI/CD WORKFLOW FOR REFLECTIFY
+
+name: CICD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/reflectify .
+
+      - name: Publish Docker image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/reflectify:latest
+
+  deploy:
+    needs: build
+    runs-on: aws-ec2
+
+    steps:
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Cleanup Docker resources
+        run: |
+          docker container stop reflectify || true
+          docker container rm reflectify || true
+          docker image prune -a -f
+
+      - name: Pull Docker image
+        run: docker pull ${{ secrets.DOCKER_USERNAME }}/reflectify:latest
+
+      - name: Run new container
+        run: docker run -d -p 3000:3000 --name reflectify ${{ secrets.DOCKER_USERNAME }}/reflectify
