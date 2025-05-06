@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div className="font-sans"> abc</div>;
+  return <div className='font-sans'> abc</div>;
 }
