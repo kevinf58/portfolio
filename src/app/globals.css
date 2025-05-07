@@ -1,15 +1,11 @@
 @import 'tailwindcss';
 
+/**
+ * default to dark mode
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-pt-serif);
+  --background: #212527;
+  --foreground: #f1efdd;
 }
 
 /**
@@ -22,178 +18,111 @@
   }
 }
 
+@theme {
+  /**
+   * breakpoints
+  */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+
+  /**
+   * colors
+  */
+  --color-primary: #c17134;
+  --color-black: #212527;
+  --color-white: #f1efdd;
+  --color-green: #f07174;
+  --color-red: #74f071;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-pt-serif);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), Helvetica, sans-serif;
 }
 
-/**
- * css style reset
-*/
-.disable-mouse-events {
-  pointer-events: none;
-}
-
-html {
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
 }
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
+
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 6. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 7. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 8. Avoid text overflows */
+p,
 h1,
 h2,
 h3,
 h4,
 h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-  margin: 0;
-  padding: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-body.no-scroll {
-  margin: 0;
-  height: 100%;
-  overflow: hidden;
-}
-ol,
-ul {
-  list-style: none;
-}
-blockquote,
-q {
-  quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: '';
-  content: none;
+h6 {
+  overflow-wrap: break-word;
 }
 
-img {
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-
-  -khtml-user-select: none;
-  -o-user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
 }
-button,
-input[type='submit'],
-input[type='reset'] {
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
 }
 
-input,
-textarea,
-select {
-  font: inherit;
-  color: inherit;
-  background: none;
-  border: none;
-  outline: none;
+/*
+  10. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
 }
