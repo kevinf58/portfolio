@@ -51,6 +51,10 @@ body {
   font-family: var(--font-inter), Helvetica, sans-serif;
 }
 
+/**
+ * css reset
+*/
+
 /* 1. Use a more-intuitive box-sizing model */
 *,
 *::before,
