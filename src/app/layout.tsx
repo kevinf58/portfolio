@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, PT_Serif } from 'next/font/google';
 import './globals.css';
+import NavBar from '@/components/common/NavBar';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -27,7 +28,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${inter.variable} ${ptSerif.variable} antialiased`}>{children}</body>
+      <body
+        className={`${inter.variable} ${ptSerif.variable} antialiased w-screen selection:bg-[#088484]`}
+      >
+        <NavBar />
+        {children}
+      </body>
     </html>
   );
 }
