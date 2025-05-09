@@ -2,7 +2,7 @@ import Link from '@/components/common/Link';
 
 const Footer = () => {
   return (
-    <section className='w-full flex flex-col mt-auto items-center px-14 py-5 bg-light-black font-medium'>
+    <section className='w-full flex flex-col mt-auto items-center px-14 py-5 bg-light-black font-medium text-xs'>
       <div>
         Built with
         <Link href={'https://nextjs.org/'} underlined>
