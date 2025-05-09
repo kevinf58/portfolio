@@ -5,7 +5,7 @@ import Blinker from '@/components/common/Blinker';
 
 export default function Home() {
   return (
-    <section className='h-screen w-full absolute top-0 left-0 flex flex-col justify-center font-medium bg-white/2'>
+    <section className='h-screen w-full absolute top-0 left-0 flex flex-col justify-center font-medium bg-white/2 -z-10'>
       <div className='w-[55%] pl-20'>
         <div className='flex items-end pb-2'>
           <h1 className='text-5xl font-bold'>{"Hi, I'm Kevin"}</h1>
@@ -36,7 +36,7 @@ export default function Home() {
           </Link>
         </h6>
       </div>
-      <div className='flex w-full justify-center'>
+      <div className='flex justify-center w-full absolute bottom-6'>
         <div className='flex flex-col whitespace-nowrap text-nowrap'>
           <h6 className='text-white/40 whitespace-nowrap text-nowrap'>Scroll Down</h6>
           <BsChevronCompactDown className='w-full h-auto text-white/40 px-4 -mt-4 hover:animate-bounce cursor-pointer' />
