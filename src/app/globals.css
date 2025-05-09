@@ -36,6 +36,32 @@
   --color-white: #f1efdd;
   --color-green: #f07174;
   --color-red: #74f071;
+
+  /**
+   * animations
+  */
+  --animate-blink: blink 1.3s steps(1, end) infinite;
+  --animate-bounce: bounce 1s infinite ease-out;
+
+  @keyframes blink {
+    0%,
+    100% {
+      visibility: visible;
+    }
+    50% {
+      visibility: hidden;
+    }
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(5px);
+    }
+  }
 }
 
 @theme inline {
@@ -60,11 +86,6 @@ body {
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-/* 2. Remove default margin */
-* {
-  margin: 0;
 }
 
 /* 3. Enable keyword animations */

@@ -5,4 +5,6 @@ export type LinkProps = {
   children: JSX.Element | string;
   disabled?: boolean;
   href: string | UrlObject;
+  underlined?: boolean;
+  className?: string;
 };
