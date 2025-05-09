@@ -1,6 +1,7 @@
 import Link from '@/components/common/Link';
 import { PiMapPinSimpleFill } from 'react-icons/pi';
 import { BsChevronCompactDown } from 'react-icons/bs';
+import Blinker from '@/components/common/Blinker';
 
 export default function Home() {
   return (
@@ -8,7 +9,7 @@ export default function Home() {
       <div className='w-[55%] pl-20'>
         <div className='flex items-end pb-2'>
           <h1 className='text-5xl font-bold'>{"Hi, I'm Kevin"}</h1>
-          <div className='h-1.5 w-6 bg-primary animate-blink mb-1.5 ml-1' />
+          <Blinker className='mb-1.5 ml-1' />
         </div>
         <div className='flex gap-1.5 items-center'>
           <h6 className='text-lg'>I’m an aspiring developer based in Toronto, ON</h6>
