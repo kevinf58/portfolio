@@ -39,7 +39,7 @@ export default function Home() {
         </div>
         <ScrollDown />
       </section>
-      <div className='h-screen w-screen snap-start' id='scroll' />
+      <div className='h-screen w-full snap-start' id='scroll' />
     </main>
   );
 }
