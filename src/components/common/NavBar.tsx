@@ -6,7 +6,7 @@ import { FaCode } from 'react-icons/fa';
 const NavBar = () => {
   return (
     <div
-      className={`w-full fixed top-0 left-0 z-50 text-lg font-bold px-14 py-5 flex justify-between bg-light-black`}
+      className={`w-full fixed top-0 left-0 z-10 text-lg font-bold px-14 py-5 flex justify-between bg-light-black`}
     >
       <div className='flex items-center gap-2'>
         <FaCode />

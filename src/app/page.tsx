@@ -1,11 +1,11 @@
 import Link from '@/components/common/Link';
 import { PiMapPinSimpleFill } from 'react-icons/pi';
-import { BsChevronCompactDown } from 'react-icons/bs';
 import Blinker from '@/components/common/Blinker';
+import ScrollDown from '@/components/ScrollDown';
 
 export default function Home() {
   return (
-    <section className='h-screen snap-y snap-mandatory overflow-y-scroll scroll-smooth'>
+    <main className='h-screen snap-y snap-mandatory overflow-y-scroll scroll-smooth'>
       <section className='relative h-full w-full flex flex-col justify-center font-medium bg-light-black snap-start'>
         <div className='w-[55%] pl-20'>
           <div className='flex items-end pb-2'>
@@ -37,14 +37,9 @@ export default function Home() {
             </Link>
           </h6>
         </div>
-        <div className='flex justify-center w-full absolute bottom-6'>
-          <div className='flex flex-col whitespace-nowrap text-nowrap'>
-            <h6 className='text-white/40 whitespace-nowrap text-nowrap'>Scroll Down</h6>
-            <BsChevronCompactDown className='w-full h-auto text-white/40 px-4 -mt-4 hover:animate-bounce cursor-pointer' />
-          </div>
-        </div>
+        <ScrollDown />
       </section>
-      <div className='h-screen w-screen snap-start' />
-    </section>
+      <div className='h-screen w-screen snap-start' id='scroll' />
+    </main>
   );
 }
