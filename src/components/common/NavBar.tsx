@@ -5,7 +5,9 @@ import { FaCode } from 'react-icons/fa';
 
 const NavBar = () => {
   return (
-    <section className='w-full text-lg font-bold bg-white/2 px-14 py-5 flex justify-between'>
+    <div
+      className={`w-full fixed top-0 left-0 z-10 text-lg font-bold px-14 py-5 flex justify-between bg-light-black`}
+    >
       <div className='flex items-center gap-2'>
         <FaCode />
         <h1>Kevin Feng</h1>
@@ -16,7 +18,7 @@ const NavBar = () => {
         <Link href={'/blog'}>Blog</Link>
         <Link href={'/contact'}>Contact</Link>
       </div>
-    </section>
+    </div>
   );
 };
 

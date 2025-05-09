@@ -33,9 +33,43 @@
   */
   --color-primary: #c17134;
   --color-black: #212527;
+  --color-light-black: #25292b;
   --color-white: #f1efdd;
   --color-green: #f07174;
   --color-red: #74f071;
+
+  /**
+   * shadows
+  */
+  --shadow-primary: 0px 4px 20px 0px rgba(0, 0, 0, 0.2);
+
+  /**
+   * animations
+  */
+  --animate-blink: blink 1.3s steps(1, end) infinite;
+  --animate-bounce: bounce 1s infinite ease-out;
+
+  @keyframes blink {
+    0%,
+    100% {
+      visibility: visible;
+    }
+    50% {
+      visibility: hidden;
+    }
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+      visibility: visible;
+    }
+    50% {
+      transform: translateY(5px);
+      visibility: hidden;
+    }
+  }
 }
 
 @theme inline {
@@ -60,11 +94,6 @@ body {
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-/* 2. Remove default margin */
-* {
-  margin: 0;
 }
 
 /* 3. Enable keyword animations */
