@@ -33,9 +33,15 @@
   */
   --color-primary: #c17134;
   --color-black: #212527;
+  --color-light-black: #25292b;
   --color-white: #f1efdd;
   --color-green: #f07174;
   --color-red: #74f071;
+
+  /**
+   * shadows
+  */
+  --shadow-primary: 0px 4px 20px 0px rgba(0, 0, 0, 0.2);
 
   /**
    * animations
