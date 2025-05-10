@@ -6,5 +6,7 @@ export type LinkProps = {
   disabled?: boolean;
   href: string | UrlObject;
   underlined?: boolean;
+  title?: string;
+  target?: string;
   className?: string;
 };

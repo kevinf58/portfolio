@@ -13,10 +13,18 @@ const NavBar = () => {
         <h1>Kevin Feng</h1>
       </div>
       <div className='flex ml-auto gap-6'>
-        <Link href={'/'}>Home</Link>
-        <Link href={'projects'}>Projects</Link>
-        <Link href={'/blog'}>Blog</Link>
-        <Link href={'/contact'}>Contact</Link>
+        <Link href={'/'} className='px-1.5'>
+          Home
+        </Link>
+        <Link href={'projects'} className='px-1.5'>
+          Projects
+        </Link>
+        <Link href={'/blog'} className='px-1.5'>
+          Blog
+        </Link>
+        <Link href={'/contact'} className='px-1.5'>
+          Contact
+        </Link>
       </div>
     </header>
   );

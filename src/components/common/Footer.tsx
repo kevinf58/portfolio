@@ -11,22 +11,32 @@ const Footer = () => {
           <Link href={'/blog'}>Blog</Link>
           <Link href={'/contact'}>Contact</Link>
         </div>
-        <div>
+        <div className='flex gap-1'>
           Built with
-          <Link href={'https://nextjs.org/'} underlined>
+          <Link
+            href={'https://nextjs.org/'}
+            underlined
+            title={`${'https://nextjs.org/'}`}
+            target='_blank'
+          >
             Next.js
           </Link>
           •
-          <Link href={'https://www.typescriptlang.org/'} underlined>
+          <Link
+            href={'https://www.typescriptlang.org/'}
+            underlined
+            title={`${'https://www.typescriptlang.org/'}`}
+            target='_blank'
+          >
             TypeScript
           </Link>
           •
-          <Link href={'https://react.dev/'} underlined>
+          <Link href={'https://react.dev/'} underlined title={`${'https://react.dev/'}`} target='_blank'>
             React
           </Link>
         </div>
-        <div>
-          Want to read about my journey developing this web app?{' '}
+        <div className='flex gap-1'>
+          Want to read about my journey developing this web app?
           <Link href={'https://react.dev/'} underlined className='text-nowrap'>
             Click here!
           </Link>
@@ -34,7 +44,7 @@ const Footer = () => {
       </div>
       <div className='w-full h-0.5 bg-white/10 rounded-full mb-8 mt-6' />
       <div className='w-full relative flex items-center justify-between mb-8'>
-        <div className='flex gap-2'>
+        <div className='flex items-center gap-2'>
           <a
             className='flex items-center justify-center w-7 h-7 border-1 border-white/20 rounded-full'
             href='https://www.linkedin.com/in/kfengg/'
