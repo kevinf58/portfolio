@@ -30,9 +30,9 @@ export default function Home() {
               </li>
             </ul>
           </div>
-          <h6>
+          <h6 className='flex gap-1'>
             {"Let's"}
-            <Link href={'/contact'} underlined>
+            <Link href={'/contact'} underlined className='px-0.5'>
               Connect!
             </Link>
           </h6>
