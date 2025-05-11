@@ -75,7 +75,17 @@ const Footer = () => {
             </Link>
           </>
         </div>
-        <h6 className='absolute left-1/2 transform -translate-x-1/2'>Released under the MIT License.</h6>
+        <h6 className='absolute left-1/2 transform -translate-x-1/2 flex gap-1'>
+          Released under the{' '}
+          <Link
+            underlined
+            href={'https://mit-license.org/'}
+            title={`${'https://mit-license.org/'}`}
+            target='_blank'
+          >
+            MIT License
+          </Link>
+        </h6>
         <h6 className='ml-auto'>© 2025 Kevin Feng. All rights reserved.</h6>
       </div>
     </section>
