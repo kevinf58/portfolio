@@ -30,10 +30,14 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${inter.variable} ${ptSerif.variable} antialiased h-screen w-screen selection:bg-[#088484]`}
+        className={`flex flex-col min-h-screen ${inter.variable} ${ptSerif.variable} antialiased selection:bg-[#088484]`}
       >
-        <NavBar />
-        {children}
+        <section className='min-h-screen'>
+          <header className='sticky top-0 z-10'>
+            <NavBar />
+          </header>
+          <main className='flex-grow'>{children}</main>
+        </section>
         <Footer />
       </body>
     </html>
