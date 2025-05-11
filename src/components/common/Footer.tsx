@@ -37,7 +37,7 @@ const Footer = () => {
         </div>
         <div className='flex gap-1'>
           Want to read about my journey developing this web app?
-          <Link href={'https://react.dev/'} underlined className='text-nowrap'>
+          <Link href={'https://react.dev/'} underlined>
             Click here!
           </Link>
         </div>
