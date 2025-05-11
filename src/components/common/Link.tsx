@@ -15,7 +15,7 @@ const Link = (props: LinkProps) => {
       title={props.title}
       target={props.target}
     >
-      {<span className='relative'>{props.children}</span>}
+      {<span className='relative whitespace-nowrap'>{props.children}</span>}
     </Nav>
   );
 };
