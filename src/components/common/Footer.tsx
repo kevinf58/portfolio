@@ -4,7 +4,7 @@ import { MdMail } from 'react-icons/md';
 
 const Footer = () => {
   return (
-    <section className='w-full flex flex-col mt-auto items-center px-28 py-10 bg-light-black font-medium text-xs'>
+    <footer className='sticky bottom-0 w-full items-center px-28 py-10 bg-light-black font-medium text-xs'>
       <div className='flex flex-col gap-4 items-center'>
         <div className='flex gap-6 !text-white/50'>
           <Link href={'projects'}>Projects</Link>
@@ -88,7 +88,7 @@ const Footer = () => {
         </h6>
         <h6 className='ml-auto'>© 2025 Kevin Feng. All rights reserved.</h6>
       </div>
-    </section>
+    </footer>
   );
 };
 

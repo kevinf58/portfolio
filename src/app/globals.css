@@ -42,12 +42,13 @@
    * shadows
   */
   --shadow-primary: 0px 4px 20px 0px rgba(0, 0, 0, 0.2);
+  --inset-shadow-primary: 0px 10px 20px 0px rgba (0, 0, 0, 0.2);
 
   /**
    * animations
   */
-  --animate-blink: blink 1.3s steps(1, end) infinite;
-  --animate-bounce: bounce 1s infinite ease-out;
+  --animate-blink: blink 1.4s steps(1, end) infinite;
+  --animate-bounce: bounce 0.9s infinite ease-out;
 
   @keyframes blink {
     0%,

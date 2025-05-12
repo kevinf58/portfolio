@@ -5,8 +5,8 @@ import ScrollDown from '@/components/ScrollDown';
 
 export default function Home() {
   return (
-    <main className='h-screen snap-y snap-mandatory overflow-y-scroll scroll-smooth'>
-      <section className='relative h-full w-full flex flex-col justify-center font-medium bg-light-black snap-start'>
+    <>
+      <section className='relative h-screen w-full flex flex-col justify-center font-medium bg-light-black'>
         <div className='w-[55%] pl-20'>
           <div className='flex items-end pb-2'>
             <h1 className='text-5xl font-bold'>{"Hi, I'm Kevin"}</h1>
@@ -39,7 +39,7 @@ export default function Home() {
         </div>
         <ScrollDown />
       </section>
-      <div className='h-screen w-full snap-start' id='scroll' />
-    </main>
+      <div className='h-screen w-full bg-green-300' id='scroll' />
+    </>
   );
 }

@@ -2,11 +2,19 @@
 
 import Link from './Link';
 import { FaCode } from 'react-icons/fa';
+import { useRef } from 'react';
+import { useScrollFollow } from '@/hooks/useScrollFollow';
 
 const NavBar = () => {
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const isScrolled = useScrollFollow(scrollRef, 2);
+
   return (
-    <header
-      className={`w-full fixed top-0 left-0 z-10 text-lg font-bold px-14 py-5 flex justify-between bg-light-black`}
+    <section
+      className={`w-full text-lg font-bold px-14 pb-5 pt-7 flex justify-between bg-light-black transition-transform duration-300 ease-out ${
+        isScrolled && 'shadow-primary'
+      }`}
+      ref={scrollRef}
     >
       <div className='flex items-center gap-2'>
         <FaCode />
@@ -26,7 +34,7 @@ const NavBar = () => {
           Contact
         </Link>
       </div>
-    </header>
+    </section>
   );
 };
 

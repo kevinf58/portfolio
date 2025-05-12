@@ -4,6 +4,7 @@ import './globals.css';
 import NavBar from '@/components/common/NavBar';
 import Footer from '@/components/common/Footer';
 
+
 const inter = Inter({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -30,10 +31,12 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${inter.variable} ${ptSerif.variable} antialiased h-screen w-screen selection:bg-[#088484]`}
+        className={`flex flex-col min-h-screen ${inter.variable} ${ptSerif.variable} antialiased selection:bg-[#088484]`}
       >
-        <NavBar />
-        {children}
+        <header className='sticky top-0 z-20'>
+          <NavBar />
+        </header>
+        <main className='flex-grow z-10'>{children}</main>
         <Footer />
       </body>
     </html>
