@@ -6,7 +6,7 @@ import ScrollDown from '@/components/ScrollDown';
 export default function Home() {
   return (
     <>
-      <section className='relative h-screen w-full flex flex-col justify-center font-medium bg-light-black shadow-primary'>
+      <section className='relative h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-light-black shadow-primary'>
         <div className='w-[55%] pl-20'>
           <div className='flex items-end pb-2'>
             <h1 className='text-5xl font-bold'>{"Hi, I'm Kevin"}</h1>
