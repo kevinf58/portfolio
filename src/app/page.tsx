@@ -2,6 +2,7 @@ import Link from '@/components/common/Link';
 import { PiMapPinSimpleFill } from 'react-icons/pi';
 import Blinker from '@/components/common/Blinker';
 import ScrollDown from '@/components/ScrollDown';
+import AwardSection from '@/components/common/AwardSection';
 
 export default function Home() {
   return (
@@ -39,7 +40,8 @@ export default function Home() {
         </div>
         <ScrollDown />
       </section>
-      <div className='h-screen w-full bg-green-300' id='scroll' />
+      <AwardSection />
+      <section className='h-screen w-full bg-green-300' />
     </>
   );
 }
