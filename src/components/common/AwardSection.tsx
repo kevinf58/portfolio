@@ -8,19 +8,19 @@ const AwardSection = () => {
       <div className='flex flex-wrap justify-center gap-10 pt-10 pb-8'>
         <Box>
           <div className='flex'>
-            <BiAward size={60} className='my-auto mr-6 text-primary' />
+            <BiAward size={70} className='my-auto mr-6 text-primary' />
             <div className='flex flex-col w-48'>
               <span className='text-sm font-semibold'>2025 TD Scholarship in Computer Science</span>
               <span className='text-xs text-white/50 my-1 break-words'>
                 Awarded for Academic Excellence
               </span>
-              <h6 className='text-sm text-white/50 mt-2'>$600</h6>
+              <h6 className='text-sm text-white/50 mt-2'>$1500</h6>
             </div>
           </div>
         </Box>
         <Box>
           <div className='flex'>
-            <BiAward size={60} className='my-auto mr-6 text-primary' />
+            <BiAward size={70} className='my-auto mr-6 text-primary' />
             <div className='flex flex-col w-48'>
               <span className='text-sm font-semibold'>2024 Toronto Tech Expo Winner</span>
               <span className='text-xs text-white/50 my-1 break-words'>
@@ -32,13 +32,13 @@ const AwardSection = () => {
         </Box>
         <Box>
           <div className='flex'>
-            <BiAward size={60} className='my-auto mr-6 text-primary' />
+            <BiAward size={70} className='my-auto mr-6 text-primary' />
             <div className='flex flex-col w-48'>
               <span className='text-sm font-semibold'>2025 TD Scholarship in Computer Science</span>
               <span className='text-xs text-white/50 my-1 break-words'>
                 Awarded for Academic Excellence
               </span>
-              <h6 className='text-sm text-white/50 mt-2'>$600</h6>
+              <h6 className='text-sm text-white/50 mt-2'>$1500</h6>
             </div>
           </div>
         </Box>
