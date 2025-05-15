@@ -1,6 +1,6 @@
-import { BoxProps } from '@/types/BoxProps';
+import { CardProps } from "@/types/CardProps";
 
-const Box = (props: BoxProps) => {
+const Card = (props: CardProps) => {
   return (
     <div className={`w-72 px-6 py-4 bg-white/8 rounded-xl shadow-primary ${props.className}`}>
       {props.children}
@@ -8,4 +8,4 @@ const Box = (props: BoxProps) => {
   );
 };
 
-export default Box;
+export default Card;
