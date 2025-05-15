@@ -2,6 +2,11 @@ import Link from '@/components/common/Link';
 import { PiMapPinSimpleFill } from 'react-icons/pi';
 import Blinker from '@/components/common/Blinker';
 import ScrollDown from '@/components/ScrollDown';
+import Awards from '@/components/Awards';
+import Divider from '@/components/common/Divider';
+import Technologies from '@/components/Technologies';
+import Projects from '@/components/Projects';
+import { Button } from '@/components/common/Button';
 
 export default function Home() {
   return (
@@ -39,7 +44,15 @@ export default function Home() {
         </div>
         <ScrollDown />
       </section>
-      <div className='h-screen w-full bg-green-300' id='scroll' />
+      <div className='w-full sm:px-32 px-6 py-24 bg-black ' id='scroll'>
+        <Awards />
+        <Divider />
+        <Technologies />
+        <Divider />
+        <Projects />
+        <Button>View My Projects</Button>
+      </div>
+      <section className='h-screen w-full bg-green-300' />
     </>
   );
 }
