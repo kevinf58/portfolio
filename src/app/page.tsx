@@ -1,3 +1,5 @@
+'use client';
+
 import Link from '@/components/common/Link';
 import { PiMapPinSimpleFill } from 'react-icons/pi';
 import Blinker from '@/components/common/Blinker';
