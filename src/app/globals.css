@@ -23,7 +23,7 @@
   border-radius: 50%;
   transform: scale(0);
   animation: ripple 600ms linear;
-  background-color: rgba(193, 113, 52, 0.9);
+  background-color: rgba(193, 113, 52, 0.4);
   pointer-events: none;
   z-index: 0;
 }
@@ -45,8 +45,8 @@
   --color-black: #212527;
   --color-light-black: #25292b;
   --color-white: #f1efdd;
-  --color-green: #f07174;
-  --color-red: #74f071;
+  --color-green: #74f071;
+  --color-red: #f07174;
 
   /**
    * shadows
