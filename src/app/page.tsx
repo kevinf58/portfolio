@@ -6,7 +6,6 @@ import Awards from '@/components/Awards';
 import Divider from '@/components/common/Divider';
 import Technologies from '@/components/Technologies';
 import Projects from '@/components/Projects';
-import { Button } from '@/components/common/Button';
 
 export default function Home() {
   return (
@@ -50,7 +49,6 @@ export default function Home() {
         <Technologies />
         <Divider />
         <Projects />
-        <Button>View My Projects</Button>
       </div>
       <section className='h-screen w-full bg-green-300' />
     </>
