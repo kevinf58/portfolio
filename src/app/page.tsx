@@ -10,15 +10,18 @@ import Projects from '@/components/Projects';
 export default function Home() {
   return (
     <>
-      <section className='relative h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-light-black shadow-primary'>
-        <div className='w-[55%] pl-20'>
+      <section className='relative h-[calc(100vh-4.75rem)] w-full flex flex-col sm:justify-center sm:pt-0 font-medium bg-light-black shadow-primary pt-20'>
+        <div className='lg:w-[55%] w-full sm:px-20 px-2'>
           <div className='flex items-end pb-2'>
             <h1 className='text-5xl font-bold'>{"Hi, I'm Kevin"}</h1>
             <Blinker className='mb-1.5 ml-1' />
           </div>
-          <div className='flex gap-1.5 items-center'>
-            <h6 className='text-lg'>I’m an aspiring developer based in Toronto, ON</h6>
-            <PiMapPinSimpleFill />
+          <div className='flex sm:flex-row sm:items-center sm:justify-start sm:gap-1 flex-col justify-center text-lg gap-0'>
+            <span>I’m an aspiring developer based in </span>
+            <div className='flex items-center gap-1.5 whitespace-nowrap'>
+              Toronto, ON
+              <PiMapPinSimpleFill />
+            </div>
           </div>
           <div className='flex ml-5 my-8'>
             <div className='h-auto w-1.5 bg-primary rounded-full' />

@@ -4,7 +4,6 @@ import './globals.css';
 import NavBar from '@/components/common/NavBar';
 import Footer from '@/components/common/Footer';
 
-
 const inter = Inter({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
