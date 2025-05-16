@@ -4,8 +4,8 @@ import { MdMail } from 'react-icons/md';
 
 const Footer = () => {
   return (
-    <footer className='sticky bottom-0 w-full items-center px-28 py-10 bg-light-black font-medium text-xs'>
-      <div className='flex flex-col gap-4 items-center'>
+    <footer className='sticky bottom-0 w-full items-center md:px-28 md:py-10 px-4 py-6 bg-light-black font-medium text-xs'>
+      <div className='flex flex-col gap-4 items-center sm:scale-100 scale-70'>
         <div className='flex gap-6 !text-white/50'>
           <Link href={'projects'}>Projects</Link>
           <Link href={'/blog'}>Blog</Link>
@@ -35,15 +35,15 @@ const Footer = () => {
             React
           </Link>
         </div>
-        <div className='flex gap-1'>
-          Want to read about my journey developing this web app?
+        <div className='flex sm:flex-row sm:items-start flex-col items-center gap-1'>
+          <span>Want to read about my journey developing this web app?</span>
           <Link href={'https://react.dev/'} underlined>
             Click here!
           </Link>
         </div>
       </div>
-      <div className='w-full h-0.5 bg-white/10 rounded-full mb-8 mt-6' />
-      <div className='w-full relative flex items-center justify-between mb-8'>
+      <div className='sm:mb-8 sm:mt-6 w-full h-0.5 bg-white/10 rounded-full mb-2' />
+      <div className='w-full relative flex md:flex-row md:justify-between md:gap-0 md:mb-8 sm:scale-100 flex-col items-center justify-center gap-4 scale-70'>
         <div className='flex items-center gap-2'>
           <a
             className='flex items-center justify-center w-7 h-7 border-1 border-white/20 rounded-full'
@@ -75,8 +75,8 @@ const Footer = () => {
             </Link>
           </>
         </div>
-        <h6 className='absolute left-1/2 transform -translate-x-1/2 flex gap-1'>
-          Released under the{' '}
+        <h6 className='flex gap-1'>
+          Released under the
           <Link
             underlined
             href={'https://mit-license.org/'}
@@ -86,7 +86,7 @@ const Footer = () => {
             MIT License
           </Link>
         </h6>
-        <h6 className='ml-auto'>© 2025 Kevin Feng. All rights reserved.</h6>
+        <h6>© 2025 Kevin Feng. All rights reserved.</h6>
       </div>
     </footer>
   );

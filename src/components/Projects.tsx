@@ -17,7 +17,7 @@ const Projects = () => {
           particularly proud of.
         </p>
       </div>
-      <div className='w-full flex px-12 gap-6'>
+      <div className='w-full flex sm:px-12 sm:justify-start justify-center gap-6'>
         <Card>
           <div className='p-4'>
             <div className='flex justify-between items-center'>
