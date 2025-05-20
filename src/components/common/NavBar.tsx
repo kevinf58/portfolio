@@ -8,7 +8,7 @@ import { useScrollProgress } from '@/hooks/useScrollProgress';
 
 const NavBar = () => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
-  
+
   const isScrolled = useScrollFollow(scrollRef, 2);
   const scrollProgress = useScrollProgress();
 
@@ -38,7 +38,10 @@ const NavBar = () => {
           </Link>
         </div>
       </div>
-      <div className='h-1 w-min absolute bg-primary transition-all duration-100 ease-out' style={{ width: `${scrollProgress}%` }} />
+      <div
+        className='h-1 w-min absolute bg-primary transition-all duration-100 ease-out'
+        style={{ width: `${scrollProgress}%` }}
+      />
     </section>
   );
 };
