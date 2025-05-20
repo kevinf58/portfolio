@@ -3,6 +3,7 @@ import { Inter, PT_Serif } from 'next/font/google';
 import './globals.css';
 import NavBar from '@/components/common/NavBar';
 import Footer from '@/components/common/Footer';
+import { ToastContainer } from 'react-toastify';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -37,6 +38,7 @@ export default function RootLayout({
         </header>
         <main className='flex-grow z-10'>{children}</main>
         <Footer />
+        <ToastContainer className='sm:mt-14' />
       </body>
     </html>
   );
