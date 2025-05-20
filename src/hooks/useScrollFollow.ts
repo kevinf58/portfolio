@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 
-// this hook utilizes an element's ref to translate the element "offset" tailwind units upwards
-// when the user scrolls down and returns the state of whether or not the user has scrolled from the
-// top of the screen
+/**
+ *
+ * @param ref the ref of the component that this hook is attached to
+ * @param offset the amount the component should move upwards on scroll in tailwind units
+ * @returns the boolean for whether or not the user has scrolled
+ */
 export function useScrollFollow(ref: React.RefObject<HTMLElement | null>, offset: number): boolean {
   const [isScrolled, setIsScrolled] = useState(false);
   const tailwindUnits = offset * 0.25;
