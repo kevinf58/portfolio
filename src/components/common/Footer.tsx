@@ -8,6 +8,12 @@ import { toast } from 'react-toastify';
 const Footer = () => {
   const notifySuccess = () => toast.success('Email Copied!');
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText('kfeng58@uwo.ca').then(() => {
+      notifySuccess();
+    });
+  };
+
   return (
     <footer className='sticky bottom-0 w-full items-center md:px-28 md:py-10 px-4 py-6 bg-light-black font-medium text-xs'>
       <div className='flex flex-col gap-4 items-center sm:scale-100 scale-70'>
@@ -75,7 +81,11 @@ const Footer = () => {
             >
               <MdMail />
             </a>
-            <button onClick={notifySuccess} className='flex items-center hover:cursor-pointer underline'>
+            <button
+              onClick={handleCopy}
+              title='Click to copy email'
+              className='flex items-center hover:cursor-pointer underline'
+            >
               kfeng58@uwo.ca
             </button>
           </>
