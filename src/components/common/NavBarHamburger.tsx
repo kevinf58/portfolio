@@ -51,7 +51,7 @@ const NavBarHamburger = () => {
         </div>
       </div>
       <div
-        className={`fixed top-0 left-0 w-screen h-screen bg-black/30 transform transition-transform duration-300 ease-in z-10 ${
+        className={`fixed top-0 left-0 w-screen h-screen bg-black/30 transform transition-transform duration-200 ease-in z-10 ${
           open ? 'translate-y-0 shadow-primary' : '-translate-y-full'
         }`}
         onClick={toggleMenu}
