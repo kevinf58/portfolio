@@ -9,4 +9,5 @@ export type LinkProps = {
   title?: string;
   target?: string;
   className?: string;
+  onClick?: () => void;
 };

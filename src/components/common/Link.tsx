@@ -14,6 +14,7 @@ const Link = (props: LinkProps) => {
       href={props.href}
       title={props.title}
       target={props.target}
+      onClick={props.onClick}
     >
       {<span className='relative whitespace-nowrap'>{props.children}</span>}
     </Nav>
