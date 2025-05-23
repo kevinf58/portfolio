@@ -41,12 +41,10 @@ const Cursor = () => {
 
   return (
     <div
-      className='fixed z-50 pointer-events-none'
+      className={`fixed z-50 pointer-events-none ${hoveringClickable && 'mix-blend-difference'}`}
       style={{ left: pos.x, top: pos.y, transform: 'translate(-50%, -50%)' }}
     >
-      <div
-        className={`rounded-full transition-all ${conditionalSizing} ${conditionalBg}`}
-      />
+      <div className={`rounded-full transition-all ${conditionalSizing} ${conditionalBg}`} />
     </div>
   );
 };
