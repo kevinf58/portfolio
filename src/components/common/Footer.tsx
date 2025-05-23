@@ -4,6 +4,7 @@ import Link from '@/components/common/Link';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import { MdMail } from 'react-icons/md';
 import { toast } from 'react-toastify';
+import Divider from './Divider';
 
 const Footer = () => {
   const notifySuccess = () => toast.success('Email Copied!');
@@ -15,7 +16,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className='sticky bottom-0 w-full items-center md:px-28 md:py-10 px-4 py-6 bg-light-black font-medium text-xs'>
+    <footer className='sticky bottom-0 w-full items-center md:px-18 md:py-10 px-4 py-6 bg-light-black font-medium text-xs'>
       <div className='flex flex-col gap-4 items-center sm:scale-100 scale-70'>
         <div className='flex gap-6 !text-white/50'>
           <Link href={'projects'}>Projects</Link>
@@ -53,7 +54,7 @@ const Footer = () => {
           </Link>
         </div>
       </div>
-      <div className='sm:mb-8 sm:mt-6 w-full h-0.5 bg-white/10 rounded-full mb-2' />
+      <Divider className='!bg-white/10 !mb-10 !mt-6' />
       <div className='w-full relative flex md:flex-row md:justify-between md:gap-0 md:mb-8 sm:scale-100 flex-col items-center justify-center gap-4 scale-70'>
         <div className='flex items-center gap-2'>
           <a

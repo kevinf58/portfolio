@@ -1,8 +1,7 @@
-import { JSX } from 'react';
 import { UrlObject } from 'url';
 
 export type LinkProps = {
-  children: JSX.Element | string;
+  children: React.ReactNode;
   disabled?: boolean;
   href: string | UrlObject;
   underlined?: boolean;

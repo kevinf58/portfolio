@@ -1,6 +1,4 @@
-import { JSX } from 'react';
-
 export type CardProps = {
-  children: JSX.Element | string;
+  children: React.ReactNode;
   className?: string;
 };
