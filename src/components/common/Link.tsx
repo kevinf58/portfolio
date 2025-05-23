@@ -1,5 +1,5 @@
 import { LinkProps } from '@/types/LinkProps';
-import { default as Nav } from 'next/link';
+import { default as NextLink } from 'next/link';
 
 const Link = (props: LinkProps) => {
   return props.disabled ? (
@@ -7,7 +7,7 @@ const Link = (props: LinkProps) => {
       <span className='relative'>{props.children}</span>
     </span>
   ) : (
-    <Nav
+    <NextLink
       className={`relative w-min h-min flex justify-center text-white hover:text-primary before:bg-white before:absolute before:bottom-0 before:origin-bottom before:scale-y-[0] hover:before:scale-y-100 before:h-full before:w-full before:transition-transform before:duration-300 duration-300 before:ease-in-out hover:cursor-pointer'
       ${props.underlined && 'underline'} ${props.className}
         `}
@@ -17,7 +17,7 @@ const Link = (props: LinkProps) => {
       onClick={props.onClick}
     >
       {<span className='relative whitespace-nowrap'>{props.children}</span>}
-    </Nav>
+    </NextLink>
   );
 };
 
