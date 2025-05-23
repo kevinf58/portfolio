@@ -31,11 +31,11 @@ const Cursor = () => {
 
   const conditionalSizing = hoveringClickable
     ? mouseDown
-      ? 'w-10 h-10'
-      : 'w-12 h-12'
+      ? 'w-9 h-9 duration-0'
+      : 'w-12 h-12 duration-200'
     : mouseDown
-    ? 'w-2.5 h-2.5'
-    : 'w-3 h-3';
+    ? 'w-2.5 h-2.5 duration-0'
+    : 'w-3 h-3 duration-200';
 
   const conditionalBg = hoveringClickable ? 'bg-black/55' : 'bg-primary/65';
 
@@ -45,7 +45,7 @@ const Cursor = () => {
       style={{ left: pos.x, top: pos.y, transform: 'translate(-50%, -50%)' }}
     >
       <div
-        className={`rounded-full transition-all duration-150 ${conditionalSizing} ${conditionalBg}`}
+        className={`rounded-full transition-all ${conditionalSizing} ${conditionalBg}`}
       />
     </div>
   );
