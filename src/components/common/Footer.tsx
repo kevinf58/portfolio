@@ -67,7 +67,7 @@ const Footer = () => {
           </a>
           <>
             <a
-              className='flex items-center justify-center w-7 h-7 border-1 border-white/20 rounded-full hover:cursor-pointer'
+              className='flex items-center justify-center w-7 h-7 border-1 border-white/20 rounded-full lg:hover:cursor-pointer'
               href='mailto:kfeng58@uwo.ca'
               title={`${'kfeng58@uwo.ca'}`}
               target='_blank'
@@ -77,7 +77,7 @@ const Footer = () => {
             <button
               onClick={copyText}
               title='Click to copy email'
-              className='flex items-center hover:cursor-pointer underline'
+              className='flex items-center lg:hover:cursor-pointer underline'
             >
               kfeng58@uwo.ca
             </button>
