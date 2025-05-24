@@ -4,7 +4,7 @@ import './globals.css';
 import NavBar from '@/components/common/NavBar';
 import Footer from '@/components/common/Footer';
 import { ToastContainer } from 'react-toastify';
-import Cursor from '@/components/common/Cursor';
+import ClientWrapper from '@/components/ClientWrapper';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -32,15 +32,16 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`flex flex-col min-h-screen cursor-none ${inter.variable} ${ptSerif.variable} antialiased selection:bg-[#088484]`}
+        className={`md:cursor-none cursor-default ${inter.variable} ${ptSerif.variable} antialiased selection:bg-[#088484]`}
       >
-        <Cursor />
-        <header className='sticky top-0 z-20'>
-          <NavBar />
-        </header>
-        <main className='flex-grow z-10'>{children}</main>
-        <Footer />
-        <ToastContainer className='sm:mt-14' />
+        <ClientWrapper>
+          <header className='sticky top-0 z-20'>
+            <NavBar />
+          </header>
+          <main className='flex-grow z-10'>{children}</main>
+          <Footer />
+          <ToastContainer className='sm:mt-14' />
+        </ClientWrapper>
       </body>
     </html>
   );
