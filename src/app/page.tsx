@@ -1,3 +1,5 @@
+'use client';
+
 import Link from '@/components/common/Link';
 import { PiMapPinSimpleFill } from 'react-icons/pi';
 import Blinker from '@/components/common/Blinker';
@@ -8,8 +10,12 @@ import Technologies from '@/components/Technologies';
 import Projects from '@/components/Projects';
 import Blogs from '@/components/Blogs';
 import Interests from '@/components/Interests';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
+import Socials from '@/components/Socials';
 
 export default function Home() {
+  const currDeviceSize = useBreakpoint();
+
   return (
     <>
       <section className='relative h-[calc(100vh-4.75rem)] w-full flex flex-col sm:justify-center sm:pt-0 font-medium bg-light-black shadow-primary pt-20'>
@@ -46,6 +52,7 @@ export default function Home() {
             </Link>
           </h6>
         </div>
+        {currDeviceSize !== 'sm' && currDeviceSize !== 'md' && <Socials />}
         <ScrollDown />
       </section>
       <div className='w-full sm:px-32 px-6 py-32 bg-black shadow-primary' id='scroll'>

@@ -3,18 +3,10 @@
 import Link from '@/components/common/Link';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import { MdMail } from 'react-icons/md';
-import { toast } from 'react-toastify';
 import Divider from './Divider';
+import copyText from '@/utils/copyText';
 
 const Footer = () => {
-  const notifySuccess = () => toast.success('Email Copied!');
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText('kfeng58@uwo.ca').then(() => {
-      notifySuccess();
-    });
-  };
-
   return (
     <footer className='sticky bottom-0 w-full items-center md:px-18 md:py-10 lg:px-40 px-4 py-6 bg-light-black font-medium text-xs'>
       <div className='flex flex-col gap-4 items-center sm:scale-100 scale-70'>
@@ -83,7 +75,7 @@ const Footer = () => {
               <MdMail />
             </a>
             <button
-              onClick={handleCopy}
+              onClick={copyText}
               title='Click to copy email'
               className='flex items-center hover:cursor-pointer underline'
             >
