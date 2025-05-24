@@ -35,7 +35,7 @@ const NavBarHamburger = () => {
         <div className='flex items-center gap-2'>
           <FaCode />
           <h1>Kevin Feng</h1>
-          <IoClose className='text-white ml-auto hover:cursor-pointer' size={30} onClick={toggleMenu} />
+          <IoClose className='text-white ml-auto lg:hover:cursor-pointer' size={30} onClick={toggleMenu} />
         </div>
         <div className='flex flex-col items-center mt-8 gap-4'>
           <Link href={'/'} className='px-1.5' onClick={toggleMenu}>
@@ -91,7 +91,7 @@ const NavBarHamburger = () => {
         }`}
         onClick={toggleMenu}
       />
-      <IoMenu className='text-white h-full hover:cursor-pointer' size={30} onClick={toggleMenu} />
+      <IoMenu className='text-white h-full lg:hover:cursor-pointer' size={30} onClick={toggleMenu} />
     </div>
   );
 };
