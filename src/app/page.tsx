@@ -6,6 +6,8 @@ import Awards from '@/components/Awards';
 import Divider from '@/components/common/Divider';
 import Technologies from '@/components/Technologies';
 import Projects from '@/components/Projects';
+import Blogs from '@/components/Blogs';
+import Interests from '@/components/Interests';
 
 export default function Home() {
   return (
@@ -46,14 +48,18 @@ export default function Home() {
         </div>
         <ScrollDown />
       </section>
-      <div className='w-full sm:px-32 px-6 py-24 bg-black ' id='scroll'>
+      <div className='w-full sm:px-32 px-6 py-32 bg-black shadow-primary' id='scroll'>
         <Awards />
         <Divider />
         <Technologies />
         <Divider />
         <Projects />
+        <Divider />
+        <Blogs />
+        <Divider />
+        <Interests />
       </div>
-      <section className='h-screen w-full bg-green-300' />
+      {/* <section className='h-screen w-full bg-green-300' /> */}
     </>
   );
 }
