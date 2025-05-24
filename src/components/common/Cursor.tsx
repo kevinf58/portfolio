@@ -12,9 +12,15 @@ const Cursor = () => {
       setPos({ x: e.clientX, y: e.clientY });
 
       const elem = e.target as HTMLElement | null;
-      const isClickable =
-        elem instanceof HTMLElement && (elem.closest('button') || elem.closest('a') ? true : false);
-      setHoveringClickable(isClickable);
+
+      let clickable = false;
+      if (elem instanceof Element) {
+        const clickableElems = elem.closest('a, button');
+        if (clickableElems) {
+          clickable = true;
+        }
+      }
+      setHoveringClickable(clickable);
     };
     const handleMouseDown = () => setMouseDown(true);
     const handleMouseUp = () => setMouseDown(false);
