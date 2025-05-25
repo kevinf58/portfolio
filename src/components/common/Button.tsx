@@ -33,7 +33,7 @@ export const Button = (props: ButtonProps) => {
         createRipple(e);
         props.onClick?.();
       }}
-      className={`relative overflow-hidden group border-2 border-primary lg:hover:bg-primary/15 lg:hover:cursor-pointer lg:hover:shadow-primary lg:hover:scale-[102%] active:scale-100 active:transition-none px-5 py-2 rounded-full transition-all duration-400 ease-in-out ${props.className}`}
+      className={`relative overflow-hidden group border-2 border-primary lg:hover:bg-primary/15 lg:hover:cursor-pointer lg:hover:shadow-primary hover:scale-[102%] lg:active:scale-100 active:transition-none active:scale-[103%] px-5 py-2 rounded-full transition-all duration-400 ease-in-out ${props.className}`}
     >
       <div className='flex items-center gap-3 font-medium text-white mr-1'>
         {props.children}{' '}

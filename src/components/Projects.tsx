@@ -18,7 +18,7 @@ const Projects = () => {
         </p>
       </div>
       <div className='w-full flex sm:px-12 sm:justify-start justify-center gap-6'>
-        <Card>
+        <Card cardType='projects'>
           <div className='p-4'>
             <div className='flex justify-between items-center'>
               <span className='font-semibold'>This Portfolio Website!</span> <FaArrowRightLong />

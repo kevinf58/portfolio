@@ -56,15 +56,17 @@ export default function Home() {
         <ScrollDown />
       </section>
       <div className='w-full sm:px-32 px-6 py-32 bg-black shadow-primary' id='scroll'>
-        <Awards />
-        <Divider />
-        <Technologies />
-        <Divider />
-        <Projects />
-        <Divider />
-        <Blogs />
-        <Divider />
-        <Interests />
+        <div className='max-w-7xl mx-auto'>
+          <Awards />
+          <Divider />
+          <Technologies />
+          <Divider />
+          <Projects />
+          <Divider />
+          <Blogs />
+          <Divider />
+          <Interests />
+        </div>
       </div>
       {/* <section className='h-screen w-full bg-green-300' /> */}
     </>

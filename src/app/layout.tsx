@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`md:cursor-none cursor-default ${inter.variable} ${ptSerif.variable} antialiased selection:bg-[#088484]`}
+        className={`md:cursor-none cursor-default ${inter.variable} ${ptSerif.variable} antialiased selection:bg-secondary`}
       >
         <ClientWrapper>
           <header className='sticky top-0 z-20'>
