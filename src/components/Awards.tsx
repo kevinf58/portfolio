@@ -6,7 +6,7 @@ const Awards = () => {
     <>
       <h1 className='text-3xl font-medium lg:text-start text-center'>Awards</h1>
       <div className='flex flex-wrap justify-center gap-10 mt-10'>
-        <Card>
+        <Card cardType='award'>
           <div className='h-full flex'>
             <BiAward size={70} className='my-auto mr-6 text-primary' />
             <div className='flex flex-col w-48'>
@@ -18,7 +18,7 @@ const Awards = () => {
             </div>
           </div>
         </Card>
-        <Card>
+        <Card cardType='award'>
           <div className='h-full flex'>
             <BiAward size={70} className='my-auto mr-6 text-primary' />
             <div className='flex flex-col w-48'>
@@ -30,7 +30,7 @@ const Awards = () => {
             </div>
           </div>
         </Card>
-        <Card>
+        <Card cardType='award'>
           <div className='h-full flex'>
             <BiAward size={70} className='my-auto mr-6 text-primary' />
             <div className='flex flex-col w-48'>

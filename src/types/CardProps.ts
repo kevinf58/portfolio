@@ -1,5 +1,5 @@
 export type CardProps = {
   children: React.ReactNode;
   className?: string;
-  cardType: 'projects' | 'blogs';
+  cardType: 'project' | 'blog' | 'award' | 'technology';
 };

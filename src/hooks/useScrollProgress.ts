@@ -7,15 +7,17 @@ import { useEffect, useState } from 'react';
 export const useScrollProgress = (): number => {
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  const updateScrollProgress = () => {
-    const top = window.scrollY;
-    const pageHeight = document.body.scrollHeight - window.innerHeight;
-    const scrollProgress = (top / pageHeight) * 100;
-
-    setScrollProgress(scrollProgress);
-  };
-
   useEffect(() => {
+    const updateScrollProgress = () => {
+      const top = window.scrollY;
+      const pageHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollProgress = (top / pageHeight) * 100;
+
+      setScrollProgress(scrollProgress);
+    };
+
+    updateScrollProgress();
+
     window.addEventListener('scroll', updateScrollProgress);
     return () => window.removeEventListener('scroll', updateScrollProgress);
   }, []);

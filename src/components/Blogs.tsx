@@ -15,7 +15,7 @@ const Blogs = () => {
         </p>
       </div>
       <div className='w-full flex sm:px-12 sm:justify-start justify-center gap-6'>
-        <Card cardType='blogs'>
+        <Card cardType='blog'>
           <div className='p-4'>
             <div className='flex justify-between items-center'>
               <span className='font-semibold'>My Journal #28</span>
