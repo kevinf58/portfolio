@@ -8,67 +8,67 @@ const Technologies = () => {
     <>
       <h1 className='text-3xl font-medium lg:text-start text-center'>Technologies</h1>
       <div className='flex flex-wrap gap-4 mt-8 mx-6'>
-        <Card className='w-fit !px-4.5 !py-1.5 flex items-center text-sm font-medium gap-1.5'>
+        <Card cardType='technology'>
           <>
             <FaReact className='text-[#30A2FF]' />
             React
           </>
         </Card>
-        <Card className='w-fit !px-4.5 !py-1.5 flex items-center text-sm font-medium gap-1.5'>
+        <Card cardType='technology'>
           <>
             <SiTypescript className='text-[#3178C6] bg-white rounded-xs' />
             TypeScript
           </>
         </Card>
-        <Card className='w-fit !px-4.5 !py-1.5 flex items-center text-sm font-medium gap-1.5'>
+        <Card cardType='technology'>
           <>
             <SiJavascript className='text-[#FFDF00] bg-black' />
             TypeScript
           </>
         </Card>
-        <Card className='w-fit !px-4.5 !py-1.5 flex items-center text-sm font-medium gap-1.5'>
+        <Card cardType='technology'>
           <>
             <FaPython className='text-[#336D9C]' />
             Python
           </>
         </Card>
-        <Card className='w-fit !px-4.5 !py-1.5 flex items-center text-sm font-medium gap-1.5'>
+        <Card cardType='technology'>
           <>
             <FaHtml5 className='text-[#FC490B]' />
             HTML
           </>
         </Card>
-        <Card className='w-fit !px-4.5 !py-1.5 flex items-center text-sm font-medium gap-1.5'>
+        <Card cardType='technology'>
           <>
             <FaCss3Alt className='text-[#2196F3]' />
             CSS
           </>
         </Card>
-        <Card className='w-fit !px-4.5 !py-1.5 flex items-center text-sm font-medium gap-1.5'>
+        <Card cardType='technology'>
           <>
             <SiTailwindcss className='text-[#38BDF9]' />
             Tailwind CSS
           </>
         </Card>
-        <Card className='w-fit !px-4.5 !py-1.5 flex items-center text-sm font-medium gap-1.5'>
+        <Card cardType='technology'>
           <>
             <FaDatabase className='text-white' />
             SQL
           </>
         </Card>
-        <Card className='w-fit !px-4.5 !py-1.5 flex items-center text-sm font-medium gap-1.5'>
+        <Card cardType='technology'>
           <>
             <RiNextjsFill className='text-[#161416]' />
             Next.JS
           </>
         </Card>
-        <Card className='w-fit !px-4.5 !py-1.5 flex items-center text-sm font-medium gap-1.5'>
+        <Card cardType='technology'>
           <>
             <FaGitAlt className='text-[#F2645A]' />
             Git
           </>
         </Card>
-        <Card className='w-fit !px-4.5 !py-1.5 flex items-center text-sm font-medium gap-1.5'>
+        <Card cardType='technology'>
           <>
             <FaJava className='text-[#DE8E2F]' />
             Java

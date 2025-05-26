@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
  *
  * @returns the size of the current screen (like sm, lg, xl, etc...)
  */
-export const useBreakpoint = () => {
+export const useBreakpoint = (): string => {
   const [breakpoint, setBreakpoint] = useState<keyof Breakpoints>('2xl');
 
   useEffect(() => {

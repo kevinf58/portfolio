@@ -55,17 +55,19 @@ export default function Home() {
         {currDeviceSize !== 'sm' && currDeviceSize !== 'md' && <Socials />}
         <ScrollDown />
       </section>
-      <div className='w-full sm:px-32 px-6 py-32 bg-black shadow-primary' id='scroll'>
-        <Awards />
-        <Divider />
-        <Technologies />
-        <Divider />
-        <Projects />
-        <Divider />
-        <Blogs />
-        <Divider />
-        <Interests />
-      </div>
+      <section className='w-full sm:px-32 px-6 py-32 bg-black shadow-primary' id='scroll'>
+        <div className='max-w-7xl mx-auto'>
+          <Awards />
+          <Divider />
+          <Technologies />
+          <Divider />
+          <Projects />
+          <Divider />
+          <Blogs />
+          <Divider />
+          <Interests />
+        </div>
+      </section>
       {/* <section className='h-screen w-full bg-green-300' /> */}
     </>
   );

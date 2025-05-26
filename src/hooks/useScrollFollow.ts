@@ -11,6 +11,7 @@ export function useScrollFollow(ref: React.RefObject<HTMLElement | null>, offset
   const tailwindUnits = offset * 0.25;
 
   useEffect(() => {
+    
     const transform = () => {
       const y = Math.max(tailwindUnits - window.scrollY / 16, 0);
       if (ref.current) {

@@ -4,7 +4,7 @@ import { IoIosMail } from 'react-icons/io';
 
 const Socials = () => {
   return (
-    <section className='fixed -right-18 flex flex-col gap-2.5 p-1.5 lg:hover:-translate-x-18 transition-transform duration-200 ease-out bg-white border-l-2 border-y-2 border-primary text-black font-bold'>
+    <div className='fixed -right-18 flex flex-col gap-2.5 p-1.5 lg:hover:-translate-x-18 transition-transform duration-200 ease-out bg-white border-l-2 border-y-2 border-primary text-black font-bold'>
       <a
         className='flex items-center gap-1.5'
         href='https://www.linkedin.com/in/kfengg/'
@@ -27,7 +27,7 @@ const Socials = () => {
         <IoIosMail className='text-black text-2xl' />
         <span>Email</span>
       </a>
-    </section>
+    </div>
   );
 };
 

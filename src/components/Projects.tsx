@@ -18,10 +18,10 @@ const Projects = () => {
         </p>
       </div>
       <div className='w-full flex sm:px-12 sm:justify-start justify-center gap-6'>
-        <Card>
+        <Card cardType='project'>
           <div className='p-4'>
             <div className='flex justify-between items-center'>
-              <span className='font-semibold'>This Portfolio Website!</span> <FaArrowRightLong />
+              <span className='font-semibold mr-2'>This Portfolio Website!</span> <FaArrowRightLong />
             </div>
             <div className='mt-3 mb-7 text-sm'>
               A central place for me to display my journey as a developer
