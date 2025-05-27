@@ -3,8 +3,27 @@ import Link from 'next/link';
 import Card from './common/Card';
 import { FaArrowRightLong } from 'react-icons/fa6';
 import { AiFillTool } from 'react-icons/ai';
+import Image from 'next/image';
+import { MdImageNotSupported } from 'react-icons/md';
 
 const Projects = () => {
+  const projectImgs = [
+    '/images/Portfolio-01.png',
+    '/images/Portfolio-02.png',
+    '/images/Portfolio-03.png',
+    '/images/Portfolio-04.png',
+    '/images/Portfolio-05.png',
+    '/images/Portfolio-06.png',
+    '/images/Portfolio-07.png',
+    '/images/Portfolio-08.png',
+    '/images/Portfolio-09.png',
+    '/images/Portfolio-00.png',
+    '/images/Portfolio-11.png',
+    '/images/Portfolio-12.png',
+    '/images/Portfolio-13.png',
+    '/images/Portfolio-14.png',
+  ];
+
   return (
     <>
       <h1 className='text-3xl font-medium lg:text-start text-center'>Projects</h1>
@@ -23,8 +42,12 @@ const Projects = () => {
             <div className='flex justify-between items-center'>
               <span className='font-semibold mr-2'>This Portfolio Website!</span> <FaArrowRightLong />
             </div>
-            <div className='mt-3 mb-7 text-sm'>
-              A central place for me to display my journey as a developer
+            <div className='relative flex items-center justify-center h-36 w-auto mx-auto mt-3 mb-5 border-2 border-primary'>
+              {projectImgs[111] ? (
+                <Image src={projectImgs[0]} alt='image' fill className='object-contain' />
+              ) : (
+                <MdImageNotSupported className='text-4xl' />
+              )}
             </div>
             <div className='flex gap-3'>
               <AiFillTool className='w-6 h-5' />
