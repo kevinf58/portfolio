@@ -18,7 +18,7 @@ const NavBar = () => {
   return (
     <nav ref={scrollRef} className='transition-transform duration-300 ease-out'>
       <div
-        className={`w-full text-lg font-bold md:px-14 px-8 pb-5 pt-7 flex items-center justify-between bg-light-black ${
+        className={`w-full text-lg font-bold md:px-18 px-8 pb-4 pt-6 flex items-center justify-between bg-light-black ${
           isScrolled && 'shadow-primary'
         }`}
       >
@@ -45,7 +45,7 @@ const NavBar = () => {
         {(currDeviceSize === 'sm' || currDeviceSize === 'md') && <NavBarHamburger />}
       </div>
       <div
-        className='h-1 w-min absolute bg-primary transition-all duration-100 ease-out'
+        className='h-[0.15rem] w-min absolute bg-primary transition-all duration-100 ease-out'
         style={{ width: `${scrollProgress}%` }}
       />
     </nav>

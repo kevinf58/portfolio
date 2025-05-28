@@ -118,6 +118,15 @@ body {
 }
 
 /**
+ * to be applied to li's parent. applies pl-2 for all child li elements
+*/
+@layer components {
+  .list-indent > li {
+    @apply pl-2;
+  }
+}
+
+/**
  * css reset
 */
 

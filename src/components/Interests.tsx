@@ -13,14 +13,14 @@ const Interests = () => {
         </p>
         <div className='flex ml-2'>
           <div className='h-auto w-1 bg-primary rounded-full' />
-          <ul className='w-full flex flex-col gap-y-2 list-disc ml-10 my-1'>
+          <ul className='w-full flex flex-col gap-y-2 list-disc ml-10 my-1 list-indent'>
             <li>Embedded Systems</li>
             <li>Blockchain technologies and smart contracts</li>
           </ul>
         </div>
         <div className='flex ml-2'>
           <div className='h-auto w-1 bg-primary rounded-full' />
-          <ul className='w-full flex flex-col gap-y-2 list-disc ml-10 my-1'>
+          <ul className='w-full flex flex-col gap-y-2 list-disc ml-10 my-1 list-indent'>
             <li>Improving code maintainability and readability</li>
             <li>Learning more about Testing and QA</li>
             <li>Database design and optimization</li>
@@ -33,7 +33,7 @@ const Interests = () => {
         </p>
         <div className='flex ml-2'>
           <div className='h-auto w-1 bg-primary rounded-full' />
-          <ul className='w-full flex flex-col gap-y-2 list-disc ml-10 my-1'>
+          <ul className='w-full flex flex-col gap-y-2 list-disc ml-10 my-1 list-indent'>
             <li>
               A Stock analytics platform that uses historical market data, sentimental analysis, and
               technical indicators to predict the performance of stocks. (NextJS • TypeScript •
