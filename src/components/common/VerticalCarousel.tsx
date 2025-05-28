@@ -9,6 +9,7 @@ const VerticalCarousel = (props: VerticalCarouselProps) => {
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const hoverDelayRef = useRef<NodeJS.Timeout | null>(null);
   const [dragging, setDragging] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
@@ -23,7 +24,7 @@ const VerticalCarousel = (props: VerticalCarouselProps) => {
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!dragging || !containerRef.current) return;
     const y = e.clientY - dragStateRef.current.startY;
-    containerRef.current.scrollTop = dragStateRef.current.top - y * 3;
+    containerRef.current.scrollTop = dragStateRef.current.top - y * 3.5;
   };
 
   const handleMouseUp = () => setDragging(false);
@@ -33,7 +34,7 @@ const VerticalCarousel = (props: VerticalCarouselProps) => {
     hoverDelayRef.current = setTimeout(() => {
       scrollIntervalRef.current = setInterval(() => {
         if (containerRef.current) {
-          containerRef.current.scrollTop += 3;
+          containerRef.current.scrollTop += 1.5;
         }
       }, 16);
     }, 1000);
@@ -46,7 +47,7 @@ const VerticalCarousel = (props: VerticalCarouselProps) => {
 
   const handleWheel = () => {
     cancelAutoScroll();
-  }
+  };
 
   const cancelAutoScroll = () => {
     if (hoverDelayRef.current) {
@@ -60,6 +61,10 @@ const VerticalCarousel = (props: VerticalCarouselProps) => {
   };
 
   useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = 0;
+    }
+
     return () => cancelAutoScroll();
   }, []);
 
@@ -72,9 +77,14 @@ const VerticalCarousel = (props: VerticalCarouselProps) => {
       onMouseLeave={handleMouseLeave}
       onMouseEnter={handleMouseEnter}
       onWheel={handleWheel}
-      className={`relative flex justify-center border-2 border-black overflow-y-auto cursor-grab active:cursor-grabbing hide-scrollbar select-none ${props.className}`}
+      className={`relative flex justify-center rounded-lg border-2 border-black overflow-y-auto cursor-grab active:cursor-grabbing hide-scrollbar select-none ${props.className}`}
     >
-      {props.images[0] ? (
+      {loading && (
+        <div className='absolute inset-0 flex justify-center items-center z-10 bg-white bg-opacity-70'>
+          <MdImageNotSupported className='text-4xl text-gray-400 animate-pulse' />
+        </div>
+      )}
+      {props.images[0] && (
         <div className='relative w-full flex flex-col gap-1'>
           {props.images.map((imgSrc, index) => (
             <Image
@@ -85,11 +95,12 @@ const VerticalCarousel = (props: VerticalCarouselProps) => {
               height={10000}
               className='object-top'
               draggable={false}
+              onLoad={() => {
+                if (index === 0) setLoading(false);
+              }}
             />
           ))}
         </div>
-      ) : (
-        <MdImageNotSupported className='text-3xl my-auto' />
       )}
     </div>
   );
