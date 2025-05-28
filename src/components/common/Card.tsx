@@ -14,7 +14,7 @@ const Card = (props: CardProps) => {
 
   return (
     <div
-      className={`relative bg-white/8 rounded-xl shadow-primary ${props.className} ${
+      className={`relative bg-white/8 rounded-md shadow-primary ${props.className} ${
         cardStyles[props.cardType]
       }`}
     >
