@@ -3,8 +3,7 @@ import Link from 'next/link';
 import Card from './common/Card';
 import { FaArrowRightLong } from 'react-icons/fa6';
 import { AiFillTool } from 'react-icons/ai';
-import Image from 'next/image';
-import { MdImageNotSupported } from 'react-icons/md';
+import VerticalCarousel from './common/VerticalCarousel';
 
 const Projects = () => {
   const projectImgs = [
@@ -17,7 +16,7 @@ const Projects = () => {
     '/images/Portfolio-07.png',
     '/images/Portfolio-08.png',
     '/images/Portfolio-09.png',
-    '/images/Portfolio-00.png',
+    '/images/Portfolio-10.png',
     '/images/Portfolio-11.png',
     '/images/Portfolio-12.png',
     '/images/Portfolio-13.png',
@@ -42,13 +41,7 @@ const Projects = () => {
             <div className='flex justify-between items-center'>
               <span className='font-semibold mr-2'>This Portfolio Website!</span> <FaArrowRightLong />
             </div>
-            <div className='relative flex items-center justify-center h-36 w-auto mx-auto mt-3 mb-5 border-2 border-primary'>
-              {projectImgs[111] ? (
-                <Image src={projectImgs[0]} alt='image' fill className='object-contain' />
-              ) : (
-                <MdImageNotSupported className='text-4xl' />
-              )}
-            </div>
+            <VerticalCarousel className='h-27 w-auto mx-auto mt-3 mb-5' images={projectImgs} />
             <div className='flex gap-3'>
               <AiFillTool className='w-6 h-5' />
               <span className='text-xs font-medium'>NextJS • TypeScript • Tailwind • AWS • Redux</span>

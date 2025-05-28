@@ -59,7 +59,7 @@
    * animations
   */
   --animate-blink: blink 1.4s steps(1, end) infinite;
-  --animate-bounce: bounce 0.9s infinite ease-out;
+  --animate-bounce: bounce 1s infinite ease-out;
 
   @keyframes blink {
     0%,
@@ -102,6 +102,19 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), Helvetica, sans-serif;
+}
+
+/**
+ * hide scrollbar
+*/
+@layer utilities {
+  .hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /**
