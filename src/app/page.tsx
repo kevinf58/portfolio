@@ -6,7 +6,7 @@ import Blinker from '@/components/common/Blinker';
 import ScrollDown from '@/components/ScrollDown';
 import Awards from '@/components/Awards';
 import Divider from '@/components/common/Divider';
-import Technologies from '@/components/Technologies';
+import TechStack from '@/components/TechStack';
 import Projects from '@/components/Projects';
 import Blogs from '@/components/Blogs';
 import Interests from '@/components/Interests';
@@ -56,13 +56,10 @@ export default function Home() {
         <ScrollDown />
       </section>
       <section className='w-full sm:px-32 px-6 py-32 bg-black shadow-primary' id='scroll'>
-        <div className='max-w-7xl mx-auto'>
+        <div className='max-w-5xl mx-auto'>
           <Awards />
-          <Divider />
-          <Technologies />
-          <Divider />
+          <TechStack />
           <Projects />
-          <Divider />
           <Blogs />
           <Divider />
           <Interests />

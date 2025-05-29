@@ -4,7 +4,7 @@ import { BiAward } from 'react-icons/bi';
 const Awards = () => {
   return (
     <>
-      <h1 className='text-3xl font-medium lg:text-start text-center'>Awards</h1>
+      <h1 className='text-3xl lg:text-start text-center'>Awards</h1>
       <div className='flex flex-wrap justify-center gap-10 mt-10'>
         <Card cardType='award'>
           <div className='h-full flex'>

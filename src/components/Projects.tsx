@@ -25,7 +25,7 @@ const Projects = () => {
 
   return (
     <>
-      <h1 className='text-3xl font-medium lg:text-start text-center'>Projects</h1>
+      <h1 className='text-3xl lg:text-start text-center'>Projects</h1>
       <div className='my-8 mx-6'>
         <p>
           Over the years, I’ve worked on a variety of independent and collaborative projects to grow as a

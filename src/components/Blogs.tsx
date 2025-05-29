@@ -2,19 +2,27 @@ import { Button } from './common/Button';
 import Card from './common/Card';
 import { AiFillTool } from 'react-icons/ai';
 import Link from 'next/link';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 const Blogs = () => {
+  const currDeviceSize = useBreakpoint();
+
   return (
-    <>
-      <h1 className='text-3xl font-medium lg:text-start text-center'>Blogs</h1>
-      <div className='my-8 mx-6'>
+    <div className='lg:w-[48rem] sm:w-96 w-80 flex lg:flex-row flex-col gap-8 mx-auto bg-white/5 sm:px-10 sm:py-8 p-5 rounded-2xl'>
+      <div className='flex flex-col gap-3 lg:w-1/2 w-full'>
+        <h1 className='text-3xl lg:text-start text-center mb-6'>Blog</h1>
+        <p>I’m a strong believer in documenting my journey as a developer.</p>
         <p>
-          I’m a strong believer in documenting my journey as a developer. Doing this through the form of
-          a blog not only allows me to track my growth, but also to solidify my learning of concepts,
-          improve my communication skills, and perhaps share something useful with others along the way!
+          Blogging helps me track my growth, reinforce my learning, and improve communication skills.
         </p>
+        <p>It also allows me to share useful insights and experiences with others!</p>
+        {currDeviceSize !== 'sm' && currDeviceSize !== 'md' && currDeviceSize !== 'lg' && (
+          <Button className='mt-6'>
+            <Link href={'/blog'}>View my Blog</Link>
+          </Button>
+        )}
       </div>
-      <div className='w-full flex sm:px-12 sm:justify-start justify-center gap-6'>
+      <div className='flex items-center justify-center lg:w-1/2 w-full'>
         <Card cardType='blog'>
           <div className='p-4'>
             <div className='flex justify-between items-center'>
@@ -41,10 +49,12 @@ const Blogs = () => {
           </span>
         </Card>
       </div>
-      <Button>
-        <Link href={'/projects'}>View my Projects</Link>
-      </Button>
-    </>
+      {currDeviceSize !== 'xl' && currDeviceSize !== '2xl' && (
+        <Button className='mt-6'>
+          <Link href={'/blog'}>View my Blog</Link>
+        </Button>
+      )}
+    </div>
   );
 };
 

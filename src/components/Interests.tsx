@@ -3,7 +3,7 @@ import React from 'react';
 const Interests = () => {
   return (
     <>
-      <h1 className='text-3xl font-medium lg:text-start text-center'>Interests and Future Projects</h1>
+      <h1 className='text-3xl lg:text-start text-center'>Interests and Future Projects</h1>
       <div className='flex flex-col space-y-8 my-8'>
         <p className='mx-6'>
           Full Stack Web Development has been my primary focus during my post-graduate studies. As I
