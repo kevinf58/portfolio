@@ -45,7 +45,7 @@ export default function Home() {
             </li>
           </ul>
         </div>
-        <div className="flex group w-full absolute bottom-6 sm:px-28 font-sans text-xs gap-4">
+        <div className="flex flex-wrap group w-full absolute bottom-6 sm:px-28 font-sans text-xs gap-4">
           <Card>
             <SiTypescript color="#2F6CB4" />
             <span>TypeScript</span>
@@ -68,7 +68,10 @@ export default function Home() {
           </Card>
         </div>
       </section>
-      <section className="w-full flex sm:gap-40 sm:px-28 px-6 py-32 bg-black shadow-primary" id="scroll">
+      <section
+        className="w-full flex lg:flex-row lg:items-start items-center flex-col sm:gap-40 gap-24 sm:px-28 px-6 py-32 bg-black shadow-primary"
+        id="scroll"
+      >
         <JournalEntries />
         <Projects />
       </section>
