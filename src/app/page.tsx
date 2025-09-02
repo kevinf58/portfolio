@@ -12,10 +12,10 @@ import Projects from "@/components/sections/Projects";
 export default function Home() {
   return (
     <>
-      <section className="relative h-[calc(100vh-4.75rem)] w-full flex flex-col sm:justify-center sm:pt-0 font-medium bg-light-black shadow-primary pt-20">
-        <div className="lg:w-[35%] w-full sm:px-28 px-2">
+      <section className="relative h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-light-black shadow-primary">
+        <div className="xl:w-[40%] lg:w-[60%] md:w-[80%] w-full sm:px-28 px-6">
           <div className="flex items-end">
-            <h1 className="text-7xl font-bold text-tint">Kevin Feng</h1>
+            <h1 className="sm:text-7xl text-5xl font-bold text-tint">Kevin Feng</h1>
           </div>
           <div className="flex sm:flex-row sm:items-center sm:justify-start flex-col justify-center mb-16">
             <div className="flex items-center gap-1.5 whitespace-nowrap font-serif">
@@ -23,7 +23,9 @@ export default function Home() {
               <PiMapPinSimpleFill />
             </div>
           </div>
-          <span className="font-serif text-3xl">Computer Science Student @ The University of Western Ontario</span>
+          <span className="font-serif sm:text-3xl text-2xl">
+            Computer Science Student @ The University of Western Ontario
+          </span>
           <ul className="flex flex-col space-y-1 mt-10 text-sm">
             <li>
               <Link href={"https://ca.linkedin.com/"} target="_blank">
@@ -45,7 +47,7 @@ export default function Home() {
             </li>
           </ul>
         </div>
-        <div className="flex flex-wrap group w-full absolute bottom-6 sm:px-28 font-sans text-xs gap-4">
+        <div className="flex flex-wrap group w-full absolute bottom-6 sm:px-28 px-6 font-sans text-xs gap-4">
           <Card>
             <SiTypescript color="#2F6CB4" />
             <span>TypeScript</span>

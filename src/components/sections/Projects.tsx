@@ -5,7 +5,7 @@ const Projects = () => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <section className="lg:w-1/3 w-3/4">
+    <section className="lg:w-1/3 sm:w-3/4 w-full">
       <h2 className="font-sans font-bold text-4xl text-tint">Featured Projects</h2>
       <div className="w-1/3 h-[3px] bg-primary mt-1" />
       <p className="mt-8 mb-12 font-serif">
