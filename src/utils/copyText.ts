@@ -1,9 +1,9 @@
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const copyText = () => {
-  const notifySuccess = () => toast.success('Email Copied!');
+  const notifySuccess = () => toast.success("Email Copied!");
 
-  navigator.clipboard.writeText('kfeng58@uwo.ca').then(() => {
+  navigator.clipboard.writeText("kfeng58@uwo.ca").then(() => {
     notifySuccess();
   });
 };

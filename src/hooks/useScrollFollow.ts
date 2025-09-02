@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 /**
  *
@@ -11,7 +11,6 @@ export function useScrollFollow(ref: React.RefObject<HTMLElement | null>, offset
   const tailwindUnits = offset * 0.25;
 
   useEffect(() => {
-    
     const transform = () => {
       const y = Math.max(tailwindUnits - window.scrollY / 16, 0);
       if (ref.current) {
@@ -23,9 +22,9 @@ export function useScrollFollow(ref: React.RefObject<HTMLElement | null>, offset
 
     transform();
 
-    window.addEventListener('scroll', transform);
+    window.addEventListener("scroll", transform);
 
-    return () => window.removeEventListener('scroll', transform);
+    return () => window.removeEventListener("scroll", transform);
   }, [ref, tailwindUnits]);
 
   return isScrolled;

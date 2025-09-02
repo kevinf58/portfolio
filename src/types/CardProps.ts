@@ -1,5 +1,9 @@
-import { SharedProps } from './SharedProps';
+import { MouseEventHandler, ReactNode } from "react";
 
 export type CardProps = {
-  cardType: 'project' | 'blog' | 'award' | 'technology';
-} & SharedProps;
+  children: ReactNode;
+  className?: string;
+  href?: string;
+  onMouseEnter?: MouseEventHandler<HTMLAnchorElement>;
+  onMouseLeave?: MouseEventHandler<HTMLAnchorElement>;
+};

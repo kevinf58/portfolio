@@ -1,76 +1,76 @@
-import Card from './common/Card';
-import { FaReact, FaPython, FaCss3Alt, FaHtml5, FaDatabase, FaGitAlt, FaJava } from 'react-icons/fa';
-import { SiTypescript, SiJavascript, SiTailwindcss } from 'react-icons/si';
-import { RiNextjsFill } from 'react-icons/ri';
+import Card from "./common/cards/Card";
+import { FaReact, FaPython, FaCss3Alt, FaHtml5, FaDatabase, FaGitAlt, FaJava } from "react-icons/fa";
+import { SiTypescript, SiJavascript, SiTailwindcss } from "react-icons/si";
+import { RiNextjsFill } from "react-icons/ri";
 
 const Technologies = () => {
   return (
     <>
-      <h1 className='text-3xl font-medium lg:text-start text-center'>Technologies</h1>
-      <div className='flex flex-wrap gap-4 mt-8 mx-6'>
-        <Card cardType='technology'>
+      <h1 className="text-3xl font-medium lg:text-start text-center">Technologies</h1>
+      <div className="flex flex-wrap gap-4 mt-8 mx-6">
+        <Card>
           <>
-            <FaReact className='text-[#30A2FF]' />
+            <FaReact className="text-[#30A2FF]" />
             React
           </>
         </Card>
-        <Card cardType='technology'>
+        <Card>
           <>
-            <SiTypescript className='text-[#3178C6] bg-white rounded-xs' />
+            <SiTypescript className="text-[#3178C6] bg-white rounded-xs" />
             TypeScript
           </>
         </Card>
-        <Card cardType='technology'>
+        <Card>
           <>
-            <SiJavascript className='text-[#FFDF00] bg-black' />
+            <SiJavascript className="text-[#FFDF00] bg-black" />
             TypeScript
           </>
         </Card>
-        <Card cardType='technology'>
+        <Card>
           <>
-            <FaPython className='text-[#336D9C]' />
+            <FaPython className="text-[#336D9C]" />
             Python
           </>
         </Card>
-        <Card cardType='technology'>
+        <Card>
           <>
-            <FaHtml5 className='text-[#FC490B]' />
+            <FaHtml5 className="text-[#FC490B]" />
             HTML
           </>
         </Card>
-        <Card cardType='technology'>
+        <Card>
           <>
-            <FaCss3Alt className='text-[#2196F3]' />
+            <FaCss3Alt className="text-[#2196F3]" />
             CSS
           </>
         </Card>
-        <Card cardType='technology'>
+        <Card>
           <>
-            <SiTailwindcss className='text-[#38BDF9]' />
+            <SiTailwindcss className="text-[#38BDF9]" />
             Tailwind CSS
           </>
         </Card>
-        <Card cardType='technology'>
+        <Card>
           <>
-            <FaDatabase className='text-white' />
+            <FaDatabase className="text-white" />
             SQL
           </>
         </Card>
-        <Card cardType='technology'>
+        <Card>
           <>
-            <RiNextjsFill className='text-[#161416]' />
+            <RiNextjsFill className="text-[#161416]" />
             Next.JS
           </>
         </Card>
-        <Card cardType='technology'>
+        <Card>
           <>
-            <FaGitAlt className='text-[#F2645A]' />
+            <FaGitAlt className="text-[#F2645A]" />
             Git
           </>
         </Card>
-        <Card cardType='technology'>
+        <Card>
           <>
-            <FaJava className='text-[#DE8E2F]' />
+            <FaJava className="text-[#DE8E2F]" />
             Java
           </>
         </Card>

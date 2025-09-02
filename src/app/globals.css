@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /**
  * default to dark mode
@@ -41,8 +41,9 @@
   /**
    * colors
   */
-  --color-primary: #c17134;
+  --color-primary: #589981;
   --color-secondary: #4d9de0;
+  --color-tint: #ecffe7;
   --color-black: #212527;
   --color-light-black: #25292b;
   --color-white: #f1efdd;
@@ -55,6 +56,10 @@
   --shadow-primary: 0px 4px 20px 0px rgba(0, 0, 0, 0.2);
   --inset-shadow-primary: 0px 10px 20px 0px rgba (0, 0, 0, 0.2);
 
+  /**
+   * text sizes
+  */
+  --text-1\.5xl: 1.375rem;
   /**
    * animations
   */
@@ -94,8 +99,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-pt-serif);
+  --font-header: var(--font-inter);
+  --font-serif: Georgia, serif;
+  --font-sans: var(--font-inria-sans);
 }
 
 body {
@@ -104,10 +110,11 @@ body {
   font-family: var(--font-inter), Helvetica, sans-serif;
 }
 
-/**
- * hide scrollbar
-*/
 @layer utilities {
+  /**
+  * hide scrollbar
+  */
+
   .hide-scrollbar {
     scrollbar-width: none;
     -ms-overflow-style: none;

@@ -1,9 +1,8 @@
-import { SharedProps } from './SharedProps';
-import { UrlObject } from 'url';
+import { SharedProps } from "./SharedProps";
 
 export type LinkProps = {
   disabled?: boolean;
-  href: string | UrlObject;
+  href: string;
   underlined?: boolean;
   title?: string;
   target?: string;
