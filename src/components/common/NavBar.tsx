@@ -22,7 +22,7 @@ const NavBar = () => {
           isScrolled && "shadow-primary"
         }`}
       >
-        <div className="flex items-center gap-2 text-xl">
+        <div className="flex items-center gap-2 text-lg">
           <FaCode />
           <h1 className="text-tint">KF</h1>
         </div>
@@ -30,14 +30,14 @@ const NavBar = () => {
           <div className="flex ml-auto gap-6 font-sans">
             <Link href={"/"}>Home</Link>
             <Link href={"projects"}>Projects</Link>
-            <Link href={"/blog"}>Blog</Link>
+            <Link href={"/journal"}>Journal</Link>
             <Link href={"/contact"}>Contact</Link>
           </div>
         )}
         {(currDeviceSize === "sm" || currDeviceSize === "md") && <NavBarHamburger />}
       </div>
       <div
-        className="h-1 w-min absolute bg-primary transition-all duration-100 ease-out"
+        className="h-0.5 w-min absolute bg-primary transition-all duration-100 ease-out"
         style={{ width: `${scrollProgress}%` }}
       />
     </nav>

@@ -44,8 +44,8 @@ const NavBarHamburger = () => {
           <Link href={"projects"} className="px-1.5" onClick={toggleMenu}>
             Projects
           </Link>
-          <Link href={"/blog"} className="px-1.5" onClick={toggleMenu}>
-            Blog
+          <Link href={"/journal"} className="px-1.5" onClick={toggleMenu}>
+            Journal
           </Link>
           <Link href={"/contact"} className="px-1.5" onClick={toggleMenu}>
             Contact

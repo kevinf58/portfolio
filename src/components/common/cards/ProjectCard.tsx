@@ -3,6 +3,7 @@ import Card from "./Card";
 import { FiArrowUpRight } from "react-icons/fi";
 import { State } from "@/types/State";
 import { useState } from "react";
+import Tag from "../Tag";
 
 const ProjectCard = (props: State) => {
   const [blurred, setBlurred] = props.state;
@@ -11,7 +12,7 @@ const ProjectCard = (props: State) => {
   return (
     <Card
       href=""
-      className={`!w-60 group transition-discrete duration-150 ${!isFocused && blurred ? "brightness-70" : ""}`}
+      className={`group transition-discrete duration-150 ${!isFocused && blurred ? "brightness-70" : ""}`}
       onMouseEnter={() => {
         setBlurred(true);
         setIsFocused(true);
@@ -34,9 +35,9 @@ const ProjectCard = (props: State) => {
           <h6 className="font-serif text-xs text-white/50 mb-5">Tuesday, April 21, 2024</h6>
           <p className="font-serif text-xs">This is a description...</p>
           <div className="flex flex-wrap space-x-2.5 space-y-2 font-sans text-xs mt-3">
-            <Card>TypeScript</Card>
-            <Card>React</Card>
-            <Card>Tailwind CSS</Card>
+            <Tag>TypeScript</Tag>
+            <Tag>React</Tag>
+            <Tag>Tailwind CSS</Tag>
           </div>
         </div>
       </div>

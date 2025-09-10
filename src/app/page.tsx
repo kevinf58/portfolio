@@ -2,12 +2,12 @@
 
 import Link from "@/components/common/Link";
 import { PiMapPinSimpleFill } from "react-icons/pi";
-import Card from "@/components/common/cards/Card";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { IoMailSharp } from "react-icons/io5";
 import { SiTypescript, SiReact, SiPython, SiTailwindcss, SiNextdotjs } from "react-icons/si";
 import JournalEntries from "@/components/sections/JournalEntries";
 import Projects from "@/components/sections/Projects";
+import Tag from "@/components/common/Tag";
 
 export default function Home() {
   return (
@@ -48,26 +48,26 @@ export default function Home() {
           </ul>
         </div>
         <div className="flex flex-wrap group w-full absolute bottom-6 sm:px-28 px-6 font-sans text-xs gap-4">
-          <Card>
+          <Tag>
             <SiTypescript color="#2F6CB4" />
             <span>TypeScript</span>
-          </Card>
-          <Card>
+          </Tag>
+          <Tag>
             <SiReact color="#66DBFB" />
             <span>React</span>
-          </Card>
-          <Card>
+          </Tag>
+          <Tag>
             <SiPython />
             <span>Python</span>
-          </Card>
-          <Card>
+          </Tag>
+          <Tag>
             <SiTailwindcss color="#3FBFF8" />
             <span>Tailwind CSS</span>
-          </Card>
-          <Card>
+          </Tag>
+          <Tag>
             <SiNextdotjs color="#080808" />
             <span>Next JS</span>
-          </Card>
+          </Tag>
         </div>
       </section>
       <section

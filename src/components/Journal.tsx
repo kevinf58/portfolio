@@ -3,10 +3,10 @@ import Card from "./common/cards/Card";
 import { AiFillTool } from "react-icons/ai";
 import Link from "./common/Link";
 
-const Blogs = () => {
+const Journal = () => {
   return (
     <>
-      <h1 className="text-3xl font-medium lg:text-start text-center">Blogs</h1>
+      <h1 className="text-3xl font-medium lg:text-start text-center">Journal</h1>
       <div className="my-8 mx-6">
         <p>
           I’m a strong believer in documenting my journey as a developer. Doing this through the form of a blog not only
@@ -46,4 +46,4 @@ const Blogs = () => {
   );
 };
 
-export default Blogs;
+export default Journal;

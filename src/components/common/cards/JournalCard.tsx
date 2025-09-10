@@ -3,6 +3,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 import { FaTag } from "react-icons/fa";
 import { State } from "@/types/State";
 import { useState } from "react";
+import Tag from "../Tag";
 
 const JournalCard = (props: State) => {
   const [blurred, setBlurred] = props.state;
@@ -33,9 +34,9 @@ const JournalCard = (props: State) => {
           <h6 className="font-serif text-xs text-white/50 mb-5">Tuesday, April 21, 2024</h6>
           <p className="font-serif text-xs">This is a description...</p>
           <div className="flex flex-wrap space-x-2.5 space-y-2 font-sans text-xs mt-3">
-            <Card>TypeScript</Card>
-            <Card>React</Card>
-            <Card>Tailwind CSS</Card>
+            <Tag>TypeScript</Tag>
+            <Tag>React</Tag>
+            <Tag>Tailwind CSS</Tag>
           </div>
           <div className="flex items-center text-xs font-sans gap-1 mt-1">
             <FaTag />
