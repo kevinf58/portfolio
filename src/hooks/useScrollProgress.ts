@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 /**
  *
- * @returns the current scroll progress value of the current page
+ * @returns the current scroll progress value of the current page in %
  */
 export const useScrollProgress = (): number => {
   const [scrollProgress, setScrollProgress] = useState(0);

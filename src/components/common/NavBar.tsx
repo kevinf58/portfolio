@@ -16,15 +16,15 @@ const NavBar = () => {
   const currDeviceSize = useBreakpoint();
 
   return (
-    <nav ref={scrollRef} className="transition-transform duration-300 ease-out">
+    <nav ref={scrollRef} className="transition-transform duration-150 ease-out">
       <div
-        className={`w-full text-lg font-bold sm:px-28 px-8 pb-5 pt-7 flex items-center justify-between bg-light-black ${
+        className={`w-full text-lg font-bold sm:px-28 px-8 pb-5 pt-7 flex items-center justify-between bg-light-black transition-shadow duration-100 ${
           isScrolled && "shadow-primary"
         }`}
       >
-        <div className="flex items-center gap-2 text-lg">
+        <div className="flex items-center gap-2 text-lg text-tint">
           <FaCode />
-          <h1 className="text-tint">KF</h1>
+          <h1>KF</h1>
         </div>
         {currDeviceSize !== "sm" && currDeviceSize !== "md" && (
           <div className="flex ml-auto gap-6 font-sans">
@@ -37,7 +37,7 @@ const NavBar = () => {
         {(currDeviceSize === "sm" || currDeviceSize === "md") && <NavBarHamburger />}
       </div>
       <div
-        className="h-0.5 w-min absolute bg-primary transition-all duration-100 ease-out"
+        className="h-0.5 w-min absolute bg-primary transition-all duration-50 ease-out"
         style={{ width: `${scrollProgress}%` }}
       />
     </nav>
