@@ -1,18 +1,18 @@
 import Card from "./Card";
 import { FiArrowUpRight } from "react-icons/fi";
 import { FaTag } from "react-icons/fa";
-import { State } from "@/types/State";
 import { useState } from "react";
 import Tag from "../Tag";
+import { CardProps } from "@/types/components/Card.props";
 
-const JournalCard = (props: State) => {
+const JournalCard = (props: CardProps) => {
   const [blurred, setBlurred] = props.state;
   const [isFocused, setIsFocused] = useState(false);
 
   return (
     <Card
-      href=""
-      className={`!w-60 group transition-discrete duration-150 ${!isFocused && blurred ? "brightness-70" : ""}`}
+      href="/journal"
+      className={`!w-60 group transition-discrete duration-150 ${!isFocused && blurred ? "brightness-70" : ""} ${props.className}`}
       onMouseEnter={() => {
         setBlurred(true);
         setIsFocused(true);

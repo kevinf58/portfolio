@@ -1,6 +1,6 @@
 "use client";
 
-import { ClientWrapperProps } from "@/types/ClientWrapperProps";
+import { ClientWrapperProps } from "@/types/hooks/ClientWrapper.type";
 import React from "react";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 

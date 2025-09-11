@@ -22,13 +22,12 @@ const NavBar = () => {
           isScrolled && "shadow-primary"
         }`}
       >
-        <div className="flex items-center gap-2 text-lg text-tint">
+        <Link className="flex items-center gap-2 text-lg text-tint" href={"/"} static>
           <FaCode />
           <h1>KF</h1>
-        </div>
+        </Link>
         {currDeviceSize !== "sm" && currDeviceSize !== "md" && (
           <div className="flex ml-auto gap-6 font-sans">
-            <Link href={"/"}>Home</Link>
             <Link href={"projects"}>Projects</Link>
             <Link href={"/journal"}>Journal</Link>
             <Link href={"/contact"}>Contact</Link>

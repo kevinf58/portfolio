@@ -1,4 +1,4 @@
-import { Breakpoints } from "@/types/Breakpoints";
+import { Breakpoints } from "@/types/Breakpoints.type";
 import { useEffect, useState } from "react";
 
 /**

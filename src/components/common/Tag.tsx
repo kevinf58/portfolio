@@ -1,4 +1,4 @@
-import { TagProps } from "@/types/TagProps";
+import { TagProps } from "@/types/components/TagProps";
 
 const Tag = (props: TagProps) => {
   return (
