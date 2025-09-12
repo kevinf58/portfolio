@@ -1,4 +1,4 @@
-export type SharedProps = {
+export interface BaseProps {
   children: React.ReactNode;
   className?: string;
-};
+}

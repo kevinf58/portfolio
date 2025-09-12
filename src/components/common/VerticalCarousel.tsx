@@ -1,7 +1,7 @@
-import { VerticalCarouselProps } from '@/types/VerticalCarouselProps';
-import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
-import { MdImageNotSupported } from 'react-icons/md';
+import { VerticalCarouselProps } from "@/types/VerticalCarouselProps";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { MdImageNotSupported } from "react-icons/md";
 
 const VerticalCarousel = (props: VerticalCarouselProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -80,12 +80,12 @@ const VerticalCarousel = (props: VerticalCarouselProps) => {
       className={`relative flex justify-center rounded-lg border-2 border-black overflow-y-auto cursor-grab active:cursor-grabbing hide-scrollbar select-none ${props.className}`}
     >
       {loading && (
-        <div className='absolute inset-0 flex justify-center items-center z-10 bg-white bg-opacity-70'>
-          <MdImageNotSupported className='text-4xl text-gray-400 animate-pulse' />
+        <div className="absolute inset-0 flex justify-center items-center z-10 bg-white bg-opacity-70">
+          <MdImageNotSupported className="text-4xl text-gray-400 animate-pulse" />
         </div>
       )}
       {props.images[0] && (
-        <div className='relative w-full flex flex-col gap-1'>
+        <div className="relative w-full flex flex-col gap-1">
           {props.images.map((imgSrc, index) => (
             <Image
               key={index}
@@ -93,7 +93,7 @@ const VerticalCarousel = (props: VerticalCarouselProps) => {
               alt={`Image ${index + 1}`}
               width={500}
               height={10000}
-              className='object-top'
+              className="object-top"
               draggable={false}
               onLoad={() => {
                 if (index === 0) setLoading(false);

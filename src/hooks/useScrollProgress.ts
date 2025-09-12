@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 /**
  *
- * @returns the current scroll progress value of the current page
+ * @returns the current scroll progress value of the current page in %
  */
 export const useScrollProgress = (): number => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -18,8 +18,8 @@ export const useScrollProgress = (): number => {
 
     updateScrollProgress();
 
-    window.addEventListener('scroll', updateScrollProgress);
-    return () => window.removeEventListener('scroll', updateScrollProgress);
+    window.addEventListener("scroll", updateScrollProgress);
+    return () => window.removeEventListener("scroll", updateScrollProgress);
   }, []);
 
   return scrollProgress;
