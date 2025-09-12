@@ -1,5 +1,7 @@
 import { useState } from "react";
 import JournalCard from "../common/cards/JournalCard";
+import { Button } from "../common/Button";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 const JournalEntries = () => {
   const [isFocused, setIsFocused] = useState(false);
@@ -16,6 +18,10 @@ const JournalEntries = () => {
         <JournalCard state={[isFocused, setIsFocused]} />
         <JournalCard state={[isFocused, setIsFocused]} />
         <JournalCard state={[isFocused, setIsFocused]} />
+        <Button href={"/journal"}>
+          Read More
+          <MdKeyboardArrowRight className="lg:group-hover:translate-x-0.5 transition-transform duration-200 ease-in" />
+        </Button>
       </div>
     </section>
   );

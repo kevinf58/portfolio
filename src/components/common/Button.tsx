@@ -2,10 +2,11 @@
 
 import { ButtonProps } from "@/types/components/ButtonProps";
 import { useRef } from "react";
-import { FaArrowRightLong } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
 
 export const Button = (props: ButtonProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const router = useRouter();
 
   const createRipple = (event: React.MouseEvent) => {
     const button = buttonRef.current;
@@ -32,14 +33,13 @@ export const Button = (props: ButtonProps) => {
       onClick={(e) => {
         createRipple(e);
         props.onClick?.();
+        if (props.href) router.push(props.href.toString());
       }}
       title={props.title}
-      className={`relative overflow-hidden group border-2 border-primary lg:hover:bg-primary/15 lg:hover:cursor-pointer lg:hover:shadow-primary hover:scale-[102%] lg:active:scale-100 active:transition-none active:scale-[103%] px-5 py-2 rounded-full transition-all duration-400 ease-in-out ${props.className}`}
+      className={`relative overflow-hidden group border-2 border-primary lg:hover:bg-primary/15 lg:hover:cursor-pointer lg:hover:shadow-primary hover:scale-[102%] lg:active:scale-100 active:transition-none active:scale-[103%] px-4 py-1.5 rounded-sm transition-all duration-400 ease-in-out ${props.className}
+      ${props.disabled && "pointer-events-none brightness-70"}`}
     >
-      <div className="flex items-center gap-3 font-medium text-white mr-1">
-        {props.children}
-        <FaArrowRightLong className="lg:group-hover:translate-x-1 transition-transform duration-200 ease-in" />
-      </div>
+      <div className="flex items-center gap-2 font-sans font-medium text-white text-sm">{props.children}</div>
     </button>
   );
 };

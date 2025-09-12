@@ -1,5 +1,7 @@
 import { useState } from "react";
 import ProjectCard from "../common/cards/ProjectCard";
+import { Button } from "../common/Button";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 const Projects = () => {
   const [isFocused, setIsFocused] = useState(false);
@@ -20,6 +22,10 @@ const Projects = () => {
         <ProjectCard state={[isFocused, setIsFocused]} />
         <ProjectCard state={[isFocused, setIsFocused]} />
         <ProjectCard state={[isFocused, setIsFocused]} />
+        <Button href={"/projects"}>
+          Read More
+          <MdKeyboardArrowRight className="lg:group-hover:translate-x-0.5 transition-transform duration-200 ease-in" />
+        </Button>
       </div>
     </section>
   );
