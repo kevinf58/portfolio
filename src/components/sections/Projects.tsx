@@ -22,9 +22,9 @@ const Projects = () => {
         <ProjectCard state={[isFocused, setIsFocused]} />
         <ProjectCard state={[isFocused, setIsFocused]} />
         <ProjectCard state={[isFocused, setIsFocused]} />
-        <Button href={"/projects"}>
+        <Button href={"/projects"} type="hollow">
           Read More
-          <MdKeyboardArrowRight className="lg:group-hover:translate-x-0.5 transition-transform duration-200 ease-in" />
+          <MdKeyboardArrowRight className="lg:group-hover:translate-x-0.5 transition-transform duration-150 ease-in" />
         </Button>
       </div>
     </section>
