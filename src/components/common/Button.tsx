@@ -4,7 +4,7 @@ import { ButtonProps } from "@/types/components/ButtonProps";
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
 
-export const Button = (props: ButtonProps) => {
+export const Button = ({ type = "solid", ...props }: ButtonProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
 
@@ -31,13 +31,13 @@ export const Button = (props: ButtonProps) => {
     <button
       ref={buttonRef}
       onClick={(e) => {
-        createRipple(e);
+        if (type === "hollow") createRipple(e);
         props.onClick?.();
         if (props.href) router.push(props.href.toString());
       }}
       title={props.title}
-      className={`relative overflow-hidden group border-2 border-primary lg:hover:bg-primary/15 lg:hover:cursor-pointer lg:hover:shadow-primary hover:scale-[102%] lg:active:scale-100 active:transition-none active:scale-[103%] px-4 py-1.5 rounded-sm transition-all duration-400 ease-in-out ${props.className}
-      ${props.disabled && "pointer-events-none brightness-70"}`}
+      className={`relative overflow-hidden group border-2 border-primary bg-primary lg:hover:cursor-pointer lg:hover:shadow-primary hover:scale-[102%] active:transition-none active:scale-97 px-4 py-1.5 rounded-sm transition-all duration-100 ease-in-out ${props.className}
+      ${props.disabled && "pointer-events-none brightness-70"} ${type === "hollow" && "bg-transparent lg:hover:bg-primary/15"}`}
     >
       <div className="flex items-center gap-2 font-sans font-medium text-white text-sm">{props.children}</div>
     </button>

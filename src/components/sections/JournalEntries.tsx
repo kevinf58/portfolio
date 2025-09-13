@@ -20,7 +20,7 @@ const JournalEntries = () => {
         <JournalCard state={[isFocused, setIsFocused]} />
         <Button href={"/journal"}>
           Read More
-          <MdKeyboardArrowRight className="lg:group-hover:translate-x-0.5 transition-transform duration-200 ease-in" />
+          <MdKeyboardArrowRight className="lg:group-hover:translate-x-0.5 transition-transform duration-150 ease-in" />
         </Button>
       </div>
     </section>
