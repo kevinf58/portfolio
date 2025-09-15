@@ -36,7 +36,7 @@ export const Button = ({ type = "solid", size = "default", ...props }: ButtonPro
         if (props.href) router.push(props.href.toString());
       }}
       title={props.title}
-      className={`relative overflow-hidden group border-2 border-primary lg:hover:cursor-pointer lg:hover:shadow-primary hover:scale-[102%] active:transition-none active:scale-97 rounded-sm transition-all duration-100 ease-in-out ${props.className}
+      className={`relative overflow-hidden group border-2 border-primary lg:hover:cursor-pointer hover:scale-[102%] active:transition-none active:scale-97 rounded-sm transition-all duration-100 ease-in-out ${props.className}
       ${props.disabled && "pointer-events-none brightness-70"} ${type === "hollow" ? "bg-transparent lg:hover:bg-primary/15" : "bg-primary"}`}
     >
       <div

@@ -35,10 +35,12 @@ const NavBar = () => {
         )}
         {(currDeviceSize === "sm" || currDeviceSize === "md") && <NavBarHamburger />}
       </div>
-      <div
-        className="h-0.5 w-min absolute bg-primary transition-all duration-50 ease-out"
-        style={{ width: `${scrollProgress}%` }}
-      />
+      <div className="h-0.5 w-full absolute">
+        <div
+          className="h-0.5 bg-primary origin-left transition-transform will-change-transform duration-50 ease-out transform-gpu"
+          style={{ transform: `scaleX(${scrollProgress / 100})` }}
+        ></div>
+      </div>
     </nav>
   );
 };
