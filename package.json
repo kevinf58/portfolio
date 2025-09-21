@@ -9,6 +9,9 @@
     "lint": "next lint && prettier --write ."
   },
   "dependencies": {
+    "@milkdown/crepe": "^7.15.5",
+    "@milkdown/kit": "^7.15.5",
+    "@milkdown/react": "^7.15.5",
     "motion": "^12.23.12",
     "next": "15.5.3",
     "react": "19.1.1",
