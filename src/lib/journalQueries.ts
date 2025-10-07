@@ -5,6 +5,7 @@ export function getAllJournals(): JournalType[] {
   const statement = db.prepare("SELECT * FROM journals ORDER BY date DESC");
 
   const rawRows = statement.all() as Array<Omit<JournalType, "date" | "tags"> & { date: string; tags: string }>;
+
   const rows: JournalType[] = rawRows.map((row) => ({
     ...row,
     date: new Date(row.date),
@@ -14,9 +15,13 @@ export function getAllJournals(): JournalType[] {
   return rows;
 }
 
-export function addJournal(journal: JournalType) {
+export function addJournal(journal: Omit<JournalType, "id">) {
   const stmt = db.prepare("INSERT INTO journals (title, date, tags, markdown) VALUES (?, ?, ?, ?)");
-  const info = stmt.run(journal.title, journal.date.toISOString(), JSON.stringify(journal.tags), journal.markdown);
+
+  const date = typeof journal.date === "string" ? new Date(journal.date) : journal.date;
+
+  const info = stmt.run(journal.title, date.toISOString(), JSON.stringify(journal.tags), journal.markdown);
+
   return { ...journal, id: info.lastInsertRowid };
 }
 

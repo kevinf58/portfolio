@@ -7,7 +7,7 @@ import "@milkdown/crepe/theme/common/style.css";
 
 const CrepeEditor = (props: EditorProps) => {
   useEditor((root) => {
-    const crepe = new Crepe({ root });
+    const crepe = new Crepe({ root, defaultValue: "# " });
 
     // listen for updates in crepe to invoke setMarkdown and send it back up the tree
     crepe.on((listener) => {
@@ -16,7 +16,6 @@ const CrepeEditor = (props: EditorProps) => {
           const markdown = crepe.getMarkdown();
 
           props.setMarkdown(markdown);
-          console.log(markdown);
         }
       });
     });

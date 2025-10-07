@@ -11,7 +11,7 @@ const db = new Database(dbPath);
 db.exec(`
   CREATE TABLE IF NOT EXISTS journals (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL,
+    title TEXT UNIQUE NOT NULL,
     date TEXT NOT NULL,
     markdown TEXT NOT NULL,
     tags TEXT,

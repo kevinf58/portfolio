@@ -3,9 +3,51 @@
 import { Button } from "@/components/common/Button";
 import Editor from "@/components/Editor";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { RawJournalType } from "@/types/api/Journal.type";
 
 const Page = () => {
   const [markdown, setMarkdown] = useState("");
+
+  const handleSubmit = async () => {
+    const firstLine = (markdown || "").split("\n")[0].replace(/^#\s*/, "").trim();
+
+    const newJournal: RawJournalType = {
+      title: firstLine,
+      date: new Date(),
+      tags: [],
+      markdown,
+    };
+
+    if (markdown.length < 200) {
+      toast.warn("Please add sufficient text to this journal");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/journal", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newJournal),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        if (res.status === 409) {
+          toast.warn("A journal with this title already exists. Please rename it!");
+        } else {
+          toast.error(data.error || "Failed to add entry.");
+        }
+        return;
+      }
+
+      toast.success("Entry added!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to add entry.");
+    }
+  };
 
   return (
     <section className="relative h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-light-black shadow-primary">
@@ -18,7 +60,7 @@ const Page = () => {
           <div className="w-full flex-1 py-1 px-2 font-serif whitespace-pre-wrap leading-4 overflow-y-auto">
             {markdown}
           </div>
-          <Button className="!fixed bottom-5 right-10" type="hollow" onClick={() => console.log(markdown)}>
+          <Button className="!fixed bottom-5 right-10" type="hollow" onClick={handleSubmit}>
             Submit
           </Button>
         </div>

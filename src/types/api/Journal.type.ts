@@ -5,3 +5,5 @@ export type JournalType = {
   tags: string[];
   markdown: string;
 };
+
+export type RawJournalType = Omit<JournalType, "id">;
