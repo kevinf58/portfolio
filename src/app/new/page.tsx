@@ -5,8 +5,10 @@ import Editor from "@/components/Editor";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { RawJournalType } from "@/types/api/Journal.type";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
   const [markdown, setMarkdown] = useState("");
 
   const handleSubmit = async () => {
@@ -42,6 +44,7 @@ const Page = () => {
         return;
       }
 
+      router.push("/");
       toast.success("Entry added!");
     } catch (err) {
       console.error(err);
