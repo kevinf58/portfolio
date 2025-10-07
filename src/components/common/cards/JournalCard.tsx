@@ -3,14 +3,15 @@ import { FiArrowUpRight } from "react-icons/fi";
 import { FaTag } from "react-icons/fa";
 import Tag from "../Tag";
 import { CardProps } from "@/types/components/Card.props";
+import { JournalType } from "@/types/api/Journal.type";
 
-const JournalCard = (props: CardProps) => {
+const JournalCard = (props: CardProps & Omit<JournalType, "id">) => {
   return (
     <Card href="/journal" className={`!w-60 group transition-discrete duration-150 ${props.className}`}>
       <div className="mx-4 my-5">
         <div className="flex flex-col gap-0.5">
           <div className="flex items-center gap-4">
-            <h3 className="font-sans font-bold text-2xl text-1.5xl leading-7">My Journal #28</h3>
+            <h3 className="font-sans font-bold text-2xl text-1.5xl leading-7">{props.title}</h3>
             <FiArrowUpRight
               size={20}
               className="-translate-x-0.5 group-hover:translate-x-0 group-hover:-translate-y-0.5 duration-200"

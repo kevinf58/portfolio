@@ -1,5 +1,5 @@
 import db from "./db";
-import { JournalType } from "@/types/api/Journal.type";
+import { JournalType, RawJournalType } from "@/types/api/Journal.type";
 
 export function getAllJournals(): JournalType[] {
   const statement = db.prepare("SELECT * FROM journals ORDER BY date DESC");
@@ -15,9 +15,8 @@ export function getAllJournals(): JournalType[] {
   return rows;
 }
 
-export function addJournal(journal: Omit<JournalType, "id">) {
+export function addJournal(journal: RawJournalType) {
   const stmt = db.prepare("INSERT INTO journals (title, date, tags, markdown) VALUES (?, ?, ?, ?)");
-
   const date = typeof journal.date === "string" ? new Date(journal.date) : journal.date;
 
   const info = stmt.run(journal.title, date.toISOString(), JSON.stringify(journal.tags), journal.markdown);
