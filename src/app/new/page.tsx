@@ -12,17 +12,22 @@ const Page = () => {
   const [markdown, setMarkdown] = useState("");
 
   const handleSubmit = async () => {
-    const firstLine = (markdown || "").split("\n")[0].replace(/^#\s*/, "").trim();
+    const lines = (markdown || "").split("\n");
+    const firstLine = lines[0].replace(/^#\s*/, "").trim();
+    const remainingMarkdown = lines.slice(1).join("\n").trim();
 
     const newJournal: RawJournalType = {
       title: firstLine,
       date: new Date(),
       tags: [],
-      markdown,
+      markdown: remainingMarkdown,
     };
 
     if (markdown.length < 200) {
       toast.warn("Please add sufficient text to this journal");
+      return;
+    } else if (firstLine.length < 4) {
+      toast.warn("Title too short!");
       return;
     }
 
