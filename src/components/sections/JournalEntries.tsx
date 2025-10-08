@@ -41,6 +41,7 @@ const JournalEntries = () => {
           <TextAnimation element="div" key={journal.id}>
             <JournalCard
               state={[isFocused, setIsFocused]}
+              id={journal.id}
               title={journal.title}
               date={journal.date}
               tags={journal.tags}

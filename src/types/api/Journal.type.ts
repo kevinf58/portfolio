@@ -7,3 +7,9 @@ export type JournalType = {
 };
 
 export type RawJournalType = Omit<JournalType, "id">;
+
+export type JournalPageParams = {
+  params: Promise<{
+    id: string;
+  }>;
+};
