@@ -25,7 +25,14 @@ const JournalCard = (props: CardProps & RawJournalType) => {
             </div>
           </div>
 
-          <h6 className="font-serif text-xs text-white/50 mb-5">Tuesday, April 21, 2024</h6>
+          <h6 className="font-serif text-xs text-white/50 mb-5">
+            {Intl.DateTimeFormat("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            }).format(props.date)}
+          </h6>
           <p className="font-serif text-xs break-words">{stripMarkdown(truncateText(props.markdown, "markdown"))}</p>
           <div className="flex flex-wrap space-x-2.5 space-y-2 font-sans text-xs mt-3">
             <Tag>TypeScript</Tag>
