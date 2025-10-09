@@ -49,6 +49,7 @@
   --color-white: #f1efdd;
   --color-green: #74f071;
   --color-red: #f07174;
+  --color-gray: #2c2f31;
 
   /**
    * shadows
@@ -129,8 +130,8 @@ body {
 */
 
 .milkdown {
-  --crepe-color-background: #212527;
-  --crepe-color-on-background: #e6e6e6;
+  --crepe-color-background: #2c2f31;
+  --crepe-color-on-background: #f1efdd;
   --crepe-color-surface: #121212;
   --crepe-color-surface-low: #1c1c1c;
   --crepe-color-on-surface: #d1d1d1;
@@ -165,6 +166,11 @@ body {
 }
 .milkdown .editor .milkdown-image-block .image-edit {
   border-radius: 0.25rem;
+}
+
+.milkdown .ProseMirror {
+  margin: 0rem;
+  padding: 0 !important;
 }
 
 /**
