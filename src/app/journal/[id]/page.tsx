@@ -1,12 +1,39 @@
-import { JournalPageParams } from "@/types/api/Journal.type";
+"use client";
 
-const Page = async (props: JournalPageParams) => {
-  const { id } = await props.params;
+import { JournalType } from "@/types/api/Journal.type";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+
+const Page = () => {
+  const params = useParams();
+  const id = Number(params.id);
+
+  const [journal, setJournal] = useState<JournalType | null>(null);
+
+  useEffect(() => {
+    const fetchJournal = async () => {
+      const res = await fetch(`/api/journal/${id}`);
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Failed to fetch journal");
+      }
+
+      const data: JournalType = await res.json();
+      setJournal({
+        ...data,
+        date: new Date(data.date),
+      });
+    };
+
+    fetchJournal();
+  }, [id]);
+
+  if (!journal) return <h1>Loading...</h1>;
 
   return (
     <section className="relative flex justify-center min-h-[calc(100vh-4.75rem)] w-full bg-light-black shadow-default py-36 md:px-10 sm:px-6 px-2">
       <div className="min-h-full max-w-[65rem] lg:px-48 sm:px-20 px-10 sm:py-32 py-20 gap-1 rounded-sm border-2 border-tint/10 bg-white/8 hover:scale-101 duration-100 cursor-pointer">
-        <h1 className="text-5xl font-bold text-tint md:text-left text-center">This is a header</h1>
+        <h1 className="text-5xl font-bold text-tint md:text-left text-center">{journal.title}</h1>
         <hr className="my-5 mx-10 text-white/40" />
         <p>
           Today started quietly, with the soft hum of the rain against my window. It’s strange how mornings like this

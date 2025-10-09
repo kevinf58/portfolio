@@ -29,3 +29,16 @@ export function deleteJournal(id: number) {
   stmt.run(id);
   return { success: true };
 }
+
+export function getJournal(id: number): JournalType {
+  const statement = db.prepare("SELECT * FROM journals WHERE id = ?");
+
+  const rawRow = statement.get(id) as Omit<JournalType, "date" | "tags"> & { date: string; tags: string };
+  const journal = {
+    ...rawRow,
+    date: new Date(rawRow.date),
+    tags: JSON.parse(rawRow.tags || "[]"),
+  };
+
+  return journal;
+}
