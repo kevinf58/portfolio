@@ -134,9 +134,9 @@ body {
   --crepe-color-on-background: #f1efdd;
   --crepe-color-surface: #121212;
   --crepe-color-surface-low: #1c1c1c;
-  --crepe-color-on-surface: #d1d1d1;
+  --crepe-color-on-surface: #f1efdd;
   --crepe-color-on-surface-variant: #a9a9a9;
-  --crepe-color-outline: #757575;
+  --crepe-color-outline: #e5e5e5;
   --crepe-color-primary: #86efac;
   --crepe-color-secondary: #4d4d4d;
   --crepe-color-on-secondary: #d6d6d6;
@@ -171,6 +171,14 @@ body {
 .milkdown .ProseMirror {
   margin: 0rem;
   padding: 0 !important;
+}
+
+.milkdown .ProseMirror .crepe-placeholder {
+  font-weight: 600;
+}
+
+.milkdown .ProseMirror h1 {
+  font-weight: 600 !important;
 }
 
 /**
