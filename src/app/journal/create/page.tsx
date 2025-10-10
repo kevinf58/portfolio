@@ -14,13 +14,12 @@ const Page = () => {
   const handleSubmit = async () => {
     const lines = (markdown || "").split("\n");
     const firstLine = lines[0].replace(/^#\s*/, "").trim();
-    const remainingMarkdown = lines.slice(1).join("\n").trim();
 
     const newJournal: RawJournalType = {
       title: firstLine,
       date: new Date(),
       tags: [],
-      markdown: remainingMarkdown,
+      markdown,
     };
 
     if (markdown.length < 200) {
