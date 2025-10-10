@@ -49,12 +49,13 @@
   --color-white: #f1efdd;
   --color-green: #74f071;
   --color-red: #f07174;
+  --color-gray: #2c2f31;
 
   /**
    * shadows
   */
-  --shadow-primary: 0px 4px 20px 0px rgba(0, 0, 0, 0.2);
-  --inset-shadow-primary: 0px 10px 20px 0px rgba (0, 0, 0, 0.2);
+  --shadow-default: 0px 4px 20px 0px rgba(0, 0, 0, 0.2);
+  --inset-shadow-default: 0px 10px 20px 0px rgba (0, 0, 0, 0.2);
 
   /**
    * text sizes
@@ -129,13 +130,13 @@ body {
 */
 
 .milkdown {
-  --crepe-color-background: #212527;
-  --crepe-color-on-background: #e6e6e6;
+  --crepe-color-background: #2c2f31;
+  --crepe-color-on-background: #f1efdd;
   --crepe-color-surface: #121212;
   --crepe-color-surface-low: #1c1c1c;
-  --crepe-color-on-surface: #d1d1d1;
+  --crepe-color-on-surface: #f1efdd;
   --crepe-color-on-surface-variant: #a9a9a9;
-  --crepe-color-outline: #757575;
+  --crepe-color-outline: #e5e5e5;
   --crepe-color-primary: #86efac;
   --crepe-color-secondary: #4d4d4d;
   --crepe-color-on-secondary: #d6d6d6;
@@ -165,6 +166,19 @@ body {
 }
 .milkdown .editor .milkdown-image-block .image-edit {
   border-radius: 0.25rem;
+}
+
+.milkdown .ProseMirror {
+  margin: 0rem;
+  padding: 0 !important;
+}
+
+.milkdown .ProseMirror .crepe-placeholder {
+  font-weight: 600;
+}
+
+.milkdown .ProseMirror h1 {
+  font-weight: 600 !important;
 }
 
 /**

@@ -12,7 +12,7 @@ import Tag from "@/components/common/Tag";
 export default function Home() {
   return (
     <>
-      <section className="relative h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-light-black shadow-primary">
+      <section className="relative h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-light-black shadow-default">
         <div className="2xl:w-[40%] xl:w-[55%] lg:w-[60%] md:w-[80%] w-full sm:px-28 px-6">
           <div className="flex items-end">
             <h1 className="sm:text-7xl text-5xl font-bold text-tint">Kevin Feng</h1>
@@ -71,7 +71,7 @@ export default function Home() {
         </div>
       </section>
       <section
-        className="w-full flex lg:flex-row lg:items-start items-center flex-col sm:gap-40 gap-24 sm:px-28 px-6 py-32 bg-black shadow-primary"
+        className="w-full flex lg:flex-row lg:items-start items-center flex-col sm:gap-40 gap-24 sm:px-28 px-6 py-32 bg-black shadow-default"
         id="scroll"
       >
         <JournalEntries />

@@ -19,7 +19,7 @@ const NavBar = () => {
     <nav ref={scrollRef} className="transition-transform duration-150 ease-out">
       <div
         className={`w-full text-lg font-bold sm:px-28 px-8 pb-5 pt-7 flex items-center justify-between bg-light-black transition-shadow duration-100 ${
-          isScrolled && "shadow-primary"
+          isScrolled && "shadow-default"
         }`}
       >
         <Link className="flex items-center gap-2 text-lg text-tint" href={"/"} static>

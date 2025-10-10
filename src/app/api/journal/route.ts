@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAllJournals, addJournal } from "@/lib/journalQueries";
-import { JournalType, RawJournalType } from "@/types/api/Journal.type";
+import { RawJournalType } from "@/types/api/Journal.type";
 
 export async function GET() {
   const journals = getAllJournals();
