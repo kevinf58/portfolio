@@ -6,6 +6,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { RawJournalType } from "@/types/api/Journal.type";
 import { useRouter } from "next/navigation";
+import { FaMarkdown } from "react-icons/fa6";
 
 const Page = () => {
   const router = useRouter();
@@ -63,7 +64,10 @@ const Page = () => {
           <Editor setMarkdown={setMarkdown} />
         </div>
         <div className="w-1/2 h-full flex flex-col border-l-2 border-tint/20">
-          <h1 className="bg-primary/10 font-bold py-3 px-6 border-b-2 border-tint/20 shadow-default">Markdown</h1>
+          <h1 className="flex items-center gap-2 bg-primary/10 font-bold py-3 px-6 border-b-2 border-tint/20 shadow-default">
+            <FaMarkdown className="text-lg" />
+            <span>Markdown</span>
+          </h1>
           <div className="w-full flex-1 py-4 px-6 font-serif whitespace-pre-wrap leading-4 overflow-y-auto">
             {markdown}
           </div>
