@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { deleteJournal, getJournal } from "@/lib/journalQueries";
-import { Params } from "next/dist/server/request/params";
 
 export async function DELETE(request: NextRequest) {
   const { searchParams } = new URL(request.url);
