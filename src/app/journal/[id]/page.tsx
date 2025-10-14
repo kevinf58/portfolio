@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { Milkdown, MilkdownProvider, useEditor } from "@milkdown/react";
 import { Crepe } from "@milkdown/crepe";
 import "@milkdown/crepe/theme/common/style.css";
+import Loading from "@/app/loading";
 
 // read only crepe editor component to be used to display markdown
 const ReadOnlyCrepe = ({ markdown }: { markdown: string }) => {
@@ -47,7 +48,7 @@ const Page = () => {
     fetchJournal();
   }, [id]);
 
-  if (!journal) return <h1>Loading...</h1>;
+  if (!journal) return <Loading />;
 
   return (
     <section className="relative flex justify-center min-h-[calc(100vh-4.75rem)] w-full bg-light-black shadow-default py-36 md:px-10 sm:px-6 px-2">
