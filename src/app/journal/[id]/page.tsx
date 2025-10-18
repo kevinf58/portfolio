@@ -4,7 +4,7 @@ import DeleteButton from "@/components/DeleteButton";
 import { notFound } from "next/navigation";
 
 const Page = async ({ params }: { params: { id: string } }) => {
-  const { id } = await params;
+  const { id } = params;
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
   const res = await fetch(`${apiURL}/journal/${id}`, { cache: "force-cache" });
@@ -25,7 +25,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
       <div className="min-h-full max-w-[65rem] w-full lg:px-48 sm:px-20 px-8 lg:py-32 sm:py-24 py-12 gap-1 rounded-sm border-2 border-tint/10 bg-gray hover:scale-101 duration-100">
         <ReadOnlyCrepe markdown={journal.markdown} />
       </div>
-      <DeleteButton id={id} />
+      <DeleteButton id={Number(id)} />
     </section>
   );
 };
