@@ -12,7 +12,7 @@ const Page = () => {
   const router = useRouter();
   const [markdown, setMarkdown] = useState("");
 
-  const handleSubmit = async () => {
+  const handleCreate = async () => {
     const lines = (markdown || "").split("\n");
     const firstLine = lines[0].replace(/^#\s*/, "").trim();
 
@@ -71,8 +71,8 @@ const Page = () => {
           <div className="w-full flex-1 py-4 px-6 font-serif whitespace-pre-wrap leading-4 overflow-y-auto">
             {markdown}
           </div>
-          <Button className="!fixed bottom-5 right-10" type="hollow" onClick={handleSubmit}>
-            Submit
+          <Button className="!fixed bottom-5 right-10" type="hollow" onClick={handleCreate}>
+            Create
           </Button>
         </div>
       </div>

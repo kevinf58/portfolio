@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import JournalCard from "../common/cards/JournalCard";
 import { Button } from "../common/Button";
