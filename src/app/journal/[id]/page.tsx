@@ -4,7 +4,7 @@ import DeleteButton from "@/components/DeleteButton";
 import { notFound } from "next/navigation";
 
 const Page = async ({ params }: { params: { id: string } }) => {
-  const id = Number(params.id);
+  const { id } = await params;
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
   const res = await fetch(`${apiURL}/journal/${id}`, { cache: "force-cache" });
