@@ -3,8 +3,8 @@ import ReadOnlyCrepe from "@/components/ReadOnlyCrepe";
 import DeleteButton from "@/components/DeleteButton";
 import { notFound } from "next/navigation";
 
-const Page = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
   const res = await fetch(`${apiURL}/journal/${id}`, { cache: "force-cache" });
