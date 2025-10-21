@@ -6,6 +6,7 @@ import { SiTypescript, SiReact, SiPython, SiTailwindcss, SiNextdotjs } from "rea
 import JournalEntries from "@/components/sections/JournalEntries";
 import Projects from "@/components/sections/Projects";
 import Tag from "@/components/common/Tag";
+import Card from "@/components/common/cards/Card";
 
 export default function Home() {
   return (
@@ -46,26 +47,26 @@ export default function Home() {
           </ul>
         </div>
         <div className="flex flex-wrap group w-full absolute bottom-6 sm:px-28 px-6 font-sans text-xs gap-4">
-          <Tag>
+          <Card href="">
             <SiTypescript color="#2F6CB4" />
             <span>TypeScript</span>
-          </Tag>
-          <Tag>
+          </Card>
+          <Card href="">
             <SiReact color="#66DBFB" />
             <span>React</span>
-          </Tag>
-          <Tag>
+          </Card>
+          <Card href="">
             <SiPython />
             <span>Python</span>
-          </Tag>
-          <Tag>
+          </Card>
+          <Card href="">
             <SiTailwindcss color="#3FBFF8" />
             <span>Tailwind CSS</span>
-          </Tag>
-          <Tag>
+          </Card>
+          <Card href="">
             <SiNextdotjs color="#080808" />
             <span>Next JS</span>
-          </Tag>
+          </Card>
         </div>
       </section>
       <section

@@ -9,8 +9,8 @@ import { stripMarkdown } from "@/utils/stripMarkdown";
 
 const JournalCard = (props: CardProps & JournalType) => {
   return (
-    <Card href={`/journal/${props.id}`} className={`!w-60 group transition-discrete duration-150 ${props.className}`}>
-      <div className="mx-4 my-5 h-full w-full overflow-hidden">
+    <Card href={`/journal/${props.id}`} className={`group transition-discrete duration-150 ${props.className}`}>
+      <div className="mx-4 my-5">
         <div className="flex flex-col gap-0.5">
           <div className="flex items-center gap-4 min-w-0">
             <h3 className="font-sans font-bold text-2xl text-1.5xl truncate leading-7 min-w-0">
@@ -35,9 +35,9 @@ const JournalCard = (props: CardProps & JournalType) => {
           </h6>
           <p className="font-serif text-xs break-words">{stripMarkdown(truncateText(props.markdown, "markdown"))}</p>
           <div className="flex flex-wrap space-x-2.5 space-y-2 font-sans text-xs mt-3">
-            <Tag>TypeScript</Tag>
-            <Tag>React</Tag>
-            <Tag>Tailwind CSS</Tag>
+            <Card href="">TypeScript</Card>
+            <Card href="">React</Card>
+            <Card href="">Tailwind CSS</Card>
           </div>
           <div className="flex items-center text-xs font-sans gap-1 mt-1">
             <FaTag />

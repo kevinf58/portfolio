@@ -32,7 +32,7 @@ const Page = () => {
     }
 
     try {
-      const res = await fetch("/api/journal", {
+      const res = await fetch("/api/projects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newJournal),
@@ -72,7 +72,7 @@ const Page = () => {
             {markdown}
           </div>
           <Button className="!fixed bottom-5 right-10" type="hollow" onClick={handleCreate}>
-            Create Journal
+            Create Project
           </Button>
         </div>
       </div>
