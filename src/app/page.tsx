@@ -5,7 +5,6 @@ import { IoMailSharp } from "react-icons/io5";
 import { SiTypescript, SiReact, SiPython, SiTailwindcss, SiNextdotjs } from "react-icons/si";
 import JournalEntries from "@/components/sections/JournalEntries";
 import Projects from "@/components/sections/Projects";
-import Tag from "@/components/common/Tag";
 import Card from "@/components/common/cards/Card";
 
 export default function Home() {
@@ -47,23 +46,23 @@ export default function Home() {
           </ul>
         </div>
         <div className="flex flex-wrap group w-full absolute bottom-6 sm:px-28 px-6 font-sans text-xs gap-4">
-          <Card href="">
+          <Card href="" className="items-center">
             <SiTypescript color="#2F6CB4" />
             <span>TypeScript</span>
           </Card>
-          <Card href="">
+          <Card href="" className="items-center">
             <SiReact color="#66DBFB" />
             <span>React</span>
           </Card>
-          <Card href="">
+          <Card href="" className="items-center">
             <SiPython />
             <span>Python</span>
           </Card>
-          <Card href="">
+          <Card href="" className="items-center">
             <SiTailwindcss color="#3FBFF8" />
             <span>Tailwind CSS</span>
           </Card>
-          <Card href="">
+          <Card href="" className="items-center">
             <SiNextdotjs color="#080808" />
             <span>Next JS</span>
           </Card>

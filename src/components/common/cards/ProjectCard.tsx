@@ -2,7 +2,6 @@ import Image from "next/image";
 import Card from "./Card";
 import { FiArrowUpRight } from "react-icons/fi";
 import { CardProps } from "@/types/components/Card.props";
-import Tag from "../Tag";
 
 const ProjectCard = (props: CardProps) => {
   return (

@@ -7,6 +7,11 @@ import { toast } from "react-toastify";
 import { RawJournalType } from "@/types/api/Journal.type";
 import { useRouter } from "next/navigation";
 import { FaMarkdown } from "react-icons/fa6";
+import Card from "@/components/common/cards/Card";
+import { FaRegEdit } from "react-icons/fa";
+import { MdOutlineRemoveRedEye, MdOutlineDateRange } from "react-icons/md";
+import getCurrentDate from "@/utils/getCurrentDate";
+import TagInput from "@/components/TagInput";
 
 const Page = () => {
   const router = useRouter();
@@ -59,22 +64,29 @@ const Page = () => {
 
   return (
     <section className="relative h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-light-black shadow-default">
-      <div className="h-full w-full flex bg-white/3">
-        <div className="bg-gray h-full w-1/2 px-28 py-10 overflow-y-scroll">
-          <Editor setMarkdown={setMarkdown} />
-        </div>
-        <div className="w-1/2 h-full flex flex-col border-l-2 border-tint/20">
-          <h1 className="flex items-center gap-2 bg-primary/10 font-bold py-3 px-6 border-b-2 border-tint/20 shadow-default">
-            <FaMarkdown className="text-lg" />
-            <span>Markdown</span>
-          </h1>
-          <div className="w-full flex-1 py-4 px-6 font-serif whitespace-pre-wrap leading-4 overflow-y-auto">
-            {markdown}
+      <div className="h-full w-full flex flex-wrap justify-center space-x-10 p-8 pt-28">
+        <Card href="" className="flex flex-col border-2 !max-w-[36rem] w-full !max-h-[38rem] h-full !px-4 !py-4">
+          <FaRegEdit size={25} className="text-white/50" />
+          <div className="flex flex-col mx-10 my-6 gap-4">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                placeholder="Enter a title..."
+                className="w-full h-min outline-none bg-white/8 shadow-inner focus:ring-2 ring-primary rounded-sm py-2 px-3 !text-xs duration-200 ease-in"
+              />
+              <input
+                type="date"
+                placeholder="Enter a title..."
+                className="w-min h-min outline-none bg-white/8 text-white/50 shadow-inner focus:ring-2 ring-primary rounded-sm py-2 px-2 !text-xs duration-200 ease-in"
+                defaultValue={getCurrentDate()}
+              />
+            </div>
+            <TagInput />
           </div>
-          <Button className="!fixed bottom-5 right-10" type="hollow" onClick={handleCreate}>
-            Create Project
-          </Button>
-        </div>
+        </Card>
+        <Card href="" className="border-2 !max-w-[36rem] w-full !max-h-[38rem] h-full !px-4 !py-4">
+          <MdOutlineRemoveRedEye size={25} className="text-white/50" />
+        </Card>
       </div>
     </section>
   );

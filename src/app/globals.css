@@ -115,7 +115,6 @@ body {
   /**
   * hide scrollbar
   */
-
   .hide-scrollbar {
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -128,7 +127,6 @@ body {
 /**
  * milkdown custom theme
 */
-
 .milkdown {
   --crepe-color-background: #2c2f31;
   --crepe-color-on-background: #f1efdd;

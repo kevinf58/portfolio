@@ -1,7 +1,6 @@
 import Card from "./Card";
 import { FiArrowUpRight } from "react-icons/fi";
 import { FaTag } from "react-icons/fa";
-import Tag from "../Tag";
 import { CardProps } from "@/types/components/Card.props";
 import { JournalType } from "@/types/api/Journal.type";
 import truncateText from "@/utils/TruncateText";
