@@ -12,6 +12,9 @@ export default function TagInput() {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // max number of tags that can be added per project/journal
+  const MAX_TAGS = 3;
+
   const handleAddTag = (tag: string) => {
     const trimmedTag = tag.trim();
     if (!trimmedTag) return;
@@ -67,31 +70,32 @@ export default function TagInput() {
         </Card>
       ))}
 
-      {isEditing ? (
-        <input
-          ref={inputRef}
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={handleKeyDown}
-          onBlur={handleBlur}
-          className={`w-min h-min outline-none bg-white/8 text-white/50 shadow-inner focus:ring-2 ring-primary rounded-sm py-2 px-2 !text-xs duration-150 ease-in ${
-            isEditing ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-90 pointer-events-none"
-          }`}
-          placeholder="New tag..."
-        />
-      ) : (
-        <Card
-          onClick={() => {
-            setIsEditing(true);
-            setTimeout(() => inputRef.current?.focus(), 0);
-          }}
-          className={`!px-3 transition-all duration-150 ease-in ${isEditing ? "opacity-0 scale-90 pointer-events-none" : "opacity-100 scale-100"}`}
-          href=""
-        >
-          +
-        </Card>
-      )}
+      {tags.length < MAX_TAGS &&
+        (isEditing ? (
+          <input
+            ref={inputRef}
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={handleKeyDown}
+            onBlur={handleBlur}
+            className={`w-min h-min outline-none bg-white/8 text-white/50 shadow-inner focus:ring-2 ring-primary rounded-sm py-2 px-2 !text-xs duration-150 ease-in ${
+              isEditing ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-90 pointer-events-none"
+            }`}
+            placeholder="New tag..."
+          />
+        ) : (
+          <Card
+            onClick={() => {
+              setIsEditing(true);
+              setTimeout(() => inputRef.current?.focus(), 0);
+            }}
+            className={`!px-3 transition-all duration-150 ease-in ${isEditing ? "opacity-0 scale-90 pointer-events-none" : "opacity-100 scale-100"}`}
+            href=""
+          >
+            +
+          </Card>
+        ))}
     </div>
   );
 }

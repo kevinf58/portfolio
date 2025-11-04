@@ -16,6 +16,10 @@ import TagInput from "@/components/TagInput";
 const Page = () => {
   const router = useRouter();
   const [markdown, setMarkdown] = useState("");
+  const [title, setTitle] = useState("");
+
+  // max char length of a journal project title
+  const MAX_TITLE_LENGTH = 60;
 
   const handleCreate = async () => {
     const lines = (markdown || "").split("\n");
@@ -65,15 +69,28 @@ const Page = () => {
   return (
     <section className="relative h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-light-black shadow-default">
       <div className="h-full w-full flex flex-wrap justify-center space-x-10 p-8 pt-28">
-        <Card href="" className="flex flex-col border-2 !max-w-[36rem] w-full !max-h-[38rem] h-full !px-4 !py-4">
+        <Card
+          href=""
+          className="flex flex-col border-2 !max-w-[36rem] w-full !max-h-[38rem] h-full !px-4 !py-4 hover:!scale-100"
+        >
           <FaRegEdit size={25} className="text-white/50" />
           <div className="flex flex-col mx-10 my-6 gap-4">
             <div className="flex gap-2">
-              <input
-                type="text"
-                placeholder="Enter a title..."
-                className="w-full h-min outline-none bg-white/8 shadow-inner focus:ring-2 ring-primary rounded-sm py-2 px-3 !text-xs duration-200 ease-in"
-              />
+              <div className="relative w-full">
+                <input
+                  type="text"
+                  placeholder="Enter a title..."
+                  value={title}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value.length <= 60) setTitle(value);
+                  }}
+                  className="w-full h-min outline-none bg-white/8 shadow-inner focus:ring-2 ring-primary rounded-sm py-2 px-3 !text-xs duration-200 ease-in pr-10"
+                />
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-white/50 pointer-events-none">
+                  {title.length}/{MAX_TITLE_LENGTH}
+                </span>
+              </div>
               <input
                 type="date"
                 placeholder="Enter a title..."
@@ -84,7 +101,7 @@ const Page = () => {
             <TagInput />
           </div>
         </Card>
-        <Card href="" className="border-2 !max-w-[36rem] w-full !max-h-[38rem] h-full !px-4 !py-4">
+        <Card href="" className="border-2 !max-w-[36rem] w-full !max-h-[38rem] h-full !px-4 !py-4 hover:!scale-100">
           <MdOutlineRemoveRedEye size={25} className="text-white/50" />
         </Card>
       </div>
