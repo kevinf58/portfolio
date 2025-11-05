@@ -128,7 +128,6 @@ body {
  * milkdown custom theme
 */
 .milkdown {
-  --crepe-color-background: #2c2f31;
   --crepe-color-on-background: #f1efdd;
   --crepe-color-surface: #121212;
   --crepe-color-surface-low: #1c1c1c;
@@ -177,6 +176,14 @@ body {
 
 .milkdown .ProseMirror h1 {
   font-weight: 600 !important;
+}
+
+.milkdown .ProseMirror p {
+  font-size: smaller !important;
+}
+
+.milkdown .milkdown-block-handle {
+  display: none !important;
 }
 
 /**

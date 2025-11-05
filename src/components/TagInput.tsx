@@ -5,8 +5,11 @@ import Card from "./common/cards/Card";
 import { toast } from "react-toastify";
 import { MdDeleteOutline } from "react-icons/md";
 
-export default function TagInput() {
-  const [tags, setTags] = useState<string[]>([]);
+export default function TagInput({
+  state: { tags, setTags },
+}: {
+  state: { tags: string[]; setTags: React.Dispatch<React.SetStateAction<string[]>> };
+}) {
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState("");
 

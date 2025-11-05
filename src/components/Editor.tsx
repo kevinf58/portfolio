@@ -9,7 +9,7 @@ import { imageBlockConfig } from "@milkdown/kit/component/image-block";
 
 const CrepeEditor = (props: EditorProps) => {
   useEditor((root) => {
-    const crepe = new Crepe({ root, defaultValue: "# \n\n*** \n" });
+    const crepe = new Crepe({ root });
 
     // listen for updates in crepe to invoke setMarkdown and send it back up the tree
     crepe.on((listener) => {
