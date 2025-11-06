@@ -139,7 +139,7 @@ const DocumentLayout = () => {
                 </Card>
               ))}
             </div>
-            <hr className="opacity-20" />
+            <hr className="opacity-20 mb-6" />
             <ReadOnlyCrepe markdown={markdown} />
           </div>
         </Card>
