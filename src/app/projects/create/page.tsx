@@ -79,7 +79,7 @@ const Page = () => {
           className="flex flex-col border-2 !max-w-[36rem] w-full !max-h-[38rem] h-full !px-4 !py-4 hover:!scale-100 !cursor-default"
         >
           <FaRegEdit size={25} className="text-white/50" />
-          <div className="h-full flex flex-col mx-10 my-6 gap-4">
+          <div className="h-full min-h-0 flex flex-col mx-10 my-6 gap-4">
             <div className="flex gap-2">
               <div className="relative w-full">
                 <input
@@ -111,7 +111,7 @@ const Page = () => {
         </Card>
         <Card
           href=""
-          className="flex flex-col border-2 !max-w-[36rem] w-full !max-h-[38rem] h-full !px-4 !py-4 hover:!scale-100 !cursor-default"
+          className="w-full !max-h-[38rem] h-full min-h-0 overflow-y-auto flex flex-col border-2 !max-w-[36rem] !px-4 !py-4 hover:!scale-100 !cursor-default"
         >
           <MdOutlineRemoveRedEye size={25} className="text-white/50" />
           <div className="mx-10">

@@ -20,9 +20,7 @@ const CrepeEditor = (props: EditorProps) => {
           props.setMarkdown(markdown);
         }
       });
-    });
 
-    crepe.on((listener) => {
       listener.mounted(() => {
         crepe.editor.ctx.update(imageBlockConfig.key, (defaultConfig) => ({
           ...defaultConfig,
