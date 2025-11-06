@@ -8,11 +8,12 @@ import { RawJournalType } from "@/types/api/Journal.type";
 import { useRouter } from "next/navigation";
 import Card from "@/components/common/cards/Card";
 import { FaRegEdit } from "react-icons/fa";
-import { MdOutlineRemoveRedEye, MdOutlineDateRange } from "react-icons/md";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 import getCurrentDate from "@/utils/getCurrentDate";
 import TagInput from "@/components/TagInput";
 import dateToReadable from "@/utils/dateToReadable";
 import ReadOnlyCrepe from "@/components/ReadOnlyCrepe";
+import { TbSwitchHorizontal } from "react-icons/tb";
 
 const Page = () => {
   const router = useRouter();
@@ -78,7 +79,11 @@ const Page = () => {
           href=""
           className="flex flex-col border-2 !max-w-[36rem] w-full !max-h-[38rem] h-full !px-4 !py-4 hover:!scale-100 !cursor-default"
         >
-          <FaRegEdit size={25} className="text-white/50" />
+          <div className="flex items-center gap-2">
+            <FaRegEdit size={25} className="text-white/50 mr-2" />
+            <h3 className="font-sans font-bold text-xl text-white">Create a Project</h3>
+            <TbSwitchHorizontal size={20} title="Click to Swap to a Journal!" className="cursor-pointer" />
+          </div>
           <div className="h-full min-h-0 flex flex-col mx-10 my-6 gap-4">
             <div className="flex gap-2">
               <div className="relative w-full">
