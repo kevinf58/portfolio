@@ -4,60 +4,61 @@ import { Button } from "@/components/common/Button";
 import Editor from "@/components/Editor";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { RawJournalType } from "@/types/api/Journal.type";
+import { Document, DocumentType } from "@/types/api/Document.type";
 import { useRouter } from "next/navigation";
 import Card from "@/components/common/cards/Card";
 import { FaRegEdit } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-import getCurrentDate from "@/utils/getCurrentDate";
+import { getCurrentDate, dateToReadable } from "@/utils/dateUtils";
 import TagInput from "@/components/TagInput";
-import dateToReadable from "@/utils/dateToReadable";
 import ReadOnlyCrepe from "@/components/ReadOnlyCrepe";
 import { TbSwitchHorizontal } from "react-icons/tb";
 
-const Page = () => {
+const DocumentLayout = () => {
   const router = useRouter();
   const [markdown, setMarkdown] = useState("");
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState<string[]>([]);
   const [date, setDate] = useState(getCurrentDate());
+  const [documentType, setDocumentType] = useState<DocumentType>("journal");
 
-  // max char length of a journal project title
+  // max char length of a journal/project title
   const MAX_TITLE_LENGTH = 60;
 
   const inputStyles = "bg-white/8 shadow-inner focus-within:ring-2 ring-primary rounded-sm duration-200";
 
-  const handleCreate = async () => {
-    const lines = (markdown || "").split("\n");
-    const firstLine = lines[0].replace(/^#\s*/, "").trim();
+  const [year, month, day] = date.split("-").map(Number);
+  const localDate = new Date(year, month - 1, day);
 
-    const newJournal: RawJournalType = {
-      title: firstLine,
-      date: new Date(),
-      tags: [],
+  const handleCreate = async () => {
+    const newDocument: Document = {
+      title,
+      date: localDate,
+      tags,
       markdown,
+      type: documentType,
     };
 
     if (markdown.length < 200) {
-      toast.warn("Please add sufficient text to this journal");
+      toast.warn(`Please add sufficient text to this ${documentType}`);
       return;
-    } else if (firstLine.length < 4) {
+    } else if (title.length < 6) {
       toast.warn("Title too short!");
       return;
     }
 
     try {
-      const res = await fetch("/api/projects", {
+      const res = await fetch(`/api/${documentType}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newJournal),
+        body: JSON.stringify(newDocument),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
         if (res.status === 409) {
-          toast.warn("A journal with this title already exists. Please rename it!");
+          toast.warn(`A ${documentType} with this title already exists. Please rename it!`);
         } else {
           toast.error(data.error || "Failed to add entry.");
         }
@@ -72,6 +73,10 @@ const Page = () => {
     }
   };
 
+  const switchDocType = (current: DocumentType): DocumentType => {
+    return current === "journal" ? "project" : "journal";
+  };
+
   return (
     <section className="relative h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-light-black shadow-default">
       <div className="h-full w-full flex flex-wrap justify-center space-x-10 p-8 pt-28">
@@ -81,8 +86,13 @@ const Page = () => {
         >
           <div className="flex items-center gap-2">
             <FaRegEdit size={25} className="text-white/50 mr-2" />
-            <h3 className="font-sans font-bold text-xl text-white">Create a Project</h3>
-            <TbSwitchHorizontal size={20} title="Click to Swap to a Journal!" className="cursor-pointer" />
+            <h3 className="font-sans font-bold text-xl text-white">New {documentType}</h3>
+            <TbSwitchHorizontal
+              size={20}
+              title={`Click to Swap to a ${switchDocType(documentType)}!`}
+              className="cursor-pointer"
+              onClick={() => setDocumentType(switchDocType)}
+            />
           </div>
           <div className="h-full min-h-0 flex flex-col mx-10 my-6 gap-4">
             <div className="flex gap-2">
@@ -135,10 +145,10 @@ const Page = () => {
         </Card>
       </div>
       <Button className="!fixed bottom-5 right-10" type="hollow" onClick={handleCreate}>
-        Create Project
+        Create {documentType}
       </Button>
     </section>
   );
 };
 
-export default Page;
+export default DocumentLayout;

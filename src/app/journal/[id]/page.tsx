@@ -1,4 +1,4 @@
-import { JournalType } from "@/types/api/Journal.type";
+import { Journal } from "@/types/api/Document.type";
 import ReadOnlyCrepe from "@/components/ReadOnlyCrepe";
 import DeleteButton from "@/components/DeleteButton";
 import { notFound } from "next/navigation";
@@ -13,9 +13,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
     notFound();
   }
 
-  const data: JournalType = await res.json();
+  const data: Journal = await res.json();
 
-  const journal: JournalType = {
+  const journal: Journal = {
     ...data,
     date: new Date(data.date),
   };

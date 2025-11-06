@@ -1,4 +1,12 @@
-const dateToReadable = (dateString: string): string => {
+// retrieves the current date of your local time
+export const getCurrentDate = (): string => {
+  const today = new Date();
+  const currentDate = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().split("T")[0];
+
+  return currentDate;
+};
+
+export const dateToReadable = (dateString: string): string => {
   const [year, month, day] = dateString.split("-").map(Number);
   const date = new Date(year, month - 1, day);
 
@@ -24,5 +32,3 @@ const dateToReadable = (dateString: string): string => {
 
   return `${weekday}, ${monthName} ${day}${ordinal}, ${yearNum}`;
 };
-
-export default dateToReadable;

@@ -2,11 +2,11 @@ import Card from "./Card";
 import { FiArrowUpRight } from "react-icons/fi";
 import { FaTag } from "react-icons/fa";
 import { CardProps } from "@/types/components/Card.props";
-import { JournalType } from "@/types/api/Journal.type";
+import { Journal } from "@/types/api/Document.type";
 import truncateText from "@/utils/TruncateText";
 import { stripMarkdown } from "@/utils/stripMarkdown";
 
-const JournalCard = (props: CardProps & JournalType) => {
+const JournalCard = (props: CardProps & Journal) => {
   return (
     <Card href={`/journal/${props.id}`} className={`group transition-discrete duration-150 ${props.className}`}>
       <div className="mx-4 my-5">
@@ -34,9 +34,11 @@ const JournalCard = (props: CardProps & JournalType) => {
           </h6>
           <p className="font-serif text-xs break-words">{stripMarkdown(truncateText(props.markdown, "markdown"))}</p>
           <div className="flex flex-wrap space-x-2.5 space-y-2 font-sans text-xs mt-3">
-            <Card href="">TypeScript</Card>
-            <Card href="">React</Card>
-            <Card href="">Tailwind CSS</Card>
+            {props.tags.map((tag) => (
+              <Card href="" key={tag}>
+                {tag}
+              </Card>
+            ))}
           </div>
           <div className="flex items-center text-xs font-sans gap-1 mt-1">
             <FaTag />

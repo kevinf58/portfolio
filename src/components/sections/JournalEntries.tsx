@@ -5,17 +5,17 @@ import JournalCard from "../common/cards/JournalCard";
 import { Button } from "../common/Button";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import TextAnimation from "../common/TextAnimation";
-import { JournalType } from "@/types/api/Journal.type";
+import { Journal } from "@/types/api/Document.type";
 
 const JournalEntries = () => {
   const [isFocused, setIsFocused] = useState(false);
-  const [journals, setJournals] = useState<JournalType[]>([]);
+  const [journals, setJournals] = useState<Journal[]>([]);
 
   useEffect(() => {
     const fetchJournals = async () => {
       const res = await fetch("/api/journal");
       if (res.ok) {
-        const data: JournalType[] = await res.json();
+        const data: Journal[] = await res.json();
         const formattedData = data.map((journal) => ({
           ...journal,
           date: new Date(journal.date),

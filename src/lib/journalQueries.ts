@@ -1,12 +1,12 @@
 import db from "./db";
-import { JournalType, RawJournalType } from "@/types/api/Journal.type";
+import { Journal, Document } from "@/types/api/Document.type";
 
-export function getAllJournals(): JournalType[] {
+export function getAllJournals(): Journal[] {
   const statement = db.prepare("SELECT * FROM journals ORDER BY date DESC");
 
-  const rawRows = statement.all() as Array<Omit<JournalType, "date" | "tags"> & { date: string; tags: string }>;
+  const rawRows = statement.all() as Array<Omit<Journal, "date" | "tags"> & { date: string; tags: string }>;
 
-  const rows: JournalType[] = rawRows.map((row) => ({
+  const rows: Journal[] = rawRows.map((row) => ({
     ...row,
     date: new Date(row.date),
     tags: JSON.parse(row.tags || "[]"),
@@ -15,7 +15,7 @@ export function getAllJournals(): JournalType[] {
   return rows;
 }
 
-export function addJournal(journal: RawJournalType) {
+export function addJournal(journal: Document) {
   const stmt = db.prepare("INSERT INTO journals (title, date, tags, markdown) VALUES (?, ?, ?, ?)");
   const date = typeof journal.date === "string" ? new Date(journal.date) : journal.date;
 
@@ -30,10 +30,10 @@ export function deleteJournal(id: number) {
   return { success: true };
 }
 
-export function getJournal(id: number): JournalType {
+export function getJournal(id: number): Journal {
   const statement = db.prepare("SELECT * FROM journals WHERE id = ?");
 
-  const rawRow = statement.get(id) as Omit<JournalType, "date" | "tags"> & { date: string; tags: string };
+  const rawRow = statement.get(id) as Omit<Journal, "date" | "tags"> & { date: string; tags: string };
   const journal = {
     ...rawRow,
     date: new Date(rawRow.date),
