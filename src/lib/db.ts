@@ -9,7 +9,7 @@ const dbPath = path.join(dbDir, "database.db");
 const db = new Database(dbPath);
 
 db.exec(`
-  CREATE TABLE IF NOT EXISTS journals (
+  CREATE TABLE IF NOT EXISTS journal (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT UNIQUE NOT NULL,
     date TEXT NOT NULL,

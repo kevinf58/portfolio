@@ -9,7 +9,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
-  const res = await fetch(`${apiURL}/journal/${id}`, { cache: "force-cache" });
+  const res = await fetch(`${apiURL}/journal/${id}`, { cache: "default" });
 
   if (!res.ok) {
     notFound();
@@ -39,7 +39,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         <hr className="opacity-20 mb-6" />
         <ReadOnlyCrepe markdown={journal.markdown} />
       </div>
-      <DeleteButton id={Number(id)} />
+      <DeleteButton id={Number(id)} documentType="journal" />
     </section>
   );
 };

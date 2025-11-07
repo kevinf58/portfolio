@@ -1,0 +1,45 @@
+import db from "./db";
+import { Document, DocumentType } from "@/types/api/Document.type";
+
+export function getDocuments(documentType: DocumentType): Document[] {
+  const statement = db.prepare(`SELECT * FROM ${documentType} ORDER BY date DESC`);
+
+  const rawRows = statement.all() as Array<Document>;
+
+  const rows: Document[] = rawRows.map((row) => ({
+    ...row,
+    date: new Date(row.date),
+    tags: typeof row.tags === "string" ? JSON.parse(row.tags) : row.tags,
+    type: documentType,
+  }));
+
+  return rows;
+}
+
+export function addDocument(document: Document) {
+  const stmt = db.prepare(`INSERT INTO ${document.type} (title, date, tags, markdown) VALUES (?, ?, ?, ?)`);
+  const date = typeof document.date === "string" ? new Date(document.date) : document.date;
+
+  const info = stmt.run(document.title, date.toISOString(), JSON.stringify(document.tags), document.markdown);
+
+  return { ...document, id: info.lastInsertRowid };
+}
+
+export function deleteDocument(id: number, documentType: DocumentType) {
+  const stmt = db.prepare(`DELETE FROM ${documentType} WHERE id = ?`);
+  stmt.run(id);
+  return { success: true };
+}
+
+export function getDocument(id: number, documentType: DocumentType): Document {
+  const statement = db.prepare(`SELECT * FROM ${documentType} WHERE id = ?`);
+
+  const rawRow = statement.get(id) as Omit<Document, "date" | "tags"> & { date: string; tags: string };
+  const document = {
+    ...rawRow,
+    date: new Date(rawRow.date),
+    tags: JSON.parse(rawRow.tags || "[]"),
+  };
+
+  return document;
+}

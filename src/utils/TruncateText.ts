@@ -5,7 +5,7 @@ const truncateText = (text: string, type: Exclude<keyof Document, "date">): stri
     case "title":
       return text.length > 25 ? text.slice(0, 25) + "…" : text;
     case "markdown":
-      return text.length > 60 ? text.slice(0, 90) + "…" : text;
+      return text.length > 60 ? text.slice(0, 80) + "…" : text;
     default:
       return "";
   }

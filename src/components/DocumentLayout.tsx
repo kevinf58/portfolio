@@ -25,7 +25,7 @@ const DocumentLayout = () => {
   // max char length of a journal/project title
   const MAX_TITLE_LENGTH = 60;
 
-  const inputStyles = "bg-white/8 shadow-inner focus-within:ring-2 ring-primary rounded-sm duration-200";
+  const inputStyles = "bg-white/8 shadow-inner focus-within:ring-2 ring-primary/80 rounded-sm duration-200";
 
   const [year, month, day] = date.split("-").map(Number);
   const localDate = new Date(year, month - 1, day);
@@ -48,7 +48,7 @@ const DocumentLayout = () => {
     }
 
     try {
-      const res = await fetch(`/api/${documentType}`, {
+      const res = await fetch("/api/document", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newDocument),

@@ -13,7 +13,7 @@ const JournalEntries = () => {
 
   useEffect(() => {
     const fetchJournals = async () => {
-      const res = await fetch("/api/journal");
+      const res = await fetch("/api/document?type=journal");
       if (res.ok) {
         const data: Journal[] = await res.json();
         const formattedData = data.map((journal) => ({
@@ -48,6 +48,7 @@ const JournalEntries = () => {
               date={journal.date}
               tags={journal.tags}
               markdown={journal.markdown}
+              type={journal.type}
             />
           </TextAnimation>
         ))}

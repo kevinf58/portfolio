@@ -4,8 +4,9 @@ import { Button } from "@/components/common/Button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { DocumentType } from "@/types/api/Document.type";
 
-const DeleteButton = ({ id }: { id: number }) => {
+const DeleteButton = ({ id, documentType }: { id: number; documentType: DocumentType }) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const router = useRouter();
@@ -17,7 +18,7 @@ const DeleteButton = ({ id }: { id: number }) => {
 
     setIsDeleting(true);
     try {
-      const res = await fetch(`/api/journal/${id}`, {
+      const res = await fetch(`/api/document/${id}?type=${documentType}`, {
         method: "DELETE",
       });
 
