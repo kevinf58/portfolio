@@ -11,9 +11,9 @@ const Projects = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
 
-  const apiURL = process.env.NEXT_PUBLIC_API_URL;
-
   useEffect(() => {
+    const apiURL = process.env.NEXT_PUBLIC_API_URL;
+
     const fetchProjects = async () => {
       const res = await fetch(`${apiURL}/project`);
       if (res.ok) {

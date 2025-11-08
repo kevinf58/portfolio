@@ -3,9 +3,9 @@ import { addDocument, getDocuments } from "@/lib/documentQueries";
 import { DocumentType } from "@/types/api/Document.type";
 import { Document } from "@/types/api/Document.type";
 
-export async function GET(request: NextRequest, { params }: { params: Promise<{ type: DocumentType }> }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ type: string }> }) {
   const { type } = await params;
-  const journals = getDocuments(type);
+  const journals = getDocuments(type as DocumentType);
   return NextResponse.json(journals, { status: 200 });
 }
 

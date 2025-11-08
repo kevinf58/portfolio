@@ -11,9 +11,9 @@ const JournalEntries = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [journals, setJournals] = useState<Journal[]>([]);
 
-  const apiURL = process.env.NEXT_PUBLIC_API_URL;
-
   useEffect(() => {
+    const apiURL = process.env.NEXT_PUBLIC_API_URL;
+
     const fetchJournals = async () => {
       const res = await fetch(`${apiURL}/journal`);
       if (res.ok) {
