@@ -48,7 +48,8 @@ const DocumentLayout = () => {
     }
 
     try {
-      const res = await fetch("/api/document", {
+      console.log(markdown);
+      const res = await fetch(`/api/${newDocument.type}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newDocument),

@@ -8,12 +8,15 @@ import { stripMarkdown } from "@/utils/stripMarkdown";
 
 const DocumentCard = (props: CardProps & (Journal | Project)) => {
   return (
-    <Card href={`/${props.type}/${props.id}`} className={`group transition-discrete duration-150 ${props.className}`}>
-      <div className="mx-4 my-5">
-        <div className="flex flex-col gap-0.5">
+    <Card
+      href={`/${props.type}/${props.id}`}
+      className={`group transition-discrete duration-150 min-w-0 ${props.className}`}
+    >
+      <div className="mx-4 my-5 min-w-0">
+        <div className="flex flex-col gap-0.5 min-w-0">
           <div className="flex items-center gap-4 min-w-0">
-            <h3 className="font-sans font-bold text-2xl text-1.5xl truncate leading-7 min-w-0">
-              {stripMarkdown(truncateText(props.title, "title"))}
+            <h3 className="font-sans font-bold text-2xl leading-7 flex-1 min-w-0 truncate">
+              {truncateText(props.title, "title")}
             </h3>
 
             <div className="flex-shrink-0">
@@ -23,7 +26,6 @@ const DocumentCard = (props: CardProps & (Journal | Project)) => {
               />
             </div>
           </div>
-
           <h6 className="font-serif text-xs text-white/50 mb-5">
             {Intl.DateTimeFormat("en-US", {
               weekday: "long",
@@ -32,7 +34,7 @@ const DocumentCard = (props: CardProps & (Journal | Project)) => {
               day: "numeric",
             }).format(props.date)}
           </h6>
-          <p className="font-serif text-xs break-words">{stripMarkdown(truncateText(props.markdown, "markdown"))}</p>
+          <p className="font-serif text-xs break-words">{truncateText(stripMarkdown(props.markdown), "markdown")}</p>
           <div className="flex flex-wrap space-x-2.5 space-y-2 font-sans text-xs mt-3">
             {props.tags.map((tag) => (
               <Card href="" key={tag}>

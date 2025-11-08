@@ -23,8 +23,6 @@ const DeleteButton = ({ id, type }: { id: number; type: DocumentType }) => {
         method: "DELETE",
       });
 
-      console.log(type, id);
-
       if (!res.ok) {
         const data = await res.json();
         throw new Error(data.error || "Failed to delete journal");

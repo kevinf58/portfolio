@@ -11,7 +11,6 @@ const Page = async ({ params }: { params: Promise<{ type: DocumentType; id: stri
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
   const res = await fetch(`${apiURL}/${type}/${id}`, { cache: "default" });
-  console.log(type, id);
 
   if (!res.ok) {
     notFound();

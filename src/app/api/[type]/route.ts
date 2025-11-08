@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     if (error instanceof Error && "code" in error) {
       if (error.code === "SQLITE_CONSTRAINT_UNIQUE") {
-        return NextResponse.json({ error: "A journal with this title already exists" }, { status: 409 });
+        return NextResponse.json({ error: `A ${document.type} with this title already exists` }, { status: 409 });
       }
     }
 
