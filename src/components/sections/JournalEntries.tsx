@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import JournalCard from "../common/cards/JournalCard";
+import DocumentCard from "../common/cards/DocumentCard";
 import { Button } from "../common/Button";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import TextAnimation from "../common/TextAnimation";
@@ -11,9 +11,11 @@ const JournalEntries = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [journals, setJournals] = useState<Journal[]>([]);
 
+  const apiURL = process.env.NEXT_PUBLIC_API_URL;
+
   useEffect(() => {
     const fetchJournals = async () => {
-      const res = await fetch("/api/document?type=journal");
+      const res = await fetch(`${apiURL}/journal`);
       if (res.ok) {
         const data: Journal[] = await res.json();
         const formattedData = data.map((journal) => ({
@@ -41,7 +43,7 @@ const JournalEntries = () => {
       <div className="flex flex-col space-y-4 md:items-start items-center">
         {journals.map((journal) => (
           <TextAnimation element="div" key={journal.id}>
-            <JournalCard
+            <DocumentCard
               state={[isFocused, setIsFocused]}
               id={journal.id}
               title={journal.title}

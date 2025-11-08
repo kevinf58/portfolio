@@ -1,15 +1,17 @@
-import { Journal } from "@/types/api/Document.type";
+import { DocumentType, Journal } from "@/types/api/Document.type";
 import ReadOnlyCrepe from "@/components/ReadOnlyCrepe";
 import DeleteButton from "@/components/DeleteButton";
 import { notFound } from "next/navigation";
 import { dateToReadable } from "@/utils/dateUtils";
 import Card from "@/components/common/cards/Card";
 
-const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params;
+const Page = async ({ params }: { params: Promise<{ type: DocumentType; id: string }> }) => {
+  const { type, id } = await params;
+
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
-  const res = await fetch(`${apiURL}/journal/${id}`, { cache: "default" });
+  const res = await fetch(`${apiURL}/${type}/${id}`, { cache: "default" });
+  console.log(type, id);
 
   if (!res.ok) {
     notFound();
@@ -39,7 +41,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         <hr className="opacity-20 mb-6" />
         <ReadOnlyCrepe markdown={journal.markdown} />
       </div>
-      <DeleteButton id={Number(id)} documentType="journal" />
+      <DeleteButton id={Number(id)} type={type} />
     </section>
   );
 };

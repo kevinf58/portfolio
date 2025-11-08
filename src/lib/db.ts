@@ -9,13 +9,23 @@ const dbPath = path.join(dbDir, "database.db");
 const db = new Database(dbPath);
 
 db.exec(`
-  CREATE TABLE IF NOT EXISTS journal (
+    CREATE TABLE IF NOT EXISTS journal (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT UNIQUE NOT NULL,
     date TEXT NOT NULL,
     markdown TEXT NOT NULL,
     tags TEXT,
     category TEXT
+  );
+
+    CREATE TABLE IF NOT EXISTS project (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT UNIQUE NOT NULL,
+    date TEXT NOT NULL,
+    markdown TEXT NOT NULL,
+    tags TEXT,
+    category TEXT,
+    imagePreviewUUID TEXT
   );
 `);
 

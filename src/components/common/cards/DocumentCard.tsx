@@ -2,13 +2,13 @@ import Card from "./Card";
 import { FiArrowUpRight } from "react-icons/fi";
 import { FaTag } from "react-icons/fa";
 import { CardProps } from "@/types/components/Card.props";
-import { Journal } from "@/types/api/Document.type";
+import { Journal, Project } from "@/types/api/Document.type";
 import truncateText from "@/utils/TruncateText";
 import { stripMarkdown } from "@/utils/stripMarkdown";
 
-const JournalCard = (props: CardProps & Journal) => {
+const DocumentCard = (props: CardProps & (Journal | Project)) => {
   return (
-    <Card href={`/journal/${props.id}`} className={`group transition-discrete duration-150 ${props.className}`}>
+    <Card href={`/${props.type}/${props.id}`} className={`group transition-discrete duration-150 ${props.className}`}>
       <div className="mx-4 my-5">
         <div className="flex flex-col gap-0.5">
           <div className="flex items-center gap-4 min-w-0">
@@ -50,4 +50,4 @@ const JournalCard = (props: CardProps & Journal) => {
   );
 };
 
-export default JournalCard;
+export default DocumentCard;
