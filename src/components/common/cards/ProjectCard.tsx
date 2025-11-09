@@ -2,11 +2,10 @@ import Image from "next/image";
 import Card from "./Card";
 import { FiArrowUpRight } from "react-icons/fi";
 import { CardProps } from "@/types/components/Card.props";
-import Tag from "../Tag";
 
 const ProjectCard = (props: CardProps) => {
   return (
-    <Card href="/projects" className={`group transition-discrete duration-150 ${props.className}`}>
+    <Card href="/project" className={`group transition-discrete duration-150 ${props.className}`}>
       <div className="mx-4 my-5">
         <div className="flex flex-col">
           <Image src={"/images/Portfolio-01.png"} alt="" width={500} height={10000} className="object-top" />
@@ -20,9 +19,9 @@ const ProjectCard = (props: CardProps) => {
           <h6 className="font-serif text-xs text-white/50 mb-5">Tuesday, April 21, 2024</h6>
           <p className="font-serif text-xs">This is a description...</p>
           <div className="flex flex-wrap space-x-2.5 space-y-2 font-sans text-xs mt-3">
-            <Tag>TypeScript</Tag>
-            <Tag>React</Tag>
-            <Tag>Tailwind CSS</Tag>
+            <Card href="">TypeScript</Card>
+            <Card href="">React</Card>
+            <Card href="">Tailwind CSS</Card>
           </div>
         </div>
       </div>

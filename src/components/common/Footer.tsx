@@ -13,7 +13,7 @@ const Footer = () => {
         <div className="flex flex-col gap-4 items-center sm:scale-100 scale-70">
           <div className="flex gap-6 !text-white/50">
             <Link href={"/"}>Home</Link>
-            <Link href={"projects"}>Projects</Link>
+            <Link href={"project"}>Projects</Link>
             <Link href={"/journal"}>Journal</Link>
             <Link href={"/contact"}>Contact</Link>
           </div>

@@ -4,11 +4,13 @@ import { Button } from "@/components/common/Button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { DocumentType } from "@/types/api/Document.type";
 
-const DeleteButton = ({ id }: { id: number }) => {
+const DeleteButton = ({ id, type }: { id: number; type: DocumentType }) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const router = useRouter();
+  const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
   const handleDelete = async () => {
     if (!confirm("Are you sure you want to delete this journal? This action cannot be undone.")) {
@@ -17,7 +19,7 @@ const DeleteButton = ({ id }: { id: number }) => {
 
     setIsDeleting(true);
     try {
-      const res = await fetch(`/api/journal/${id}`, {
+      const res = await fetch(`${apiURL}/${type}/${id}`, {
         method: "DELETE",
       });
 

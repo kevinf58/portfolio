@@ -28,7 +28,7 @@ const NavBar = () => {
         </Link>
         {currDeviceSize !== "sm" && currDeviceSize !== "md" && (
           <div className="flex ml-auto gap-6 font-sans">
-            <Link href={"projects"}>Projects</Link>
+            <Link href={"project"}>Projects</Link>
             <Link href={"/journal"}>Journal</Link>
             <Link href={"/contact"}>Contact</Link>
           </div>
