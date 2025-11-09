@@ -6,6 +6,7 @@ export type Document = {
   tags: string[];
   markdown: string;
   type: DocumentType;
+  imagePreviewLink?: string;
 };
 
 export type JournalPageParams = {

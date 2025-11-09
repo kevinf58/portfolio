@@ -17,12 +17,29 @@ export function getDocuments(documentType: DocumentType): Document[] {
 }
 
 export function addDocument(document: Document) {
-  const stmt = db.prepare(`INSERT INTO ${document.type} (title, date, tags, markdown) VALUES (?, ?, ?, ?)`);
   const date = typeof document.date === "string" ? new Date(document.date) : document.date;
 
-  const info = stmt.run(document.title, date.toISOString(), JSON.stringify(document.tags), document.markdown);
-
-  return { ...document, id: info.lastInsertRowid };
+  if (document.type === "project") {
+    const stmt = db.prepare(
+      `INSERT INTO project (title, date, tags, markdown, imagePreviewLink)
+       VALUES (?, ?, ?, ?, ?)`,
+    );
+    const info = stmt.run(
+      document.title,
+      date.toISOString(),
+      JSON.stringify(document.tags),
+      document.markdown,
+      document.imagePreviewLink ?? null,
+    );
+    return { ...document, id: info.lastInsertRowid };
+  } else {
+    const stmt = db.prepare(
+      `INSERT INTO journal (title, date, tags, markdown)
+       VALUES (?, ?, ?, ?)`,
+    );
+    const info = stmt.run(document.title, date.toISOString(), JSON.stringify(document.tags), document.markdown);
+    return { ...document, id: info.lastInsertRowid };
+  }
 }
 
 export function deleteDocument(id: number, documentType: DocumentType) {

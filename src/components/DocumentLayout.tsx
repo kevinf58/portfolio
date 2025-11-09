@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/common/Button";
 import Editor from "@/components/Editor";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { Document, DocumentType } from "@/types/api/Document.type";
 import { useRouter } from "next/navigation";
@@ -13,6 +13,8 @@ import { getCurrentDate, dateToReadable } from "@/utils/dateUtils";
 import TagInput from "@/components/TagInput";
 import ReadOnlyCrepe from "@/components/ReadOnlyCrepe";
 import { TbSwitchHorizontal } from "react-icons/tb";
+import ImageUpload from "./common/ImageUpload";
+import uploadHandler from "@/utils/uploadHandler";
 
 const DocumentLayout = () => {
   const router = useRouter();
@@ -21,6 +23,8 @@ const DocumentLayout = () => {
   const [tags, setTags] = useState<string[]>([]);
   const [date, setDate] = useState(getCurrentDate());
   const [documentType, setDocumentType] = useState<DocumentType>("journal");
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // max char length of a journal/project title
   const MAX_TITLE_LENGTH = 60;
@@ -31,14 +35,6 @@ const DocumentLayout = () => {
   const localDate = new Date(year, month - 1, day);
 
   const handleCreate = async () => {
-    const newDocument: Document = {
-      title,
-      date: localDate,
-      tags,
-      markdown,
-      type: documentType,
-    };
-
     if (markdown.length < 200) {
       toast.warn(`Please add sufficient text to this ${documentType}`);
       return;
@@ -48,7 +44,28 @@ const DocumentLayout = () => {
     }
 
     try {
-      console.log(markdown);
+      const file = fileInputRef.current?.files?.[0];
+      let imagePreviewLink = "";
+
+      if (file) {
+        try {
+          imagePreviewLink = await uploadHandler(file);
+        } catch (err) {
+          console.error(err);
+          toast.error("Image upload failed");
+          return;
+        }
+      }
+
+      const newDocument: Document = {
+        title,
+        date: localDate,
+        tags,
+        markdown,
+        type: documentType,
+        ...(documentType === "project" && { imagePreviewLink }),
+      };
+
       const res = await fetch(`/api/${newDocument.type}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -119,7 +136,9 @@ const DocumentLayout = () => {
                 onChange={(e) => setDate(e.target.value)}
               />
             </div>
+            {documentType === "project" && <ImageUpload fileInputRef={fileInputRef} />}
             <TagInput state={{ tags, setTags }} />
+
             <div className={`h-full rounded-sm cursor-text px-4 py-3 overflow-y-scroll ${inputStyles}`}>
               <Editor setMarkdown={setMarkdown} />
             </div>

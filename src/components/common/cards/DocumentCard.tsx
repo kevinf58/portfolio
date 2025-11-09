@@ -5,6 +5,7 @@ import { CardProps } from "@/types/components/Card.props";
 import { Journal, Project } from "@/types/api/Document.type";
 import truncateText from "@/utils/TruncateText";
 import { stripMarkdown } from "@/utils/stripMarkdown";
+import Image from "next/image";
 
 const DocumentCard = (props: CardProps & (Journal | Project)) => {
   return (
@@ -14,6 +15,9 @@ const DocumentCard = (props: CardProps & (Journal | Project)) => {
     >
       <div className="mx-4 my-5 min-w-0">
         <div className="flex flex-col gap-0.5 min-w-0">
+          {props.type === "project" && props.imagePreviewLink && (
+            <Image src={props.imagePreviewLink} alt="" width={500} height={10000} className="object-top" />
+          )}
           <div className="flex items-center gap-4 min-w-0">
             <h3 className="font-sans font-bold text-2xl leading-7 flex-1 min-w-0 truncate">
               {truncateText(props.title, "title")}

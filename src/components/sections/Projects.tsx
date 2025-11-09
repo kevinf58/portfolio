@@ -52,6 +52,7 @@ const Projects = () => {
               tags={project.tags}
               markdown={project.markdown}
               type={project.type}
+              imagePreviewLink={project.imagePreviewLink}
             />
           </TextAnimation>
         ))}
