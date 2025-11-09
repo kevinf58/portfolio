@@ -15,6 +15,7 @@ import ReadOnlyCrepe from "@/components/ReadOnlyCrepe";
 import { TbSwitchHorizontal } from "react-icons/tb";
 import ImageUpload from "./common/ImageUpload";
 import uploadHandler from "@/utils/uploadHandler";
+import { CgSpinner } from "react-icons/cg";
 
 const DocumentLayout = () => {
   const router = useRouter();
@@ -23,6 +24,8 @@ const DocumentLayout = () => {
   const [tags, setTags] = useState<string[]>([]);
   const [date, setDate] = useState(getCurrentDate());
   const [documentType, setDocumentType] = useState<DocumentType>("journal");
+
+  const [loading, setLoading] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -38,24 +41,16 @@ const DocumentLayout = () => {
     if (markdown.length < 200) {
       toast.warn(`Please add sufficient text to this ${documentType}`);
       return;
-    } else if (title.length < 6) {
+    }
+    if (title.length < 6) {
       toast.warn("Title too short!");
       return;
     }
 
+    setLoading(true);
     try {
       const file = fileInputRef.current?.files?.[0];
-      let imagePreviewLink = "";
-
-      if (file) {
-        try {
-          imagePreviewLink = await uploadHandler(file);
-        } catch (err) {
-          console.error(err);
-          toast.error("Image upload failed");
-          return;
-        }
-      }
+      const imagePreviewLink = file ? await uploadHandler(file) : undefined;
 
       const newDocument: Document = {
         title,
@@ -63,7 +58,7 @@ const DocumentLayout = () => {
         tags,
         markdown,
         type: documentType,
-        ...(documentType === "project" && { imagePreviewLink }),
+        ...(documentType === "project" && imagePreviewLink ? { imagePreviewLink } : {}),
       };
 
       const res = await fetch(`/api/${newDocument.type}`, {
@@ -71,23 +66,23 @@ const DocumentLayout = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newDocument),
       });
-
       const data = await res.json();
 
       if (!res.ok) {
         if (res.status === 409) {
           toast.warn(`A ${documentType} with this title already exists. Please rename it!`);
-        } else {
-          toast.error(data.error || "Failed to add entry.");
+          return;
         }
-        return;
+        throw new Error(data?.error || "Failed to add entry.");
       }
 
-      router.push("/");
       toast.success("Entry added!");
+      router.push("/");
     } catch (err) {
       console.error(err);
-      toast.error("Failed to add entry.");
+      toast.error(err instanceof Error ? err.message : "Failed to add entry.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -164,8 +159,12 @@ const DocumentLayout = () => {
           </div>
         </Card>
       </div>
-      <Button className="!fixed bottom-5 right-10" type="hollow" onClick={handleCreate}>
-        Create {documentType}
+      <Button
+        className="!fixed bottom-5 right-10 min-w-[8rem] flex items-center justify-center"
+        type="hollow"
+        onClick={!loading ? handleCreate : undefined}
+      >
+        {loading ? <CgSpinner className="size-5 animate-spin text-white" /> : `Create ${documentType}`}
       </Button>
     </section>
   );
