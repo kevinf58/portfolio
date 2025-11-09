@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { deleteDocument, getDocument } from "@/lib/documentQueries";
 import { DocumentType } from "@/types/api/Document.type";
 
-export async function GET(request: NextRequest, ctx: { params: Promise<{ type: DocumentType; id: string }> }) {
+export async function GET(request: NextRequest, ctx: { params: Promise<{ type: string; id: string }> }) {
   const { type, id } = await ctx.params;
   const documentID = Number(id);
   if (!id || Number.isNaN(documentID)) {
@@ -12,7 +12,7 @@ export async function GET(request: NextRequest, ctx: { params: Promise<{ type: D
   if (!document) return NextResponse.json({ error: `${type} not found` }, { status: 404 });
   return NextResponse.json(document, { status: 200 });
 }
-export async function DELETE(request: NextRequest, ctx: { params: Promise<{ type: DocumentType; id: string }> }) {
+export async function DELETE(request: NextRequest, ctx: { params: Promise<{ type: string; id: string }> }) {
   const { type, id } = await ctx.params;
   const documentID = Number(id);
   if (!id || Number.isNaN(documentID)) {
