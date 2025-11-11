@@ -2,7 +2,7 @@ export type DocumentType = "journal" | "project";
 
 export type Document = {
   title: string;
-  date: Date;
+  date: string;
   tags: string[];
   markdown: string;
   type: DocumentType;

@@ -18,12 +18,7 @@ const Projects = () => {
       const res = await fetch(`${apiURL}/project`);
       if (res.ok) {
         const data: Project[] = await res.json();
-        const formattedData = data.map((project) => ({
-          ...project,
-          date: new Date(project.date),
-        }));
-
-        setProjects(formattedData);
+        setProjects(data);
       }
     };
 
@@ -36,7 +31,7 @@ const Projects = () => {
         <span className="font-sans font-bold text-4xl text-tint">Hobby Projects</span>
         <div className="w-1/3 h-[3px] bg-primary mt-1" />
       </TextAnimation>
-      <TextAnimation className="mt-8 mb-12 font-serif" element="p">
+      <TextAnimation className="mt-8 mb-12 font-serif text-sm" element="p">
         These are a few that I’m particularly proud of. Each of the cards below offers a closer look at my development
         journey - sharing the reasoning behind my decisions, any challenges I encountered, and the lessons I learned
         throughout the process of building each project.

@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import Card from "@/components/common/cards/Card";
 import { FaRegEdit } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { getCurrentDate, dateToReadable } from "@/utils/dateUtils";
+import { getLocalDate, dateToReadable } from "@/utils/dateUtils";
 import TagInput from "@/components/TagInput";
 import ReadOnlyCrepe from "@/components/ReadOnlyCrepe";
 import { TbSwitchHorizontal } from "react-icons/tb";
@@ -17,12 +17,14 @@ import ImageUpload from "./common/ImageUpload";
 import uploadHandler from "@/utils/uploadHandler";
 import { CgSpinner } from "react-icons/cg";
 
+//TODO: REFACTOR THIS SHITTTT!!!!!!! USE AN EXTERNAL USEREDUCER HOOK + MODULATION!!!!!
+
 const DocumentLayout = () => {
   const router = useRouter();
   const [markdown, setMarkdown] = useState("");
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState<string[]>([]);
-  const [date, setDate] = useState(getCurrentDate());
+  const [date, setDate] = useState(getLocalDate());
   const [documentType, setDocumentType] = useState<DocumentType>("journal");
 
   const [loading, setLoading] = useState(false);
@@ -33,9 +35,6 @@ const DocumentLayout = () => {
   const MAX_TITLE_LENGTH = 60;
 
   const inputStyles = "bg-white/8 shadow-inner focus-within:ring-2 ring-primary/80 rounded-sm duration-200";
-
-  const [year, month, day] = date.split("-").map(Number);
-  const localDate = new Date(year, month - 1, day);
 
   const handleCreate = async () => {
     if (markdown.length < 200) {
@@ -54,7 +53,7 @@ const DocumentLayout = () => {
 
       const newDocument: Document = {
         title,
-        date: localDate,
+        date: getLocalDate(),
         tags,
         markdown,
         type: documentType,

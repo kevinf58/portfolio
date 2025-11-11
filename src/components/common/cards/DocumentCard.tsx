@@ -6,6 +6,7 @@ import { Journal, Project } from "@/types/api/Document.type";
 import truncateText from "@/utils/TruncateText";
 import { stripMarkdown } from "@/utils/stripMarkdown";
 import Image from "next/image";
+import { dateToReadable } from "@/utils/dateUtils";
 
 const DocumentCard = (props: CardProps & (Journal | Project)) => {
   return (
@@ -30,14 +31,7 @@ const DocumentCard = (props: CardProps & (Journal | Project)) => {
               />
             </div>
           </div>
-          <h6 className="font-serif text-xs text-white/50 mb-5">
-            {Intl.DateTimeFormat("en-US", {
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            }).format(props.date)}
-          </h6>
+          <h6 className="font-serif text-xs text-white/50 mb-5">{dateToReadable(props.date)}</h6>
           <p className="font-serif text-xs break-words">{truncateText(stripMarkdown(props.markdown), "markdown")}</p>
           <div className="flex flex-wrap space-x-2.5 space-y-2 font-sans text-xs mt-3">
             {props.tags.map((tag) => (
