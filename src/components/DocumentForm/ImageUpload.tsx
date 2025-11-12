@@ -1,8 +1,11 @@
-import { RefObject, useState } from "react";
+import { useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
+import { useDocumentFormContext } from "./DocumentLayoutContext";
 
-const ImageUpload = ({ fileInputRef }: { fileInputRef: RefObject<HTMLInputElement | null> }) => {
+const ImageUpload = () => {
   const [imageName, setImageName] = useState("");
+
+  const { fileInputRef } = useDocumentFormContext();
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -37,9 +40,7 @@ const ImageUpload = ({ fileInputRef }: { fileInputRef: RefObject<HTMLInputElemen
             e.preventDefault();
             setImageName("");
 
-            if (fileInputRef.current) {
-              fileInputRef.current.value = "";
-            }
+            if (fileInputRef.current) fileInputRef.current.value = "";
           }}
           className=" ml-2 text-[16px] text-white hover:text-red duration-200"
         />

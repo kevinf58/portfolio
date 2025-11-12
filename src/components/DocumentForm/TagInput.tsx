@@ -1,19 +1,18 @@
 "use client";
 
 import { useState, useRef, KeyboardEvent } from "react";
-import Card from "./common/cards/Card";
+import Card from "../common/cards/Card";
 import { toast } from "react-toastify";
 import { MdDeleteOutline } from "react-icons/md";
+import { useDocumentFormContext } from "./DocumentLayoutContext";
 
-export default function TagInput({
-  state: { tags, setTags },
-}: {
-  state: { tags: string[]; setTags: React.Dispatch<React.SetStateAction<string[]>> };
-}) {
+export default function TagInput() {
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const { tags, setTags } = useDocumentFormContext();
 
   // max number of tags that can be added per project/journal
   const MAX_TAGS = 3;
@@ -24,7 +23,7 @@ export default function TagInput({
     const newTags = [...tags, tag.trim()];
 
     // duplicate tags check
-    const isDuplicate = tags.some((t) => t.toLowerCase() === trimmedTag.toLowerCase());
+    const isDuplicate = tags.some((tag) => tag.toLowerCase() === trimmedTag.toLowerCase());
     if (isDuplicate) {
       toast.error(`The tag "${trimmedTag}" already exists!`);
       setInputValue("");

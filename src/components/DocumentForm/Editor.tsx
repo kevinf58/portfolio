@@ -2,12 +2,14 @@
 
 import { Crepe } from "@milkdown/crepe";
 import { Milkdown, MilkdownProvider, useEditor } from "@milkdown/react";
-import { EditorProps } from "@/types/components/Editor.type";
 import "@milkdown/crepe/theme/common/style.css";
 import uploadHandler from "@/utils/uploadHandler";
 import { imageBlockConfig } from "@milkdown/kit/component/image-block";
+import { useDocumentFormContext } from "./DocumentLayoutContext";
 
-const CrepeEditor = (props: EditorProps) => {
+const CrepeEditor = () => {
+  const { setMarkdown } = useDocumentFormContext();
+
   useEditor((root) => {
     const crepe = new Crepe({ root });
 
@@ -17,7 +19,7 @@ const CrepeEditor = (props: EditorProps) => {
         if (crepe) {
           const markdown = crepe.getMarkdown();
 
-          props.setMarkdown(markdown);
+          setMarkdown(markdown);
         }
       });
 
@@ -33,7 +35,7 @@ const CrepeEditor = (props: EditorProps) => {
 
       listener.updated(() => {
         const markdown = crepe.getMarkdown();
-        props.setMarkdown(markdown);
+        setMarkdown(markdown);
       });
     });
 
@@ -43,10 +45,10 @@ const CrepeEditor = (props: EditorProps) => {
   return <Milkdown />;
 };
 
-const Editor = (props: EditorProps) => {
+const Editor = () => {
   return (
     <MilkdownProvider>
-      <CrepeEditor setMarkdown={props.setMarkdown} />
+      <CrepeEditor />
     </MilkdownProvider>
   );
 };

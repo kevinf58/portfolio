@@ -124,6 +124,12 @@ body {
   }
 }
 
+@layer components {
+  .input-base {
+    @apply bg-white/8 shadow-inner focus-within:ring-2 ring-primary/80 rounded-sm duration-200;
+  }
+}
+
 /**
  * milkdown custom theme
 */

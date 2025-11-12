@@ -7,7 +7,8 @@ export const getLocalDate = (): string => {
 };
 
 export function dateToReadable(isoString: string): string {
-  const date = new Date(isoString);
+  const normalized = isoString.length === 10 ? `${isoString}T00:00:00` : isoString.replace("Z", "");
+  const date = new Date(normalized);
 
   const weekday = date.toLocaleDateString(undefined, { weekday: "long" });
   const month = date.toLocaleDateString(undefined, { month: "long" });

@@ -1,4 +1,4 @@
-import DocumentLayout from "@/components/DocumentLayout";
+import DocumentLayout from "@/components/DocumentForm/DocumentLayout";
 
 const Page = () => {
   return <DocumentLayout />;

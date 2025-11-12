@@ -1,7 +1,7 @@
 "use server";
 
 import { DocumentType, Journal } from "@/types/api/Document.type";
-import ReadOnlyCrepe from "@/components/ReadOnlyCrepe";
+import ReadOnlyCrepe from "@/components/DocumentForm/ReadOnlyCrepe";
 import DeleteButton from "@/components/DeleteButton";
 import { notFound } from "next/navigation";
 import { dateToReadable } from "@/utils/dateUtils";
