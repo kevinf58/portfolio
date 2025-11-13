@@ -23,7 +23,7 @@
   border-radius: 50%;
   transform: scale(0);
   animation: ripple 600ms linear;
-  background-color: rgba(183, 228, 183, 0.7);
+  background-color: #4d9de0b3;
   pointer-events: none;
   z-index: 0;
 }
@@ -41,7 +41,7 @@
   /**
    * colors
   */
-  --color-primary: #ff6e66;
+  --color-primary: #4d9de0;
   --color-secondary: #99999995;
   --color-tint: #ecffe7;
   --color-black: #212527;
