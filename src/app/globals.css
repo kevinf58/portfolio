@@ -46,10 +46,12 @@
   --color-tint: #ecffe7;
   --color-black: #212527;
   --color-white: #f1efdd;
+  --color-dark-white: #f1efdd85;
   --color-green: #74f071;
   --color-red: #f07174;
   --color-dark-gray: #25292b;
-  --color-light-gray: #2c2f31;
+  --color-gray: #2c2f31;
+  --color-light-gray: #f1efdd12;
 
   /**
    * shadows
@@ -126,7 +128,7 @@ body {
 
 @layer components {
   .input-base {
-    @apply bg-white/8 shadow-inner focus-within:ring-2 ring-primary/80 rounded-sm duration-200;
+    @apply bg-light-gray shadow-inner focus-within:ring-2 ring-primary/80 rounded-sm duration-200;
   }
 }
 

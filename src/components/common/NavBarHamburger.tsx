@@ -50,7 +50,7 @@ const NavBarHamburger = () => {
           <Link href={"/contact"} className="px-1.5" onClick={toggleMenu}>
             Contact
           </Link>
-          <div className="flex gap-4 mt-10 text-white/50">
+          <div className="flex gap-4 mt-10">
             <a
               className="flex items-center gap-1.5"
               href="https://www.linkedin.com/in/kfengg/"

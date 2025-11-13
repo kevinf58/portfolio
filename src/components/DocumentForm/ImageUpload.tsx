@@ -19,7 +19,7 @@ const ImageUpload = () => {
   return (
     <label
       htmlFor="image"
-      className={`relative inline-flex items-center gap-2 cursor-pointer select-none py-2 px-3 !text-xs bg-white/8 shadow-inner focus-within:ring-2 ring-primary/80 rounded-sm duration-200`}
+      className={`relative inline-flex items-center gap-2 cursor-pointer select-none py-2 px-3 !text-xs bg-light-gray shadow-inner focus-within:ring-2 ring-primary/80 rounded-sm duration-200`}
       title={imageName || "Choose an image"}
     >
       <input
@@ -31,7 +31,9 @@ const ImageUpload = () => {
         ref={fileInputRef}
       />
       <span className="whitespace-nowrap">Choose image</span>
-      <span className="ml-auto text-[10px] text-white/50 truncate max-w-[10rem]">{imageName || "No file chosen"}</span>
+      <span className="ml-auto text-[10px] text-dark-white truncate max-w-[10rem]">
+        {imageName || "No file chosen"}
+      </span>
 
       {imageName && (
         <MdDeleteOutline

@@ -17,7 +17,7 @@ const TitleInput = () => {
         }}
         className={`w-full h-min outline-none py-2 px-3 !text-xs ease-in pr-10 input-base`}
       />
-      <span className="absolute right-2 pb-0.5 top-1/2 -translate-y-1/2 text-[10px] text-white/50 pointer-events-none">
+      <span className="absolute right-2 pb-0.5 top-1/2 -translate-y-1/2 text-[10px] text-dark-white pointer-events-none">
         {title.length}/{MAX_TITLE_LENGTH}
       </span>
     </div>

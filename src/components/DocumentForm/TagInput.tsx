@@ -81,7 +81,7 @@ export default function TagInput() {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             onBlur={handleBlur}
-            className={`w-min h-min outline-none bg-white/8 text-white/50 shadow-inner focus:ring-2 ring-primary rounded-sm py-2 px-2 !text-xs duration-150 ease-in ${
+            className={`w-min h-min outline-none bg-light-gray text-dark-white shadow-inner focus:ring-2 ring-primary rounded-sm py-2 px-2 !text-xs duration-150 ease-in ${
               isEditing ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-90 pointer-events-none"
             }`}
             placeholder="New tag..."

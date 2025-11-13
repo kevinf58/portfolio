@@ -71,7 +71,7 @@ function DocumentLayoutInner() {
           className="flex flex-col border-2 !max-w-[36rem] w-full !max-h-[38rem] h-full !px-4 !py-4 hover:!scale-100 !cursor-default"
         >
           <div className="flex items-center gap-2">
-            <FaRegEdit size={25} className="text-white/50 mr-2" />
+            <FaRegEdit size={25} className="text-dark-white mr-2" />
             <h3 className="font-sans font-bold text-xl text-white">New {documentType}</h3>
             <TbSwitchHorizontal
               size={20}
@@ -85,7 +85,7 @@ function DocumentLayoutInner() {
               <TitleInput />
               <input
                 type="date"
-                className={`w-min h-min outline-none py-2 px-2 !text-xs text-white/50 ease-in cursor-pointer input-base`}
+                className={`w-min h-min outline-none py-2 px-2 !text-xs text-dark-white ease-in cursor-pointer input-base`}
                 value={date}
                 onChange={(e) => documentForm.setDate(e.target.value)}
               />

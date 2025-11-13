@@ -2,7 +2,7 @@ import { BaseCardProps } from "@/types/components/Card.props";
 import { default as NextLink } from "next/link";
 
 const Card = (props: BaseCardProps) => {
-  const cardStyles = `h-fit flex px-4 pt-1.5 pb-2 gap-1 rounded-sm border-1 border-tint/10 bg-white/8 hover:scale-105 duration-100 cursor-pointer
+  const cardStyles = `h-fit flex px-4 pt-1.5 pb-2 gap-1 rounded-sm border-1 border-tint/10 bg-light-gray hover:scale-105 duration-100 cursor-pointer
         ${props.disabled && "pointer-events-none brightness-70"} ${props.className}`;
 
   return props.href ? (
