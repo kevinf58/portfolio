@@ -68,6 +68,7 @@
   */
   --animate-blink: blink 1.4s steps(1, end) infinite;
   --animate-bounce: bounce 1s infinite ease-out;
+  --animate-spin: spin 0.4s linear infinite;
 
   @keyframes blink {
     0%,
