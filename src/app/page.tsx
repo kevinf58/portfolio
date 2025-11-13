@@ -10,7 +10,7 @@ import Card from "@/components/common/cards/Card";
 export default function Home() {
   return (
     <>
-      <section className="relative h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-light-black shadow-default">
+      <section className="relative h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-dark-gray shadow-default">
         <div className="2xl:w-[40%] xl:w-[55%] lg:w-[60%] md:w-[80%] w-full sm:px-28 px-6">
           <div className="flex items-end">
             <h1 className="sm:text-7xl text-5xl font-bold text-tint">Kevin Feng</h1>

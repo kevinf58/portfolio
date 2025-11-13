@@ -64,7 +64,7 @@ function DocumentLayoutInner() {
   };
 
   return (
-    <section className="relative h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-light-black shadow-default">
+    <section className="relative h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-dark-gray shadow-default">
       <div className="h-full w-full flex flex-wrap justify-center space-x-10 p-8 pt-28">
         <Card
           href=""

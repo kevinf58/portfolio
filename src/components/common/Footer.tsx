@@ -8,7 +8,7 @@ import copyText from "@/utils/copyText";
 
 const Footer = () => {
   return (
-    <footer className="sticky bottom-0 w-full items-center md:px-18 md:py-10 lg:px-40 px-4 py-6 bg-light-black font-medium text-xs">
+    <footer className="sticky bottom-0 w-full items-center md:px-18 md:py-10 lg:px-40 px-4 py-6 bg-dark-gray font-medium text-xs">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col gap-4 items-center sm:scale-100 scale-70">
           <div className="flex gap-6 !text-white/50">
@@ -43,7 +43,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <Divider className="!bg-white/10 !mb-10 !mt-6" />
+        <Divider className="!bg-white/8 !mb-10 !mt-6" />
         <div className="w-full relative flex md:flex-row md:justify-between md:gap-0 md:mb-8 sm:scale-100 flex-col items-center justify-center gap-4 scale-70">
           <div className="flex items-center gap-2">
             <a

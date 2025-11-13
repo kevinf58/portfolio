@@ -41,15 +41,15 @@
   /**
    * colors
   */
-  --color-primary: #589981;
-  --color-secondary: #4d9de0;
+  --color-primary: #ff6e66;
+  --color-secondary: #99999995;
   --color-tint: #ecffe7;
   --color-black: #212527;
-  --color-light-black: #25292b;
   --color-white: #f1efdd;
   --color-green: #74f071;
   --color-red: #f07174;
-  --color-gray: #2c2f31;
+  --color-dark-gray: #25292b;
+  --color-light-gray: #2c2f31;
 
   /**
    * shadows
@@ -148,7 +148,7 @@ body {
   --crepe-color-inline-code: #ff6666;
   --crepe-color-error: #ff6666;
   --crepe-color-hover: #232323;
-  --crepe-color-selected: #666666;
+  --crepe-color-selected: #99999995;
   --crepe-color-inline-area: #2b2b2b;
 
   --crepe-font-title: "Inter", Cambria, "Times New Roman", Times, serif;

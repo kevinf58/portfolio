@@ -18,7 +18,7 @@ const NavBar = () => {
   return (
     <nav ref={scrollRef} className="transition-transform duration-150 ease-out">
       <div
-        className={`w-full text-lg font-bold sm:px-28 px-8 pb-5 pt-7 flex items-center justify-between bg-light-black transition-shadow duration-100 ${
+        className={`w-full text-lg font-bold sm:px-28 px-8 pb-5 pt-7 flex items-center justify-between bg-dark-gray transition-shadow duration-100 ${
           isScrolled && "shadow-default"
         }`}
       >

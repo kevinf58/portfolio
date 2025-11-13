@@ -28,7 +28,7 @@ const NavBarHamburger = () => {
   return (
     <div>
       <div
-        className={`fixed top-0 left-0 w-screen bg-light-black px-8 pb-5 pt-7 transform transition-transform duration-200 ease-in z-20 ${
+        className={`fixed top-0 left-0 w-screen bg-dark-gray px-8 pb-5 pt-7 transform transition-transform duration-200 ease-in z-20 ${
           open ? "translate-y-0 shadow-default" : "-translate-y-full"
         }`}
       >
