@@ -5,7 +5,7 @@ import DocumentCard from "../common/cards/DocumentCard";
 import { Button } from "../common/Button";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import TextAnimation from "../common/TextAnimation";
-import { Journal } from "@/types/api/Document.type";
+import { Journal } from "@/types/Document.type";
 
 const JournalEntries = () => {
   const [isFocused, setIsFocused] = useState(false);

@@ -1,8 +1,8 @@
 "use client";
 
-import { ClientWrapperProps } from "@/types/hooks/ClientWrapper.type";
+import { BaseProps } from "@/types/components/Base.type";
 
-const ClientWrapper = (props: ClientWrapperProps) => {
+const ClientWrapper = (props: BaseProps) => {
   return <section className="flex flex-col min-h-screen">{props.children}</section>;
 };
 

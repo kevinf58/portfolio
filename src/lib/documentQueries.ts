@@ -1,5 +1,5 @@
 import db from "./db";
-import { Document, DocumentType } from "@/types/api/Document.type";
+import { Document, DocumentType } from "@/types/Document.type";
 
 export function getDocuments(documentType: DocumentType): Document[] {
   const statement = db.prepare(`SELECT * FROM ${documentType} ORDER BY date DESC`);

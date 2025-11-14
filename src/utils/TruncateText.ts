@@ -1,4 +1,4 @@
-import { Document } from "@/types/api/Document.type";
+import { Document } from "@/types/Document.type";
 
 const truncateText = (text: string, type: Exclude<keyof Document, "date">): string => {
   switch (type) {

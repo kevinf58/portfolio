@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Button } from "../common/Button";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import TextAnimation from "../common/TextAnimation";
-import { Project } from "@/types/api/Document.type";
+import { Project } from "@/types/Document.type";
 import DocumentCard from "../common/cards/DocumentCard";
 
 const Projects = () => {

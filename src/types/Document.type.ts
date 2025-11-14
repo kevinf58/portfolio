@@ -9,12 +9,6 @@ export type Document = {
   imagePreviewLink?: string;
 };
 
-export type JournalPageParams = {
-  params: {
-    id: string;
-  };
-};
-
 export type Journal = Document & {
   type: "journal";
   id: number;

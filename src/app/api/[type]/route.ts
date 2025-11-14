@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { addDocument, getDocuments } from "@/lib/documentQueries";
-import { DocumentType } from "@/types/api/Document.type";
-import { Document } from "@/types/api/Document.type";
+import { DocumentType } from "@/types/Document.type";
+import { Document } from "@/types/Document.type";
 import { getLocalDate } from "@/utils/dateUtils";
+import { DocumentCollectionParams } from "@/types/api/Api.type";
 
-export async function GET(request: NextRequest, { params }: { params: Promise<{ type: string }> }) {
+export async function GET(request: NextRequest, { params }: DocumentCollectionParams) {
   const { type } = await params;
   const journals = getDocuments(type as DocumentType);
   return NextResponse.json(journals, { status: 200 });

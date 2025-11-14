@@ -2,8 +2,8 @@
 
 import React, { createContext, useCallback, useContext, useMemo, useReducer, useRef, type ReactNode } from "react";
 import { getLocalDate } from "@/utils/dateUtils";
-import type { Document } from "@/types/api/Document.type";
-import { DocumentActions } from "@/types/api/Document.type";
+import type { Document } from "@/types/Document.type";
+import { DocumentActions } from "@/types/Document.type";
 
 function reducer(state: Document, action: DocumentActions): Document {
   switch (action.type) {

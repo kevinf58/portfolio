@@ -1,3 +1,5 @@
 import { BaseProps } from "./Base.type";
 
-export type DividerProps = Omit<BaseProps, "children">;
+export type DividerProps = {
+  className?: string | undefined;
+};

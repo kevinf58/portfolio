@@ -2,7 +2,7 @@ import Card from "./Card";
 import { FiArrowUpRight } from "react-icons/fi";
 import { FaTag } from "react-icons/fa";
 import { CardProps } from "@/types/components/Card.props";
-import { Journal, Project } from "@/types/api/Document.type";
+import { Journal, Project } from "@/types/Document.type";
 import truncateText from "@/utils/TruncateText";
 import { stripMarkdown } from "@/utils/stripMarkdown";
 import Image from "next/image";

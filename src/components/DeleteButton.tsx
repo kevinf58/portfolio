@@ -4,7 +4,7 @@ import { Button } from "@/components/common/Button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { DocumentType } from "@/types/api/Document.type";
+import { DocumentType } from "@/types/Document.type";
 
 const DeleteButton = ({ id, type }: { id: number; type: DocumentType }) => {
   const [isDeleting, setIsDeleting] = useState(false);

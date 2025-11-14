@@ -1,6 +1,6 @@
 "use server";
 
-import { DocumentType, Journal } from "@/types/api/Document.type";
+import { DocumentType, Journal } from "@/types/Document.type";
 import ReadOnlyCrepe from "@/components/DocumentForm/ReadOnlyCrepe";
 import DeleteButton from "@/components/DeleteButton";
 import { notFound } from "next/navigation";

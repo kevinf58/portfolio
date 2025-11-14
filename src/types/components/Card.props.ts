@@ -8,6 +8,6 @@ export type BaseCardProps = Clickable & {
 } & BaseProps;
 
 //TODO: OPTIONAL BASE PROPS ARE TEMPORARY. MAKE CHILDREN REQUIRED DURING DEVELOPMENT OF API
-export type CardProps = Partial<BaseProps> & {
+export type CardProps = BaseProps & {
   state: [boolean, Dispatch<SetStateAction<boolean>>];
 };
