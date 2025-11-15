@@ -51,7 +51,7 @@ const Projects = () => {
             />
           </TextAnimation>
         ))}
-        <Button href={"/journal"} type="hollow">
+        <Button href={"/journal"} variant="hollow">
           Read More
           <MdKeyboardArrowRight className="lg:group-hover:translate-x-0.5 transition-transform duration-150 ease-in" />
         </Button>

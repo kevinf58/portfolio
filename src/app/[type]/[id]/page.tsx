@@ -6,8 +6,9 @@ import DeleteButton from "@/components/DeleteButton";
 import { notFound } from "next/navigation";
 import { dateToReadable } from "@/utils/dateUtils";
 import Card from "@/components/common/cards/Card";
+import { DocumentIdentifierParams } from "@/types/api/Api.type";
 
-const Page = async ({ params }: { params: Promise<{ type: DocumentType; id: string }> }) => {
+const Page = async ({ params }: DocumentIdentifierParams) => {
   const { type, id } = await params;
 
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
@@ -35,7 +36,7 @@ const Page = async ({ params }: { params: Promise<{ type: DocumentType; id: stri
         <hr className="opacity-20 mb-6" />
         <ReadOnlyCrepe markdown={journal.markdown} />
       </div>
-      <DeleteButton id={Number(id)} type={type} />
+      <DeleteButton id={Number(id)} type={type as DocumentType} />
     </section>
   );
 };

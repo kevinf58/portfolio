@@ -101,7 +101,7 @@ function DocumentLayoutInner() {
       </div>
       <Button
         className="!fixed bottom-5 right-10 min-w=[8rem] flex items-center justify-center"
-        type="hollow"
+        variant="hollow"
         onClick={!loading ? handleCreate : undefined}
       >
         {loading ? <CgSpinner className="size-5 animate-spin text-white" /> : `Create ${documentType}`}

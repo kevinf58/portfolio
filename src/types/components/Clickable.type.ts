@@ -1,9 +1,9 @@
-import { Url } from "next/dist/shared/lib/router/router";
+import type { MouseEvent } from "react";
 
 export interface Clickable {
   disabled?: boolean;
-  href: Url;
+  href?: string | URL;
   title?: string;
-  target?: string;
-  onClick?: () => void;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
 }

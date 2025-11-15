@@ -13,8 +13,9 @@ export async function GET(request: NextRequest, { params }: DocumentIdentifierPa
   if (!document) return NextResponse.json({ error: `${type} not found` }, { status: 404 });
   return NextResponse.json(document, { status: 200 });
 }
-export async function DELETE(request: NextRequest, ctx: DocumentIdentifierParams) {
-  const { type, id } = await ctx.params;
+
+export async function DELETE(request: NextRequest, { params }: DocumentIdentifierParams) {
+  const { type, id } = await params;
   const documentID = Number(id);
   if (!id || Number.isNaN(documentID)) {
     return NextResponse.json({ message: `Invalid ${type} ID` }, { status: 400 });
