@@ -4,9 +4,9 @@ import { Button } from "@/components/common/Button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { DocumentType } from "@/types/api/Document.type";
+import { DeleteButtonProps } from "@/types/components/ButtonProps";
 
-const DeleteButton = ({ id, type }: { id: number; type: DocumentType }) => {
+const DeleteButton = (props: DeleteButtonProps) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const router = useRouter();
@@ -19,7 +19,7 @@ const DeleteButton = ({ id, type }: { id: number; type: DocumentType }) => {
 
     setIsDeleting(true);
     try {
-      const res = await fetch(`${apiURL}/${type}/${id}`, {
+      const res = await fetch(`${apiURL}/${props.type}/${props.id}`, {
         method: "DELETE",
       });
 
@@ -39,7 +39,7 @@ const DeleteButton = ({ id, type }: { id: number; type: DocumentType }) => {
   };
 
   return (
-    <Button className="!fixed bottom-5 right-10" type="hollow" onClick={handleDelete} disabled={isDeleting}>
+    <Button className="!fixed bottom-5 right-10" variant="hollow" onClick={handleDelete} disabled={isDeleting}>
       {isDeleting ? "Deleting..." : "Delete"}
     </Button>
   );

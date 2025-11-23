@@ -8,10 +8,10 @@ import copyText from "@/utils/copyText";
 
 const Footer = () => {
   return (
-    <footer className="sticky bottom-0 w-full items-center md:px-18 md:py-10 lg:px-40 px-4 py-6 bg-light-black font-medium text-xs">
+    <footer className="sticky bottom-0 w-full items-center md:px-18 md:py-10 lg:px-40 px-4 py-6 bg-dark-gray font-medium text-xs">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col gap-4 items-center sm:scale-100 scale-70">
-          <div className="flex gap-6 !text-white/50">
+          <div className="flex gap-6">
             <Link href={"/"}>Home</Link>
             <Link href={"project"}>Projects</Link>
             <Link href={"/journal"}>Journal</Link>
@@ -43,11 +43,11 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <Divider className="!bg-white/10 !mb-10 !mt-6" />
+        <Divider className="!mb-10 !mt-6" />
         <div className="w-full relative flex md:flex-row md:justify-between md:gap-0 md:mb-8 sm:scale-100 flex-col items-center justify-center gap-4 scale-70">
           <div className="flex items-center gap-2">
             <a
-              className="flex items-center justify-center w-7 h-7 border-1 border-white/20 rounded-full"
+              className="flex items-center justify-center w-7 h-7 border-1 border-light-gray rounded-full"
               href="https://www.linkedin.com/in/kfengg/"
               title={`${"https://www.linkedin.com/in/kfengg/"}`}
               target="_blank"
@@ -55,7 +55,7 @@ const Footer = () => {
               <FaLinkedin />
             </a>
             <a
-              className="flex items-center justify-center w-7 h-7 border-1 border-white/20 rounded-full"
+              className="flex items-center justify-center w-7 h-7 border-1 border-light-gray rounded-full"
               href="https://github.com/kevinf58"
               title={`${"https://github.com/kevinf58"}`}
               target="_blank"
@@ -64,7 +64,7 @@ const Footer = () => {
             </a>
             <>
               <a
-                className="flex items-center justify-center w-7 h-7 border-1 border-white/20 rounded-full lg:hover:cursor-pointer"
+                className="flex items-center justify-center w-7 h-7 border-1 border-light-gray rounded-full lg:hover:cursor-pointer"
                 href="mailto:kfeng58@uwo.ca"
                 title={`${"kfeng58@uwo.ca"}`}
                 target="_blank"

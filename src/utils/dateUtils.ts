@@ -1,34 +1,25 @@
 // retrieves the current date of your local time
-export const getCurrentDate = (): string => {
+export const getLocalDate = (): string => {
   const today = new Date();
   const currentDate = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().split("T")[0];
 
   return currentDate;
 };
 
-export const dateToReadable = (dateString: string): string => {
-  const [year, month, day] = dateString.split("-").map(Number);
-  const date = new Date(year, month - 1, day);
+export function dateToReadable(isoString: string): string {
+  const normalized = isoString.length === 10 ? `${isoString}T00:00:00` : isoString.replace("Z", "");
+  const date = new Date(normalized);
 
-  const weekday = date.toLocaleDateString("en-US", { weekday: "long" });
-  const monthName = date.toLocaleDateString("en-US", { month: "long" });
+  const weekday = date.toLocaleDateString(undefined, { weekday: "long" });
+  const month = date.toLocaleDateString(undefined, { month: "long" });
+  const day = date.getDate();
+  const year = date.getFullYear();
 
-  const getOrdinal = (n: number): string => {
-    if (n > 3 && n < 21) return "th";
-    switch (n % 10) {
-      case 1:
-        return "st";
-      case 2:
-        return "nd";
-      case 3:
-        return "rd";
-      default:
-        return "th";
-    }
-  };
+  return `${weekday}, ${month} ${ordinalSuffix(day)}, ${year}`;
+}
 
-  const ordinal = getOrdinal(day);
-  const yearNum = date.getFullYear();
-
-  return `${weekday}, ${monthName} ${day}${ordinal}, ${yearNum}`;
-};
+function ordinalSuffix(n: number): string {
+  const s = ["th", "st", "nd", "rd"];
+  const v = n % 100;
+  return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}

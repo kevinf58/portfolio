@@ -28,7 +28,7 @@ const NavBarHamburger = () => {
   return (
     <div>
       <div
-        className={`fixed top-0 left-0 w-screen bg-light-black px-8 pb-5 pt-7 transform transition-transform duration-200 ease-in z-20 ${
+        className={`fixed top-0 left-0 w-screen bg-dark-gray px-8 pb-5 pt-7 transform transition-transform duration-200 ease-in z-20 ${
           open ? "translate-y-0 shadow-default" : "-translate-y-full"
         }`}
       >
@@ -50,7 +50,7 @@ const NavBarHamburger = () => {
           <Link href={"/contact"} className="px-1.5" onClick={toggleMenu}>
             Contact
           </Link>
-          <div className="flex gap-4 mt-10 text-white/50">
+          <div className="flex gap-4 mt-10">
             <a
               className="flex items-center gap-1.5"
               href="https://www.linkedin.com/in/kfengg/"

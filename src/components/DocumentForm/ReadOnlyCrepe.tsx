@@ -14,7 +14,6 @@ const ReadOnlyCrepeEditor = ({ markdown }: { markdown: string }) => {
     },
     [markdown],
   );
-
   return <Milkdown />;
 };
 

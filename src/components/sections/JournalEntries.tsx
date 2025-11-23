@@ -5,7 +5,7 @@ import DocumentCard from "../common/cards/DocumentCard";
 import { Button } from "../common/Button";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import TextAnimation from "../common/TextAnimation";
-import { Journal } from "@/types/api/Document.type";
+import { Journal } from "@/types/Document.type";
 
 const JournalEntries = () => {
   const [isFocused, setIsFocused] = useState(false);
@@ -18,12 +18,7 @@ const JournalEntries = () => {
       const res = await fetch(`${apiURL}/journal`);
       if (res.ok) {
         const data: Journal[] = await res.json();
-        const formattedData = data.map((journal) => ({
-          ...journal,
-          date: new Date(journal.date),
-        }));
-
-        setJournals(formattedData);
+        setJournals(data);
       }
     };
 
@@ -36,7 +31,7 @@ const JournalEntries = () => {
         <span className="font-sans font-bold text-4xl text-tint">Journal Entries</span>
         <div className="w-1/3 h-[3px] bg-primary mt-1" />
       </TextAnimation>
-      <TextAnimation className="mt-8 mb-12 font-serif" element="p">
+      <TextAnimation className="mt-8 mb-12 font-serif text-sm" element="p">
         I’m a strong believer in documenting my journey as a developer. Journaling not only allows me to track my
         growth, but also to solidify my learning of concepts and improve my communication skills!
       </TextAnimation>
@@ -54,7 +49,7 @@ const JournalEntries = () => {
             />
           </TextAnimation>
         ))}
-        <Button href={"/journal"} type="hollow">
+        <Button href={"/journal"} variant="hollow">
           Read More
           <MdKeyboardArrowRight className="lg:group-hover:translate-x-0.5 transition-transform duration-150 ease-in" />
         </Button>

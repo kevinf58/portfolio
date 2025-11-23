@@ -16,7 +16,7 @@ const ProjectCard = (props: CardProps) => {
               className="-translate-x-0.5 group-hover:translate-x-0 group-hover:-translate-y-0.5 duration-200"
             />
           </div>
-          <h6 className="font-serif text-xs text-white/50 mb-5">Tuesday, April 21, 2024</h6>
+          <h6 className="font-serif text-xs text-dark-white mb-5">Tuesday, April 21, 2024</h6>
           <p className="font-serif text-xs">This is a description...</p>
           <div className="flex flex-wrap space-x-2.5 space-y-2 font-sans text-xs mt-3">
             <Card href="">TypeScript</Card>

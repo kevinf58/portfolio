@@ -1,3 +1,5 @@
 import { BaseProps } from "./Base.type";
 
-export type TextAnimationProps = { element: string } & BaseProps;
+export interface TextAnimationProps extends BaseProps {
+  element: string;
+}

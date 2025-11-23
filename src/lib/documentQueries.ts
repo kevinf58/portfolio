@@ -1,5 +1,5 @@
 import db from "./db";
-import { Document, DocumentType } from "@/types/api/Document.type";
+import { Document, DocumentType } from "@/types/Document.type";
 
 export function getDocuments(documentType: DocumentType): Document[] {
   const statement = db.prepare(`SELECT * FROM ${documentType} ORDER BY date DESC`);
@@ -8,7 +8,7 @@ export function getDocuments(documentType: DocumentType): Document[] {
 
   const rows: Document[] = rawRows.map((row) => ({
     ...row,
-    date: new Date(row.date),
+    date: row.date,
     tags: typeof row.tags === "string" ? JSON.parse(row.tags) : row.tags,
     type: documentType,
   }));
@@ -54,7 +54,7 @@ export function getDocument(id: number, documentType: DocumentType): Document {
   const rawRow = statement.get(id) as Omit<Document, "date" | "tags"> & { date: string; tags: string };
   const document = {
     ...rawRow,
-    date: new Date(rawRow.date),
+    date: rawRow.date,
     tags: JSON.parse(rawRow.tags || "[]"),
   };
 

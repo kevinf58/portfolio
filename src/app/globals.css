@@ -23,7 +23,7 @@
   border-radius: 50%;
   transform: scale(0);
   animation: ripple 600ms linear;
-  background-color: rgba(183, 228, 183, 0.7);
+  background-color: #4d9de0b3;
   pointer-events: none;
   z-index: 0;
 }
@@ -41,15 +41,17 @@
   /**
    * colors
   */
-  --color-primary: #589981;
-  --color-secondary: #4d9de0;
-  --color-tint: #ecffe7;
+  --color-primary: #4d9de0;
+  --color-secondary: #99999995;
+  --color-tint: #e4f5fe;
   --color-black: #212527;
-  --color-light-black: #25292b;
   --color-white: #f1efdd;
+  --color-dark-white: #f1efdd85;
   --color-green: #74f071;
   --color-red: #f07174;
+  --color-dark-gray: #25292b;
   --color-gray: #2c2f31;
+  --color-light-gray: #f1efdd12;
 
   /**
    * shadows
@@ -66,6 +68,7 @@
   */
   --animate-blink: blink 1.4s steps(1, end) infinite;
   --animate-bounce: bounce 1s infinite ease-out;
+  --animate-spin: spin 0.4s linear infinite;
 
   @keyframes blink {
     0%,
@@ -124,6 +127,12 @@ body {
   }
 }
 
+@layer components {
+  .input-base {
+    @apply bg-light-gray shadow-inner focus-within:ring-2 ring-primary/80 rounded-sm duration-200;
+  }
+}
+
 /**
  * milkdown custom theme
 */
@@ -142,7 +151,7 @@ body {
   --crepe-color-inline-code: #ff6666;
   --crepe-color-error: #ff6666;
   --crepe-color-hover: #232323;
-  --crepe-color-selected: #666666;
+  --crepe-color-selected: #99999995;
   --crepe-color-inline-area: #2b2b2b;
 
   --crepe-font-title: "Inter", Cambria, "Times New Roman", Times, serif;
