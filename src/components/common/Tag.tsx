@@ -1,7 +1,6 @@
-import { BaseProps } from "@/types/components/Base.type";
-import { Clickable } from "@/types/components/Clickable.type";
+import { TagProps } from "@/types/components/TagProps.type";
 
-const Tag = ({ className = "", ...props }: BaseProps & Clickable) => {
+const Tag = ({ className = "", ...props }: TagProps) => {
   // make it so that bg and text colors default to gray if none are provided in the className prop
   const hasBg = /\bbg-[^\s]+/.test(className);
   const hasText = /\btext-[^\s]+/.test(className);
