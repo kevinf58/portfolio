@@ -23,6 +23,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Please add a project preview image!" }, { status: 400 });
     }
 
+    if (document.type === "journal" && !document.category) {
+      return NextResponse.json({ error: "Please select a journal category!" }, { status: 400 });
+    }
+
     if (typeof document.markdown !== "string" || document.markdown.length < 200) {
       return NextResponse.json({ error: "Please add sufficient text to your document!" }, { status: 400 });
     }
@@ -40,6 +44,7 @@ export async function POST(request: NextRequest) {
       ...(document.type === "project" && document.imagePreviewLink
         ? { imagePreviewLink: document.imagePreviewLink }
         : {}),
+      ...(document.type === "journal" && document.category ? { category: document.category } : {}),
     };
 
     const created = await addDocument(newDocument);

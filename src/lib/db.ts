@@ -15,7 +15,7 @@ db.exec(`
     date TEXT NOT NULL,
     markdown TEXT NOT NULL,
     tags TEXT,
-    category TEXT
+    category TEXT NOT NULL
   );
 
     CREATE TABLE IF NOT EXISTS project (

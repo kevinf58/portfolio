@@ -1,8 +1,8 @@
 "use client";
 
-import React, { createContext, useCallback, useContext, useMemo, useReducer, useRef, type ReactNode } from "react";
+import React, { createContext, useCallback, useContext, useMemo, useReducer, useRef, ReactNode } from "react";
 import { getLocalDate } from "@/utils/dateUtils";
-import type { Document } from "@/types/Document.type";
+import type { Categories, Document } from "@/types/Document.type";
 import { DocumentActions } from "@/types/Document.type";
 
 function reducer(state: Document, action: DocumentActions): Document {
@@ -17,6 +17,8 @@ function reducer(state: Document, action: DocumentActions): Document {
       return { ...state, type: state.type === "journal" ? "project" : "journal" };
     case "SET_TAGS":
       return { ...state, tags: action.payload };
+    case "SET_CATEGORY":
+      return { ...state, category: action.payload };
     default:
       return state;
   }
@@ -38,12 +40,14 @@ type DocumentFormContextValue = {
   date: string;
   documentType: Document["type"];
   switchDocTypeLabel: "journal" | "project";
+  category?: Categories;
 
   setMarkdown: (markdown: string) => void;
   setTitle: (title: string) => void;
   setDate: (date: string) => void;
   toggleDocumentType: () => void;
   setTags: React.Dispatch<React.SetStateAction<string[]>>;
+  setCategory: (category: Categories) => void;
   fileInputRef: React.RefObject<HTMLInputElement | null>;
 };
 
@@ -83,6 +87,10 @@ export function DocumentFormProvider({ children, initial }: ProviderProps) {
     [state.type],
   );
 
+  const setCategory = useCallback((category: Categories) => {
+    dispatch({ type: "SET_CATEGORY", payload: category });
+  }, []);
+
   const value = useMemo<DocumentFormContextValue>(
     () => ({
       state,
@@ -92,16 +100,18 @@ export function DocumentFormProvider({ children, initial }: ProviderProps) {
       date: state.date,
       documentType: state.type,
       switchDocTypeLabel,
+      category: state.category,
 
       setMarkdown,
       setTitle,
       setDate,
       toggleDocumentType,
       setTags,
+      setCategory,
 
       fileInputRef,
     }),
-    [state, switchDocTypeLabel, setMarkdown, setTitle, setDate, toggleDocumentType, setTags],
+    [state, switchDocTypeLabel, setMarkdown, setTitle, setDate, toggleDocumentType, setTags, setCategory],
   );
 
   return <DocumentFormContext.Provider value={value}>{children}</DocumentFormContext.Provider>;

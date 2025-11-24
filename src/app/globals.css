@@ -47,11 +47,15 @@
   --color-black: #212527;
   --color-white: #f1efdd;
   --color-dark-white: #f1efdd85;
-  --color-green: #74f071;
-  --color-red: #f07174;
   --color-dark-gray: #25292b;
   --color-gray: #2c2f31;
   --color-light-gray: #f1efdd12;
+
+  --color-blue: #517bbe;
+  --color-green: #66cdbe;
+  --color-yellow: #d8bb3f;
+  --color-purple: #b57fdc;
+  --color-red: #d1757d;
 
   /**
    * shadows

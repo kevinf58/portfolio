@@ -16,13 +16,14 @@ import { useState } from "react";
 import { DocumentFormProvider, useDocumentFormContext } from "./DocumentLayoutContext";
 import DocumentPreview from "./DocumentPreview";
 import TitleInput from "./TitleInput.";
+import JournalCategorySelect from "./JournalCategorySelect";
 
 function DocumentLayoutInner() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const documentForm = useDocumentFormContext();
-  const { markdown, title, tags, date, documentType } = documentForm;
+  const { markdown, title, tags, date, documentType, category } = documentForm;
 
   const handleCreate = async () => {
     setLoading(true);
@@ -39,6 +40,7 @@ function DocumentLayoutInner() {
           tags,
           type: documentType,
           ...(imagePreviewLink ? { imagePreviewLink } : {}),
+          ...(category ? { category } : {}),
         }),
       });
 
@@ -90,7 +92,7 @@ function DocumentLayoutInner() {
                 onChange={(e) => documentForm.setDate(e.target.value)}
               />
             </div>
-            {documentType === "project" && <ImageUpload />}
+            {documentType === "project" ? <ImageUpload /> : <JournalCategorySelect />}
             <TagInput />
             <div className={`h-full rounded-sm cursor-text px-4 py-3 overflow-y-scroll input-base`}>
               <Editor />
