@@ -29,15 +29,21 @@ export function addDocument(document: Document) {
       date.toISOString(),
       JSON.stringify(document.tags),
       document.markdown,
-      document.imagePreviewLink ?? null,
+      document.imagePreviewLink,
     );
     return { ...document, id: info.lastInsertRowid };
   } else {
     const stmt = db.prepare(
-      `INSERT INTO journal (title, date, tags, markdown)
-       VALUES (?, ?, ?, ?)`,
+      `INSERT INTO journal (title, date, tags, markdown, category)
+       VALUES (?, ?, ?, ?, ?)`,
     );
-    const info = stmt.run(document.title, date.toISOString(), JSON.stringify(document.tags), document.markdown);
+    const info = stmt.run(
+      document.title,
+      date.toISOString(),
+      JSON.stringify(document.tags),
+      document.markdown,
+      document.category,
+    );
     return { ...document, id: info.lastInsertRowid };
   }
 }

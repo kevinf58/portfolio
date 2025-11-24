@@ -7,6 +7,7 @@ export type Document = {
   markdown: string;
   type: DocumentType;
   imagePreviewLink?: string;
+  category?: Categories;
 };
 
 export type Journal = Document & {
@@ -28,4 +29,7 @@ export type DocumentActions =
   | { type: "SET_TAGS"; payload: string[] }
   | { type: "ADD_TAG"; payload: string }
   | { type: "REMOVE_TAG"; payload: string }
+  | { type: "SET_CATEGORY"; payload: Categories }
   | { type: "RESET"; payload?: Partial<Document> };
+
+export type Categories = "DAILY" | "LEARNING" | "DEVELOPMENT" | "RECRUITING" | "TRADING";

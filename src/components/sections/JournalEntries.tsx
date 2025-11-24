@@ -46,6 +46,7 @@ const JournalEntries = () => {
               tags={journal.tags}
               markdown={journal.markdown}
               type={journal.type}
+              category={journal.category}
             />
           </TextAnimation>
         ))}
