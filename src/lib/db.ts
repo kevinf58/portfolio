@@ -25,7 +25,7 @@ db.exec(`
     markdown TEXT NOT NULL,
     tags TEXT,
     category TEXT,
-    imagePreviewLink TEXT
+    imagePreviewLink TEXT NOT NULL
   );
 `);
 
