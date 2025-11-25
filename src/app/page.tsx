@@ -3,7 +3,7 @@ import { PiMapPinSimpleFill } from "react-icons/pi";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { IoMailSharp } from "react-icons/io5";
 import { SiTypescript, SiReact, SiPython, SiTailwindcss, SiNextdotjs } from "react-icons/si";
-import JournalEntries from "@/components/sections/JournalEntries";
+import Journals from "@/components/sections/Journals";
 import Projects from "@/components/sections/Projects";
 import Card from "@/components/common/cards/Card";
 
@@ -73,7 +73,7 @@ export default function Home() {
         id="scroll"
       >
         <Projects />
-        <JournalEntries />
+        <Journals />
       </section>
       {/* <section className='h-screen w-full bg-green-300' /> */}
     </>

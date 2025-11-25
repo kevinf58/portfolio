@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { dateToReadable } from "@/utils/dateUtils";
 import Card from "@/components/common/cards/Card";
 import { DocumentIdentifierParams } from "@/types/api/Api.type";
+import { stripMarkdown } from "@/utils/stripMarkdown";
 
 const Page = async ({ params }: DocumentIdentifierParams) => {
   const { type, id } = await params;
@@ -32,6 +33,7 @@ const Page = async ({ params }: DocumentIdentifierParams) => {
               {tag}
             </Card>
           ))}
+          <div className="pointer-events-auto">{stripMarkdown(journal.markdown)}</div>
         </div>
         <hr className="opacity-20 mb-6" />
         <ReadOnlyCrepe markdown={journal.markdown} />

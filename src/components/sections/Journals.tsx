@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import JournalCard from "../common/cards/JournalCard";
 import { Button } from "../common/Button";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import TextAnimation from "../common/TextAnimation";
 import { Journal } from "@/types/Document.type";
+import DocumentCard from "../common/cards/DocumentCard";
 
-const JournalEntries = () => {
+const Journals = () => {
   const [journals, setJournals] = useState<Journal[]>([]);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const JournalEntries = () => {
       <div className="flex flex-col w-[80rem]">
         {journals.map((journal) => (
           <TextAnimation element="div" key={journal.id}>
-            <JournalCard
+            <DocumentCard
               id={journal.id}
               title={journal.title}
               date={journal.date}
@@ -56,4 +56,4 @@ const JournalEntries = () => {
   );
 };
 
-export default JournalEntries;
+export default Journals;

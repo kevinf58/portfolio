@@ -5,7 +5,7 @@ import { Button } from "../common/Button";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import TextAnimation from "../common/TextAnimation";
 import { Project } from "@/types/Document.type";
-import ProjectCard from "../common/cards/ProjectCard";
+import DocumentCard from "../common/cards/DocumentCard";
 
 const Projects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -34,10 +34,10 @@ const Projects = () => {
         decisions, any challenges I encountered, and the lessons I learned throughout the process of building each
         project!
       </TextAnimation> */}
-      <div className="flex flex-wrap w-[80rem] gap-x-12 gap-y-8 items-center justify-center">
+      <div className="flex flex-col w-[80rem]">
         {projects.map((project) => (
           <TextAnimation element="div" key={project.id}>
-            <ProjectCard
+            <DocumentCard
               id={project.id}
               title={project.title}
               date={project.date}
