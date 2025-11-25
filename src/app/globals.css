@@ -57,6 +57,13 @@
   --color-purple: #b57fdc;
   --color-red: #d1757d;
 
+  --color-black-100: #0b0e16;
+  --color-black-80: #37404f;
+  --color-black-60: #667085;
+  --color-white-60: #c0c6d4;
+  --color-white-80: #e1e5ea;
+  --color-white-100: #ffffff;
+
   /**
    * shadows
   */

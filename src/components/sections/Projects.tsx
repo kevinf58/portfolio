@@ -5,10 +5,9 @@ import { Button } from "../common/Button";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import TextAnimation from "../common/TextAnimation";
 import { Project } from "@/types/Document.type";
-import DocumentCard from "../common/cards/DocumentCard";
+import ProjectCard from "../common/cards/ProjectCard";
 
 const Projects = () => {
-  const [isFocused, setIsFocused] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
@@ -26,21 +25,19 @@ const Projects = () => {
   }, []);
 
   return (
-    <section className="lg:w-1/3 sm:w-3/4 w-full">
+    <section className="flex flex-col items-center w-full gap-2">
       <TextAnimation element="h1">
-        <span className="font-sans font-bold text-4xl text-tint">Hobby Projects</span>
-        <div className="w-1/3 h-[3px] bg-primary mt-1" />
+        <span className="font-sans font-bold text-5xl text-tint">Projects</span>
       </TextAnimation>
-      <TextAnimation className="mt-8 mb-12 font-serif text-sm" element="p">
-        These are a few that I’m particularly proud of. Each of the cards below offers a closer look at my development
-        journey - sharing the reasoning behind my decisions, any challenges I encountered, and the lessons I learned
-        throughout the process of building each project.
-      </TextAnimation>
-      <div className="flex flex-col space-y-4 md:items-start items-center">
+      {/* <TextAnimation className="text-base text-center lg:w-1/3 sm:w-3/4" element="p">
+        Each of the cards below offers a closer look at my development journey - sharing the reasoning behind my
+        decisions, any challenges I encountered, and the lessons I learned throughout the process of building each
+        project!
+      </TextAnimation> */}
+      <div className="flex flex-wrap w-[80rem] gap-x-12 gap-y-8 items-center justify-center">
         {projects.map((project) => (
           <TextAnimation element="div" key={project.id}>
-            <DocumentCard
-              state={[isFocused, setIsFocused]}
+            <ProjectCard
               id={project.id}
               title={project.title}
               date={project.date}
@@ -51,11 +48,11 @@ const Projects = () => {
             />
           </TextAnimation>
         ))}
-        <Button href={"/journal"} variant="hollow">
-          Read More
-          <MdKeyboardArrowRight className="lg:group-hover:translate-x-0.5 transition-transform duration-150 ease-in" />
-        </Button>
       </div>
+      <Button href={"/journal"} variant="hollow">
+        Read More
+        <MdKeyboardArrowRight className="lg:group-hover:translate-x-0.5 transition-transform duration-150 ease-in" />
+      </Button>
     </section>
   );
 };

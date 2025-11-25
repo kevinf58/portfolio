@@ -1,31 +1,51 @@
+import { FaTag } from "react-icons/fa";
+import { Project } from "@/types/Document.type";
+import truncateText from "@/utils/TruncateText";
+import { stripMarkdown } from "@/utils/stripMarkdown";
 import Image from "next/image";
-import Card from "./Card";
-import { FiArrowUpRight } from "react-icons/fi";
-import { CardProps } from "@/types/components/Card.props";
+import { dateToReadable } from "@/utils/dateUtils";
+import Tag from "../Tag";
+import { FaGithub } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa6";
 
-const ProjectCard = (props: CardProps) => {
+const ProjectCard = (props: Project) => {
   return (
-    <Card href="/project" className={`group transition-discrete duration-150 ${props.className}`}>
-      <div className="mx-4 my-5">
-        <div className="flex flex-col">
-          <Image src={"/images/Portfolio-01.png"} alt="" width={500} height={10000} className="object-top" />
-          <div className="flex items-center gap-4 mt-2">
-            <h3 className="font-sans font-bold text-1.5xl leading-7">This Project!</h3>
-            <FiArrowUpRight
-              size={20}
-              className="-translate-x-0.5 group-hover:translate-x-0 group-hover:-translate-y-0.5 duration-200"
-            />
-          </div>
-          <h6 className="font-serif text-xs text-dark-white mb-5">Tuesday, April 21, 2024</h6>
-          <p className="font-serif text-xs">This is a description...</p>
-          <div className="flex flex-wrap space-x-2.5 space-y-2 font-sans text-xs mt-3">
-            <Card href="">TypeScript</Card>
-            <Card href="">React</Card>
-            <Card href="">Tailwind CSS</Card>
-          </div>
+    <a
+      href={`/${props.type}/${props.id}`}
+      className="block w-[30rem] rounded-2xl overflow-hidden bg-gray hover:shadow-2xl transition-shadow duration-400 group"
+    >
+      {props.imagePreviewLink && (
+        <div className="relative h-64 w-full overflow-hidden">
+          <Image
+            src={props.imagePreviewLink}
+            alt={props.title}
+            fill
+            className="object-cover object-center transition-transform duration-300 group-hover:scale-103"
+          />
+        </div>
+      )}
+      <div className="flex flex-col px-8 py-6 space-y-4 h-58">
+        <div>
+          <h1 className="text-2xl font-semibold leading-7">{props.title}</h1>
+          <h6 className="text-xs text-dark-white">{dateToReadable(props.date)}</h6>
+        </div>
+        <p className="text-sm -mt-2">{truncateText(stripMarkdown(props.markdown), "markdown")}</p>
+        <div className="flex space-x-2">
+          {props.tags.map((tag) => (
+            <Tag href="" key={tag}>
+              {tag}
+            </Tag>
+          ))}
+        </div>
+        <div className="flex items-center justify-between mt-auto">
+          <span className="text-sm flex items-center space-x-2">
+            <span>View Project</span>
+            <FaArrowRight className="group-hover:translate-x-1 transition-transform duration-200" />
+          </span>
+          <FaGithub className="text-xl" />
         </div>
       </div>
-    </Card>
+    </a>
   );
 };
 

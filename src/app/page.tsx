@@ -69,11 +69,11 @@ export default function Home() {
         </div>
       </section>
       <section
-        className="w-full flex lg:flex-row lg:items-start items-center flex-col sm:gap-40 gap-24 sm:px-28 px-6 py-32 bg-black shadow-default"
+        className="w-full flex flex-col items-center sm:gap-40 gap-24 sm:px-28 px-6 py-32 bg-black shadow-default"
         id="scroll"
       >
-        <JournalEntries />
         <Projects />
+        <JournalEntries />
       </section>
       {/* <section className='h-screen w-full bg-green-300' /> */}
     </>
