@@ -25,7 +25,7 @@ const Projects = () => {
   }, []);
 
   return (
-    <section className="flex flex-col items-center w-full gap-2">
+    <section className="flex flex-col items-center w-full gap-2 pb-20">
       <TextAnimation element="h1">
         <span className="font-sans font-bold text-5xl text-tint">Projects</span>
       </TextAnimation>

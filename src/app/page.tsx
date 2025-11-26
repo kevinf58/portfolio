@@ -6,6 +6,7 @@ import { SiTypescript, SiReact, SiPython, SiTailwindcss, SiNextdotjs } from "rea
 import Journals from "@/components/sections/Journals";
 import Projects from "@/components/sections/Projects";
 import Card from "@/components/common/cards/Card";
+import CallToAction from "@/components/sections/CallToAction";
 
 export default function Home() {
   return (
@@ -68,12 +69,10 @@ export default function Home() {
           </Card>
         </div>
       </section>
-      <section
-        className="w-full flex flex-col items-center sm:gap-40 gap-24 sm:px-28 px-6 py-32 bg-black shadow-default"
-        id="scroll"
-      >
+      <section className="w-full flex flex-col items-center pt-32 bg-black shadow-default" id="scroll">
         <Projects />
         <Journals />
+        <CallToAction />
       </section>
       {/* <section className='h-screen w-full bg-green-300' /> */}
     </>

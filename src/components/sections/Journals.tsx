@@ -25,7 +25,7 @@ const Journals = () => {
   }, []);
 
   return (
-    <section className="flex flex-col items-center w-full gap-2">
+    <section className="flex flex-col items-center w-full gap-2 py-20 px-6 bg-dark-gray">
       <TextAnimation element="h1">
         <span className="font-sans font-bold text-5xl text-tint">Journals</span>
       </TextAnimation>
