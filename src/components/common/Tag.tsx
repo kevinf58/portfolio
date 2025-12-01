@@ -6,7 +6,7 @@ const categoryBgMap: Record<Categories, string> = {
   LEARNING: "text-green bg-green/25",
   DEVELOPMENT: "text-yellow bg-yellow/25",
   RECRUITING: "text-purple bg-purple/25",
-  TRADING: "text-red bg-red/25",
+  TRADING: "text-orange bg-orange/25",
 };
 
 const Tag = ({ className = "", children, ...props }: TagProps) => {
@@ -20,7 +20,7 @@ const Tag = ({ className = "", children, ...props }: TagProps) => {
   const mergedClasses = `
     ${!hasBg && !props.onClick && categoryBg}
     ${!hasBg && props.onClick && "bg-white/25"}
-    ${!hasBg && !categoryBg && "text-dark-white bg-white/10"}
+    ${!hasBg && !categoryBg && "text-dark-white bg-white/15"}
 
     ${className}
   `.trim();

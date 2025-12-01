@@ -41,9 +41,9 @@
   /**
    * colors
   */
-  --color-primary: #4d9de0;
+  --color-primary: #865555;
   --color-secondary: #99999995;
-  --color-tint: #e4f5fe;
+  --color-tint: #fff5f3;
   --color-black: #212527;
   --color-white: #f1efdd;
   --color-dark-white: #f1efdd85;
@@ -55,6 +55,8 @@
   --color-green: #66cdbe;
   --color-yellow: #d8bb3f;
   --color-purple: #b57fdc;
+  --color-orange: #d5896f;
+
   --color-red: #d1757d;
 
   --color-black-100: #0b0e16;

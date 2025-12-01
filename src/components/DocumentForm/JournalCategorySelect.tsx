@@ -25,7 +25,7 @@ const JournalCategorySelect = () => {
       >
         RECRUITING
       </Tag>
-      <Tag onClick={() => setCategory("TRADING")} className={`${category === "TRADING" && "text-red bg-red/25"}`}>
+      <Tag onClick={() => setCategory("TRADING")} className={`${category === "TRADING" && "text-orange bg-orange/25"}`}>
         TRADING
       </Tag>
     </div>

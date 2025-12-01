@@ -33,7 +33,7 @@ const ProjectCard = (props: Journal | Project) => {
               src={props.imagePreviewLink}
               alt={props.title}
               fill
-              className="object-cover object-center transition-transform duration-200 group-hover:scale-105"
+              className="object-cover object-center transition-transform duration-400 group-hover:scale-105"
             />
           </div>
         )}
