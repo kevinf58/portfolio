@@ -4,11 +4,19 @@ import { DocumentType } from "@/types/Document.type";
 import { Document } from "@/types/Document.type";
 import { getLocalDate } from "@/utils/dateUtils";
 import { DocumentCollectionParams } from "@/types/api/Api.type";
+import { DOCUMENTS_PER_LOAD } from "@/utils/constants";
 
 export async function GET(request: NextRequest, { params }: DocumentCollectionParams) {
   const { type } = await params;
-  const journals = getDocuments(type as DocumentType);
-  return NextResponse.json(journals, { status: 200 });
+
+  const { searchParams } = new URL(request.url);
+  const offset = Number(searchParams.get("offset") || 0);
+  const limit = Number(searchParams.get("limit") || DOCUMENTS_PER_LOAD);
+
+  const documents = getDocuments(type as DocumentType);
+  const paginated = documents.slice(offset, offset + limit);
+
+  return NextResponse.json(paginated, { status: 200 });
 }
 
 export async function POST(request: NextRequest) {

@@ -2,26 +2,31 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "../common/Button";
-import { MdKeyboardArrowRight } from "react-icons/md";
 import TextAnimation from "../common/TextAnimation";
 import { Project } from "@/types/Document.type";
 import DocumentCard from "../common/cards/DocumentCard";
+import { DOCUMENTS_PER_LOAD } from "@/utils/constants";
 
 const Projects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [offset, setOffset] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+
+  const apiURL = process.env.NEXT_PUBLIC_API_URL;
+
+  const loadMore = async () => {
+    const res = await fetch(`${apiURL}/project?offset=${offset}&limit=${DOCUMENTS_PER_LOAD}`);
+    if (!res.ok) return;
+
+    const data: Project[] = await res.json();
+
+    setProjects((prev) => [...prev, ...data]);
+    setOffset((prev) => prev + DOCUMENTS_PER_LOAD);
+    setHasMore(data.length === DOCUMENTS_PER_LOAD);
+  };
 
   useEffect(() => {
-    const apiURL = process.env.NEXT_PUBLIC_API_URL;
-
-    const fetchProjects = async () => {
-      const res = await fetch(`${apiURL}/project`);
-      if (res.ok) {
-        const data: Project[] = await res.json();
-        setProjects(data);
-      }
-    };
-
-    fetchProjects();
+    loadMore();
   }, []);
 
   return (
@@ -29,30 +34,20 @@ const Projects = () => {
       <TextAnimation element="h1">
         <span className="font-sans font-bold text-5xl text-tint">Projects</span>
       </TextAnimation>
-      {/* <TextAnimation className="text-base text-center lg:w-1/3 sm:w-3/4" element="p">
-        Each of the cards below offers a closer look at my development journey - sharing the reasoning behind my
-        decisions, any challenges I encountered, and the lessons I learned throughout the process of building each
-        project!
-      </TextAnimation> */}
+
       <div className="flex flex-col w-[80rem]">
         {projects.map((project) => (
           <TextAnimation element="div" key={project.id}>
-            <DocumentCard
-              id={project.id}
-              title={project.title}
-              date={project.date}
-              tags={project.tags}
-              markdown={project.markdown}
-              type={project.type}
-              imagePreviewLink={project.imagePreviewLink}
-            />
+            <DocumentCard {...project} />
           </TextAnimation>
         ))}
       </div>
-      <Button href={"/journal"} variant="hollow">
-        Read More
-        <MdKeyboardArrowRight className="lg:group-hover:translate-x-0.5 transition-transform duration-150 ease-in" />
-      </Button>
+
+      {hasMore && (
+        <Button onClick={loadMore} variant="hollow">
+          Load More
+        </Button>
+      )}
     </section>
   );
 };
