@@ -1,12 +1,14 @@
 "use server";
 
-import { DocumentType, Journal } from "@/types/Document.type";
+import { DocumentType, Journal, Project } from "@/types/Document.type";
 import ReadOnlyCrepe from "@/components/DocumentForm/ReadOnlyCrepe";
 import DeleteButton from "@/components/DeleteButton";
 import { notFound } from "next/navigation";
 import { dateToReadable } from "@/utils/dateUtils";
-import Card from "@/components/common/cards/Card";
 import { DocumentIdentifierParams } from "@/types/api/Api.type";
+import Tag from "@/components/common/Tag";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import { MdDateRange } from "react-icons/md";
 
 const Page = async ({ params }: DocumentIdentifierParams) => {
   const { type, id } = await params;
@@ -19,22 +21,31 @@ const Page = async ({ params }: DocumentIdentifierParams) => {
     notFound();
   }
 
-  const journal: Journal = await res.json();
+  const document: Journal | Project = await res.json();
 
   return (
-    <section className="relative flex justify-center min-h-[calc(100vh-4.75rem)] w-full bg-dark-gray shadow-default py-36 md:px-10 sm:px-6 px-2">
-      <div className="min-h-full max-w-[65rem] w-full lg:px-48 sm:px-20 px-8 lg:py-32 sm:py-24 py-12 gap-1 rounded-sm border-2 border-tint/10 bg-gray">
-        <h1 className="text-[48px] leading-[50px] mt-8 font-semibold">{journal.title}</h1>
-        <p className="text-white/50 text-xs mb-8 font-light italic">{dateToReadable(journal.date)}</p>
-        <div className="flex gap-1.5 text-xs mb-2">
-          {journal.tags.map((tag) => (
-            <Card href="" key={tag}>
-              {tag}
-            </Card>
-          ))}
+    <section className="relative flex justify-center min-h-[calc(100vh-4.75rem)] w-full bg-dark-gray shadow-default py-20 md:px-10 sm:px-6 px-2">
+      <div className="min-h-full max-w-[65rem] w-full lg:px-34 sm:px-20 px-8 gap-1">
+        <div className="flex items-center text-sm text-white/50 mb-10">
+          Home <MdKeyboardArrowRight size={18} /> {type.charAt(0).toUpperCase() + type.slice(1)}
+          <MdKeyboardArrowRight size={18} /> {document.title}
         </div>
-        <hr className="opacity-20 mb-6" />
-        <ReadOnlyCrepe markdown={journal.markdown} />
+        <div className="space-y-6">
+          <h1 className="text-[48px] leading-[50px] font-semibold">{document.title}</h1>
+          <div className="flex gap-x-1 text-white/50">
+            <MdDateRange />
+            <p className="text-xs font-light">{dateToReadable(document.date)}</p>
+          </div>
+          <div className="flex gap-1.5 text-xs">
+            {document.tags.map((tag) => (
+              <Tag href="" key={tag}>
+                {tag}
+              </Tag>
+            ))}
+          </div>
+          <hr className="opacity-20 mb-6" />
+        </div>
+        <ReadOnlyCrepe markdown={document.markdown} />
       </div>
       <DeleteButton id={Number(id)} type={type as DocumentType} />
     </section>

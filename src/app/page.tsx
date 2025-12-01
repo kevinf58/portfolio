@@ -3,9 +3,10 @@ import { PiMapPinSimpleFill } from "react-icons/pi";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { IoMailSharp } from "react-icons/io5";
 import { SiTypescript, SiReact, SiPython, SiTailwindcss, SiNextdotjs } from "react-icons/si";
-import JournalEntries from "@/components/sections/JournalEntries";
+import Journals from "@/components/sections/Journals";
 import Projects from "@/components/sections/Projects";
 import Card from "@/components/common/cards/Card";
+import CallToAction from "@/components/sections/CallToAction";
 
 export default function Home() {
   return (
@@ -68,12 +69,10 @@ export default function Home() {
           </Card>
         </div>
       </section>
-      <section
-        className="w-full flex lg:flex-row lg:items-start items-center flex-col sm:gap-40 gap-24 sm:px-28 px-6 py-32 bg-black shadow-default"
-        id="scroll"
-      >
-        <JournalEntries />
+      <section className="w-full flex flex-col items-center pt-32 bg-black shadow-default" id="scroll">
         <Projects />
+        <Journals />
+        <CallToAction />
       </section>
       {/* <section className='h-screen w-full bg-green-300' /> */}
     </>

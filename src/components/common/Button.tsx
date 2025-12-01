@@ -36,7 +36,7 @@ export const Button = ({ variant = "solid", size = "default", ...props }: Button
         if (props.href) router.push(props.href.toString());
       }}
       title={props.title}
-      className={`relative overflow-hidden group border-2 border-primary lg:hover:cursor-pointer hover:scale-[102%] active:transition-none active:scale-97 rounded-sm transition-all duration-100 ease-in-out ${props.className}
+      className={`relative overflow-hidden group border-2 border-primary lg:hover:cursor-pointer hover:scale-[102%] active:transition-none active:scale-97 rounded-full transition-all duration-100 ease-in-out ${props.className}
       ${props.disabled && "pointer-events-none brightness-70"} ${variant === "hollow" ? "bg-transparent lg:hover:bg-primary/15" : "bg-primary"}`}
     >
       <div

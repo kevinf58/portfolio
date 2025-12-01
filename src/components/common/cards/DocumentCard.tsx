@@ -1,55 +1,66 @@
-import Card from "./Card";
-import { FiArrowUpRight } from "react-icons/fi";
-import { FaTag } from "react-icons/fa";
-import { CardProps } from "@/types/components/Card.props";
 import { Journal, Project } from "@/types/Document.type";
-import truncateText from "@/utils/TruncateText";
-import { stripMarkdown } from "@/utils/stripMarkdown";
 import Image from "next/image";
 import { dateToReadable } from "@/utils/dateUtils";
 import Tag from "../Tag";
+import { FaArrowRight } from "react-icons/fa6";
+import summarizeMarkdown from "@/utils/summarizeMarkdown";
+import readingTime from "reading-time";
 
-const DocumentCard = (props: CardProps & (Journal | Project)) => {
+const ProjectCard = (props: Journal | Project) => {
+  const titleElement = <h1 className="text-2xl font-bold my-4">{props.title}</h1>;
+
+  const conditionalElement =
+    props.type === "journal" ? (
+      <div className="flex items-center gap-2">
+        <Tag>{props.category}</Tag>
+        <h6 className="text-xs text-dark-white">{dateToReadable(props.date)}</h6>
+        <span className="text-dark-white">•</span>
+        <h6 className="text-xs text-dark-white">{readingTime(props.markdown).text}</h6>
+      </div>
+    ) : (
+      <>
+        {titleElement}
+        <h6 className="text-xs text-dark-white">{dateToReadable(props.date)}</h6>
+      </>
+    );
+
   return (
-    <Card
-      href={`/${props.type}/${props.id}`}
-      className={`group transition-discrete duration-150 min-w-0 ${props.className}`}
-    >
-      <div className="mx-4 my-5 min-w-0">
-        <div className="flex flex-col gap-0.5 min-w-0">
-          {props.type === "project" && props.imagePreviewLink && (
-            <Image src={props.imagePreviewLink} alt="" width={500} height={10000} className="object-top" />
-          )}
-          <div className="flex items-center gap-4 min-w-0">
-            <h3 className="font-sans font-bold text-2xl leading-7 flex-1 min-w-0 truncate">
-              {truncateText(props.title, "title")}
-            </h3>
-
-            <div className="flex-shrink-0">
-              <FiArrowUpRight
-                size={20}
-                className="transition-transform duration-200 -translate-x-0.5 group-hover:translate-x-0 group-hover:-translate-y-0.5"
-              />
-            </div>
+    <a href={`/${props.type}/${props.id}`}>
+      <div className="flex hover:bg-gray transition-colors duration-200 px-10 py-8 cursor-pointer group gap-4">
+        {props.type === "project" && props.imagePreviewLink && (
+          <div className="relative w-60 h-38 flex-shrink-0 overflow-hidden rounded-sm">
+            <Image
+              src={props.imagePreviewLink}
+              alt={props.title}
+              fill
+              className="object-cover object-center transition-transform duration-400 group-hover:scale-105"
+            />
           </div>
-          <h6 className="font-serif text-xs text-dark-white mb-5">{dateToReadable(props.date)}</h6>
-          <p className="font-serif text-xs break-words">{truncateText(stripMarkdown(props.markdown), "markdown")}</p>
-          <div className="flex flex-wrap space-x-2.5 space-y-2 font-sans text-xs mt-3">
-            {props.type === "journal" && <Tag>{props.category}</Tag>}
+        )}
+        <div className="flex flex-col w-full">
+          {props.type === "journal" && conditionalElement}
+          <div className={`flex items-center ${props.type === "project" ? "justify-between" : "gap-2"}`}>
+            {props.type === "project" && conditionalElement}
+          </div>
+          {props.type === "journal" && titleElement}
+          <p className="text-sm font-light mb-3">{summarizeMarkdown(props.markdown)}</p>
+          <div className="flex space-x-2">
             {props.tags.map((tag) => (
-              <Card href="" key={tag}>
+              <Tag href="" key={tag}>
                 {tag}
-              </Card>
+              </Tag>
             ))}
-          </div>
-          <div className="flex items-center text-xs font-sans gap-1 mt-1">
-            <FaTag />
-            <h6>General</h6>
+            <div className="flex items-center ml-auto">
+              <span className="text-sm flex items-center space-x-2">
+                <span>View Project</span>
+                <FaArrowRight className="group-hover:translate-x-1 transition-transform duration-200" />
+              </span>
+            </div>
           </div>
         </div>
       </div>
-    </Card>
+    </a>
   );
 };
 
-export default DocumentCard;
+export default ProjectCard;

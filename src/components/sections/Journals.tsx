@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import DocumentCard from "../common/cards/DocumentCard";
 import { Button } from "../common/Button";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import TextAnimation from "../common/TextAnimation";
 import { Journal } from "@/types/Document.type";
+import DocumentCard from "../common/cards/DocumentCard";
 
-const JournalEntries = () => {
-  const [isFocused, setIsFocused] = useState(false);
+const Journals = () => {
   const [journals, setJournals] = useState<Journal[]>([]);
 
   useEffect(() => {
@@ -26,20 +25,18 @@ const JournalEntries = () => {
   }, []);
 
   return (
-    <section className="lg:w-1/3 sm:w-3/4 w-full">
+    <section className="flex flex-col items-center w-full gap-2 py-20 px-6 bg-dark-gray">
       <TextAnimation element="h1">
-        <span className="font-sans font-bold text-4xl text-tint">Journal Entries</span>
-        <div className="w-1/3 h-[3px] bg-primary mt-1" />
+        <span className="font-sans font-bold text-5xl text-tint">Journals</span>
       </TextAnimation>
-      <TextAnimation className="mt-8 mb-12 font-serif text-sm" element="p">
+      {/* <TextAnimation className="mt-8 mb-12 font-serif text-sm" element="p">
         I’m a strong believer in documenting my journey as a developer. Journaling not only allows me to track my
         growth, but also to solidify my learning of concepts and improve my communication skills!
-      </TextAnimation>
-      <div className="flex flex-col space-y-4 md:items-start items-center">
+      </TextAnimation> */}
+      <div className="flex flex-col w-[80rem]">
         {journals.map((journal) => (
           <TextAnimation element="div" key={journal.id}>
             <DocumentCard
-              state={[isFocused, setIsFocused]}
               id={journal.id}
               title={journal.title}
               date={journal.date}
@@ -50,13 +47,13 @@ const JournalEntries = () => {
             />
           </TextAnimation>
         ))}
-        <Button href={"/journal"} variant="hollow">
-          Read More
-          <MdKeyboardArrowRight className="lg:group-hover:translate-x-0.5 transition-transform duration-150 ease-in" />
-        </Button>
       </div>
+      <Button href={"/journal"} variant="hollow">
+        Read More
+        <MdKeyboardArrowRight className="lg:group-hover:translate-x-0.5 transition-transform duration-150 ease-in" />
+      </Button>
     </section>
   );
 };
 
-export default JournalEntries;
+export default Journals;
