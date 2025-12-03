@@ -12,7 +12,6 @@ import ImageUpload from "./ImageUpload";
 import uploadHandler from "@/utils/uploadHandler";
 import { CgSpinner } from "react-icons/cg";
 import { useState } from "react";
-
 import { DocumentFormProvider, useDocumentFormContext } from "./DocumentLayoutContext";
 import DocumentPreview from "./DocumentPreview";
 import TitleInput from "./TitleInput.";
@@ -35,9 +34,10 @@ function DocumentLayoutInner() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          title,
           markdown,
+          title,
           tags,
+          date,
           type: documentType,
           ...(imagePreviewLink ? { imagePreviewLink } : {}),
           ...(category ? { category } : {}),
@@ -56,6 +56,7 @@ function DocumentLayoutInner() {
       }
 
       toast.success("Entry added!");
+      window.location.reload();
       router.push("/");
     } catch (err) {
       console.error(err);
