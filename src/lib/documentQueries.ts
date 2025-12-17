@@ -1,16 +1,22 @@
 import db from "./db";
 import { Document, DocumentType } from "@/types/Document.type";
+import { DOCUMENTS_PER_LOAD } from "@/utils/constants";
 
-export function getDocuments(documentType: DocumentType): Document[] {
-  const statement = db.prepare(`SELECT * FROM ${documentType} ORDER BY date DESC`);
+export function getDocumentsPage(type: DocumentType, offset: number, limit: number = DOCUMENTS_PER_LOAD): Document[] {
+  const stmt = db.prepare(`
+    SELECT *
+    FROM ${type}
+    ORDER BY date DESC
+    LIMIT ? OFFSET ?
+  `);
 
-  const rawRows = statement.all() as Array<Document>;
+  const rawRows = stmt.all(limit, offset) as Array<Document>;
 
   const rows: Document[] = rawRows.map((row) => ({
     ...row,
     date: row.date,
     tags: typeof row.tags === "string" ? JSON.parse(row.tags) : row.tags,
-    type: documentType,
+    type,
   }));
 
   return rows;

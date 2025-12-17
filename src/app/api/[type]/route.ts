@@ -1,21 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
-import { addDocument, getDocuments } from "@/lib/documentQueries";
+import { addDocument, getDocumentsPage } from "@/lib/documentQueries";
 import { DocumentType } from "@/types/Document.type";
 import { Document } from "@/types/Document.type";
 import { DocumentCollectionParams } from "@/types/api/Api.type";
 import { DOCUMENTS_PER_LOAD } from "@/utils/constants";
 
 export async function GET(request: NextRequest, { params }: DocumentCollectionParams) {
+  const { searchParams } = new URL(request.url);
   const { type } = await params;
 
-  const { searchParams } = new URL(request.url);
-  const offset = Number(searchParams.get("offset") || 0);
-  const limit = Number(searchParams.get("limit") || DOCUMENTS_PER_LOAD);
+  const offset = Number(searchParams.get("offset") ?? 0);
+  const limit = Number(searchParams.get("limit") ?? DOCUMENTS_PER_LOAD);
 
-  const documents = getDocuments(type as DocumentType);
-  const paginated = documents.slice(offset, offset + limit);
+  const documents = getDocumentsPage(type as DocumentType, offset, limit);
 
-  return NextResponse.json(paginated, { status: 200 });
+  return NextResponse.json(documents);
 }
 
 export async function POST(request: NextRequest) {
