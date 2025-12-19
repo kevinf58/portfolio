@@ -12,7 +12,6 @@ import ImageUpload from "./ImageUpload";
 import uploadHandler from "@/utils/uploadHandler";
 import { CgSpinner } from "react-icons/cg";
 import { useState } from "react";
-
 import { DocumentFormProvider, useDocumentFormContext } from "./DocumentLayoutContext";
 import DocumentPreview from "./DocumentPreview";
 import TitleInput from "./TitleInput.";
@@ -35,9 +34,10 @@ function DocumentLayoutInner() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          title,
           markdown,
+          title,
           tags,
+          date,
           type: documentType,
           ...(imagePreviewLink ? { imagePreviewLink } : {}),
           ...(category ? { category } : {}),
@@ -56,6 +56,7 @@ function DocumentLayoutInner() {
       }
 
       toast.success("Entry added!");
+      window.location.reload();
       router.push("/");
     } catch (err) {
       console.error(err);
@@ -70,7 +71,7 @@ function DocumentLayoutInner() {
       <div className="h-full w-full flex flex-wrap justify-center space-x-10 p-8 pt-28">
         <Card
           href=""
-          className="flex flex-col border-2 !max-w-[36rem] w-full !max-h-[38rem] h-full !px-4 !py-4 hover:!scale-100 !cursor-default"
+          className="flex flex-col border-2 max-w-xl! w-full max-h-152! h-full px-4! py-4! hover:scale-100! cursor-default!"
         >
           <div className="flex items-center gap-2">
             <FaRegEdit size={25} className="text-dark-white mr-2" />
@@ -87,7 +88,7 @@ function DocumentLayoutInner() {
               <TitleInput />
               <input
                 type="date"
-                className={`w-min h-min outline-none py-2 px-2 !text-xs text-dark-white ease-in cursor-pointer input-base`}
+                className={`w-min h-min outline-none py-2 px-2 text-xs! text-dark-white ease-in cursor-pointer input-base`}
                 value={date}
                 onChange={(e) => documentForm.setDate(e.target.value)}
               />
@@ -102,7 +103,7 @@ function DocumentLayoutInner() {
         <DocumentPreview />
       </div>
       <Button
-        className="!fixed bottom-5 right-10 min-w=[8rem] flex items-center justify-center"
+        className="fixed! bottom-5 right-10 min-w=[8rem] flex items-center justify-center"
         variant="hollow"
         onClick={!loading ? handleCreate : undefined}
       >

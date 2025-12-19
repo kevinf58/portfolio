@@ -6,7 +6,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import summarizeMarkdown from "@/utils/summarizeMarkdown";
 import readingTime from "reading-time";
 
-const ProjectCard = (props: Journal | Project) => {
+const DocumentCard = (props: Journal | Project) => {
   const titleElement = <h1 className="text-2xl font-bold my-4">{props.title}</h1>;
 
   const conditionalElement =
@@ -63,4 +63,4 @@ const ProjectCard = (props: Journal | Project) => {
   );
 };
 
-export default ProjectCard;
+export default DocumentCard;

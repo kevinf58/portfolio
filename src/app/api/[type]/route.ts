@@ -1,14 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { addDocument, getDocuments } from "@/lib/documentQueries";
+import { addDocument, getDocumentsPage } from "@/lib/documentQueries";
 import { DocumentType } from "@/types/Document.type";
 import { Document } from "@/types/Document.type";
-import { getLocalDate } from "@/utils/dateUtils";
 import { DocumentCollectionParams } from "@/types/api/Api.type";
+import { DOCUMENTS_PER_LOAD } from "@/utils/constants";
 
 export async function GET(request: NextRequest, { params }: DocumentCollectionParams) {
+  const { searchParams } = new URL(request.url);
   const { type } = await params;
-  const journals = getDocuments(type as DocumentType);
-  return NextResponse.json(journals, { status: 200 });
+
+  const offset = Number(searchParams.get("offset") ?? 0);
+  const limit = Number(searchParams.get("limit") ?? DOCUMENTS_PER_LOAD);
+
+  const { documents, hasMore } = getDocumentsPage(type as DocumentType, offset, limit);
+  return NextResponse.json({ documents, hasMore });
 }
 
 export async function POST(request: NextRequest) {
@@ -40,7 +45,7 @@ export async function POST(request: NextRequest) {
       markdown: document.markdown,
       tags: Array.isArray(document.tags) ? document.tags : [],
       type: document.type,
-      date: getLocalDate(),
+      date: document.date,
       ...(document.type === "project" && document.imagePreviewLink
         ? { imagePreviewLink: document.imagePreviewLink }
         : {}),
@@ -50,9 +55,18 @@ export async function POST(request: NextRequest) {
     const created = await addDocument(newDocument);
 
     return NextResponse.json(created, { status: 201 });
-  } catch (err) {
+  } catch (err: unknown) {
     console.error(err);
 
-    return NextResponse.json({ error: "Failed to add document" }, { status: 500 });
+    if (err instanceof Error) {
+      if (
+        ("code" in err && err.code === "SQLITE_CONSTRAINT_UNIQUE") ||
+        err.message.includes("UNIQUE constraint failed")
+      ) {
+        return NextResponse.json({ error: "A document with this title already exists." }, { status: 409 });
+      }
+    }
+
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
