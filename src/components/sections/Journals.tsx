@@ -11,7 +11,7 @@ const MemoizedDocumentCard = React.memo(DocumentCard);
 
 const Journals = () => {
   const {
-    items: journals,
+    documents: journals,
     loadMore,
     hasMore,
     loading,

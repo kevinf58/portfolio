@@ -12,9 +12,8 @@ export async function GET(request: NextRequest, { params }: DocumentCollectionPa
   const offset = Number(searchParams.get("offset") ?? 0);
   const limit = Number(searchParams.get("limit") ?? DOCUMENTS_PER_LOAD);
 
-  const documents = getDocumentsPage(type as DocumentType, offset, limit);
-
-  return NextResponse.json(documents);
+  const { documents, hasMore } = getDocumentsPage(type as DocumentType, offset, limit);
+  return NextResponse.json({ documents, hasMore });
 }
 
 export async function POST(request: NextRequest) {

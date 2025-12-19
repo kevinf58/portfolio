@@ -11,7 +11,7 @@ const MemoizedDocumentCard = React.memo(DocumentCard);
 
 const Projects = () => {
   const {
-    items: projects,
+    documents: projects,
     loadMore,
     hasMore,
     loading,
