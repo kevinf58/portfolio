@@ -33,3 +33,22 @@ export type DocumentActions =
   | { type: "RESET"; payload?: Partial<Document> };
 
 export type Categories = "DAILY" | "LEARNING" | "DEVELOPMENT" | "RECRUITING" | "TRADING";
+
+export type DocumentFormContextValue = {
+  state: Document;
+  markdown: string;
+  title: string;
+  tags: string[];
+  date: string;
+  documentType: Document["type"];
+  switchDocTypeLabel: "journal" | "project";
+  category?: Categories;
+
+  setMarkdown: (markdown: string) => void;
+  setTitle: (title: string) => void;
+  setDate: (date: string) => void;
+  toggleDocumentType: () => void;
+  setTags: React.Dispatch<React.SetStateAction<string[]>>;
+  setCategory: (category: Categories) => void;
+  fileInputRef: React.RefObject<HTMLInputElement | null>;
+};

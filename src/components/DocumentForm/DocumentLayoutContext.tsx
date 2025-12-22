@@ -2,7 +2,7 @@
 
 import React, { createContext, useCallback, useContext, useMemo, useReducer, useRef, ReactNode } from "react";
 import { getLocalDate } from "@/utils/dateUtils";
-import type { Categories, Document } from "@/types/Document.type";
+import type { Categories, Document, DocumentFormContextValue } from "@/types/Document.type";
 import { DocumentActions } from "@/types/Document.type";
 
 function reducer(state: Document, action: DocumentActions): Document {
@@ -30,25 +30,6 @@ const initialState: Document = {
   tags: [],
   date: getLocalDate(),
   type: "journal",
-};
-
-type DocumentFormContextValue = {
-  state: Document;
-  markdown: string;
-  title: string;
-  tags: string[];
-  date: string;
-  documentType: Document["type"];
-  switchDocTypeLabel: "journal" | "project";
-  category?: Categories;
-
-  setMarkdown: (markdown: string) => void;
-  setTitle: (title: string) => void;
-  setDate: (date: string) => void;
-  toggleDocumentType: () => void;
-  setTags: React.Dispatch<React.SetStateAction<string[]>>;
-  setCategory: (category: Categories) => void;
-  fileInputRef: React.RefObject<HTMLInputElement | null>;
 };
 
 const DocumentFormContext = createContext<DocumentFormContextValue | null>(null);

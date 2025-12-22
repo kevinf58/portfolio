@@ -9,45 +9,28 @@ import { FaRegEdit } from "react-icons/fa";
 import TagInput from "@/components/DocumentForm/TagInput";
 import { TbSwitchHorizontal } from "react-icons/tb";
 import ImageUpload from "./ImageUpload";
-import uploadHandler from "@/utils/uploadHandler";
 import { CgSpinner } from "react-icons/cg";
 import { useState } from "react";
 import { DocumentFormProvider, useDocumentFormContext } from "./DocumentLayoutContext";
 import DocumentPreview from "./DocumentPreview";
 import TitleInput from "./TitleInput.";
 import JournalCategorySelect from "./JournalCategorySelect";
+import createDocument from "@/services/createDocument.service";
 
 function DocumentLayoutInner() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const documentForm = useDocumentFormContext();
-  const { markdown, title, tags, date, documentType, category } = documentForm;
+  const { date, setDate, toggleDocumentType, switchDocTypeLabel, documentType } = documentForm;
 
   const handleCreate = async () => {
     setLoading(true);
     try {
-      const file = documentForm.fileInputRef.current?.files?.[0];
-      const imagePreviewLink = file ? await uploadHandler(file) : undefined;
+      const data = await createDocument(documentForm);
 
-      const res = await fetch(`/api/${documentType}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          markdown,
-          title,
-          tags,
-          date,
-          type: documentType,
-          ...(imagePreviewLink ? { imagePreviewLink } : {}),
-          ...(category ? { category } : {}),
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        if (res.status === 409) {
+      if (!data.ok) {
+        if (data.status === 409) {
           toast.warn(`A ${documentType} with this title already exists. Please rename it!`);
           return;
         }
@@ -56,7 +39,6 @@ function DocumentLayoutInner() {
       }
 
       toast.success("Entry added!");
-      window.location.reload();
       router.push("/");
     } catch (err) {
       console.error(err);
@@ -64,6 +46,12 @@ function DocumentLayoutInner() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => setDate(e.target.value);
+
+  const handleButtonClick = () => {
+    if (!loading) handleCreate();
   };
 
   return (
@@ -78,9 +66,9 @@ function DocumentLayoutInner() {
             <h3 className="font-sans font-bold text-xl text-white">New {documentType}</h3>
             <TbSwitchHorizontal
               size={20}
-              title={`Click to Swap to a ${documentForm.switchDocTypeLabel}!`}
+              title={`Click to Swap to a ${switchDocTypeLabel}!`}
               className="cursor-pointer"
-              onClick={documentForm.toggleDocumentType}
+              onClick={toggleDocumentType}
             />
           </div>
           <div className="h-full min-h-0 flex flex-col mx-10 my-6 gap-4">
@@ -90,7 +78,7 @@ function DocumentLayoutInner() {
                 type="date"
                 className={`w-min h-min outline-none py-2 px-2 text-xs! text-dark-white ease-in cursor-pointer input-base`}
                 value={date}
-                onChange={(e) => documentForm.setDate(e.target.value)}
+                onChange={handleDateChange}
               />
             </div>
             {documentType === "project" ? <ImageUpload /> : <JournalCategorySelect />}
@@ -103,9 +91,10 @@ function DocumentLayoutInner() {
         <DocumentPreview />
       </div>
       <Button
-        className="fixed! bottom-5 right-10 min-w=[8rem] flex items-center justify-center"
+        className="fixed! bottom-5 right-10 min-w-32 flex items-center justify-center"
         variant="hollow"
-        onClick={!loading ? handleCreate : undefined}
+        onClick={handleButtonClick}
+        disabled={loading}
       >
         {loading ? <CgSpinner className="size-5 animate-spin text-white" /> : `Create ${documentType}`}
       </Button>

@@ -1,5 +1,3 @@
-"use server";
-
 import { DocumentType, Journal, Project } from "@/types/Document.type";
 import ReadOnlyCrepe from "@/components/DocumentForm/ReadOnlyCrepe";
 import DeleteButton from "@/components/DeleteButton";
@@ -25,13 +23,13 @@ const Page = async ({ params }: DocumentIdentifierParams) => {
 
   return (
     <section className="relative flex justify-center min-h-[calc(100vh-4.75rem)] w-full bg-dark-gray shadow-default py-20 md:px-10 sm:px-6 px-2">
-      <div className="min-h-full max-w-[65rem] w-full lg:px-34 sm:px-20 px-8 gap-1">
+      <div className="min-h-full max-w-260 w-full lg:px-34 sm:px-20 px-8 gap-1">
         <div className="flex items-center text-sm text-white/50 mb-10">
           Home <MdKeyboardArrowRight size={18} /> {type.charAt(0).toUpperCase() + type.slice(1)}
           <MdKeyboardArrowRight size={18} /> {document.title}
         </div>
         <div className="space-y-6">
-          <h1 className="text-[48px] leading-[50px] font-semibold">{document.title}</h1>
+          <h1 className="text-[48px] leading-12.5 font-semibold">{document.title}</h1>
           <div className="flex gap-x-1 text-white/50">
             <MdDateRange />
             <p className="text-xs font-light">{dateToReadable(document.date)}</p>
