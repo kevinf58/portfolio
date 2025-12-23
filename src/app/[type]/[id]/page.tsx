@@ -1,4 +1,4 @@
-import { DocumentType, Journal, Project } from "@/types/Document.type";
+import { DocumentType, JournalDocument, ProjectDocument } from "@/types/Document.type";
 import ReadOnlyCrepe from "@/components/DocumentForm/ReadOnlyCrepe";
 import DeleteButton from "@/components/DeleteButton";
 import { notFound } from "next/navigation";
@@ -19,7 +19,7 @@ const Page = async ({ params }: DocumentIdentifierParams) => {
     notFound();
   }
 
-  const document: Journal | Project = await res.json();
+  const document: JournalDocument | ProjectDocument = await res.json();
 
   return (
     <section className="relative flex justify-center min-h-[calc(100vh-4.75rem)] w-full bg-dark-gray shadow-default py-20 md:px-10 sm:px-6 px-2">

@@ -4,13 +4,13 @@ import { Button } from "@/components/common/Button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { DeleteButtonProps } from "@/types/components/ButtonProps";
+import { Journal, Project } from "@/types/Document.type";
+import deleteDocument from "@/services/deleteDocument.service";
 
-const DeleteButton = (props: DeleteButtonProps) => {
+const DeleteButton = (props: Journal | Project) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const router = useRouter();
-  const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
   const handleDelete = async () => {
     if (!confirm("Are you sure you want to delete this journal? This action cannot be undone.")) {
@@ -18,28 +18,25 @@ const DeleteButton = (props: DeleteButtonProps) => {
     }
 
     setIsDeleting(true);
-    try {
-      const res = await fetch(`${apiURL}/${props.type}/${props.id}`, {
-        method: "DELETE",
-      });
 
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || "Failed to delete journal");
-      }
+    const document: Journal | Project = {
+      type: props.type,
+      id: props.id,
+    };
+    const result = await deleteDocument(document);
 
-      toast.success("Journal deleted successfully!");
-      router.push("/");
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to delete journal.");
-    } finally {
+    if (!result.ok) {
+      toast.error(result.error ?? "Failed to delete journal.");
       setIsDeleting(false);
+      return;
     }
+
+    toast.success("Journal deleted successfully!");
+    router.push("/");
   };
 
   return (
-    <Button className="!fixed bottom-5 right-10" variant="hollow" onClick={handleDelete} disabled={isDeleting}>
+    <Button className="fixed! bottom-5 right-10" variant="hollow" onClick={handleDelete} disabled={isDeleting}>
       {isDeleting ? "Deleting..." : "Delete"}
     </Button>
   );

@@ -9,6 +9,6 @@ export type DocumentCollectionParams = {
 export type ApiResponse<T> = {
   ok: boolean;
   status: number;
-  data: T;
+  data?: T;
   error?: string;
 };

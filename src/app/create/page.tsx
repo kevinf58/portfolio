@@ -1,7 +1,12 @@
-import DocumentLayout from "@/components/DocumentForm/DocumentLayout";
+import { DocumentLayout } from "@/components/DocumentForm/DocumentLayout";
+import { DocumentFormProvider } from "@/components/DocumentForm/DocumentLayoutContext";
 
 const Page = () => {
-  return <DocumentLayout />;
+  return (
+    <DocumentFormProvider>
+      <DocumentLayout />
+    </DocumentFormProvider>
+  );
 };
 
 export default Page;

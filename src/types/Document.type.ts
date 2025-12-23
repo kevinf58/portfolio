@@ -10,12 +10,22 @@ export type Document = {
   category?: Categories;
 };
 
-export type Journal = Document & {
+export type Journal = {
   type: "journal";
   id: number;
 };
 
-export type Project = Document & {
+export type Project = {
+  type: "project";
+  id: number;
+};
+
+export type JournalDocument = Document & {
+  type: "journal";
+  id: number;
+};
+
+export type ProjectDocument = Document & {
   type: "project";
   id: number;
 };

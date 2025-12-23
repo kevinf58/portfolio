@@ -11,13 +11,13 @@ import { TbSwitchHorizontal } from "react-icons/tb";
 import ImageUpload from "./ImageUpload";
 import { CgSpinner } from "react-icons/cg";
 import { useState } from "react";
-import { DocumentFormProvider, useDocumentFormContext } from "./DocumentLayoutContext";
+import { useDocumentFormContext } from "./DocumentLayoutContext";
 import DocumentPreview from "./DocumentPreview";
 import TitleInput from "./TitleInput.";
 import JournalCategorySelect from "./JournalCategorySelect";
 import createDocument from "@/services/createDocument.service";
 
-function DocumentLayoutInner() {
+export const DocumentLayout = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -100,12 +100,4 @@ function DocumentLayoutInner() {
       </Button>
     </section>
   );
-}
-
-export default function DocumentLayout() {
-  return (
-    <DocumentFormProvider>
-      <DocumentLayoutInner />
-    </DocumentFormProvider>
-  );
-}
+};
