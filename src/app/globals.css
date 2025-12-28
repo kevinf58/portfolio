@@ -23,7 +23,7 @@
   border-radius: 50%;
   transform: scale(0);
   animation: ripple 600ms linear;
-  background-color: #4d9de0b3;
+  background-color: #b8878760;
   pointer-events: none;
   z-index: 0;
 }

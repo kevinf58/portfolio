@@ -1,6 +1,4 @@
-"use client";
-
-import Link from "@/components/common/Link";
+import Link from "@/components/ui/Link";
 
 const NotFound = () => {
   return (
