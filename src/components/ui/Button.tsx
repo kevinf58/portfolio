@@ -46,7 +46,7 @@ const Button = ({ variant = "primary", size = "md", ...props }: ButtonProps) => 
         variant === "secondary" ? "bg-transparent lg:hover:bg-primary/15" : "bg-primary"
       }`}
     >
-      <div className={`flex items-center gap-2 font-sans text-white ${buttonSizeStyles}`}>
+      <div className={`flex items-center gap-2 font-sans text-white whitespace-nowrap ${buttonSizeStyles}`}>
         {props.loading ? <CgSpinner className="animate-spin text-white" style={{ fontSize: "inherit" }} /> : props.children}
       </div>
     </button>

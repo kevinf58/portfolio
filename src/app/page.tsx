@@ -4,7 +4,7 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { IoMailSharp } from "react-icons/io5";
 import { SiTypescript, SiReact, SiPython, SiTailwindcss, SiNextdotjs } from "react-icons/si";
 import Journals from "./Journals";
-import Projects from "./Projects";
+import Documents from "./Documents";
 import Card from "@/components/ui/Card";
 import CallToAction from "./CallToAction";
 
@@ -68,8 +68,8 @@ export default function Home() {
         </div>
       </section>
       <section className="w-full flex flex-col items-center pt-32 bg-black shadow-default" id="scroll">
-        <Projects />
-        <Journals />
+        <Documents type="project" />
+        <Documents type="journal" />
         <CallToAction />
       </section>
       {/* <section className='h-screen w-full bg-green-300' /> */}

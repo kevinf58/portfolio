@@ -29,7 +29,7 @@ const DocumentCard = (props: Document) => {
     );
 
   return (
-    <a href={`/${props.type}/${props.id}`}>
+    <a href={`/${props.type}/${props.id}`} className="w-full">
       <div className="flex hover:bg-gray transition-colors duration-200 px-10 py-8 cursor-pointer group gap-4">
         {props.type === "project" && props.imagePreview && (
           <div className="relative w-60 h-38 shrink-0 overflow-hidden rounded-sm">
@@ -54,7 +54,7 @@ const DocumentCard = (props: Document) => {
             ))}
             <div className="flex items-center ml-auto">
               <span className="text-sm flex items-center space-x-2">
-                <span>View Project</span>
+                <span>{props.type === DOCUMENT_TYPE.JOURNAL ? "View Journal" : "View Project"}</span>
                 <FaArrowRight className="group-hover:translate-x-1 transition-transform duration-200" />
               </span>
             </div>
