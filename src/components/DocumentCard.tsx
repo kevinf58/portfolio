@@ -4,6 +4,7 @@ import readingTime from "reading-time";
 import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 import summarizeContent from "@/utils/summarizeContent";
+import Tag from "./ui/Tag";
 
 const DocumentCard = (props: Document) => {
   const titleElem = <h1 className="text-2xl font-bold my-4">{props.title}</h1>;
@@ -12,7 +13,7 @@ const DocumentCard = (props: Document) => {
   const conditionalElem =
     props.type === DOCUMENT_TYPE.JOURNAL ? (
       <div className="flex items-center gap-2">
-        <div>{props.category}</div>
+        <Tag type="category">{props.category}</Tag>
         <h6 className="text-xs text-dark-white">{dateToReadable(props.createdAt)}</h6>
         {props.createdAt !== props.updatedAt && (
           <h6 className="text-xs text-dark-white italic">{"(Edited " + dateToReadable(props.createdAt) + ")"}</h6>
@@ -50,7 +51,9 @@ const DocumentCard = (props: Document) => {
           <p className="text-sm font-light mb-3">{summarizeContent(props.content)}</p>
           <div className="flex space-x-2">
             {props.tags.map((tag) => (
-              <div key={tag}>{tag}</div>
+              <Tag type="tag" key={tag}>
+                {tag}
+              </Tag>
             ))}
             <div className="flex items-center ml-auto">
               <span className="text-sm flex items-center space-x-2">

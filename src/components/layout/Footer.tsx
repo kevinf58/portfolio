@@ -41,7 +41,7 @@ const Footer = () => {
         <div className="w-full relative flex md:flex-row md:justify-between md:gap-0 md:mb-8 sm:scale-100 flex-col items-center justify-center gap-4 scale-70">
           <div className="flex items-center gap-2">
             <a
-              className="flex items-center justify-center w-7 h-7 border-1 border-light-gray rounded-full"
+              className="flex items-center justify-center w-7 h-7 border border-light-gray rounded-full"
               href="https://www.linkedin.com/in/kfengg/"
               title={`${"https://www.linkedin.com/in/kfengg/"}`}
               target="_blank"
@@ -49,7 +49,7 @@ const Footer = () => {
               <FaLinkedin />
             </a>
             <a
-              className="flex items-center justify-center w-7 h-7 border-1 border-light-gray rounded-full"
+              className="flex items-center justify-center w-7 h-7 border border-light-gray rounded-full"
               href="https://github.com/kevinf58"
               title={`${"https://github.com/kevinf58"}`}
               target="_blank"
@@ -58,7 +58,7 @@ const Footer = () => {
             </a>
             <>
               <a
-                className="flex items-center justify-center w-7 h-7 border-1 border-light-gray rounded-full lg:hover:cursor-pointer"
+                className="flex items-center justify-center w-7 h-7 border border-light-gray rounded-full lg:hover:cursor-pointer"
                 href="mailto:kfeng58@uwo.ca"
                 title={`${"kfeng58@uwo.ca"}`}
                 target="_blank"

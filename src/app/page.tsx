@@ -3,7 +3,6 @@ import { PiMapPinSimpleFill } from "react-icons/pi";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { IoMailSharp } from "react-icons/io5";
 import { SiTypescript, SiReact, SiPython, SiTailwindcss, SiNextdotjs } from "react-icons/si";
-import Journals from "./Journals";
 import Documents from "./Documents";
 import Card from "@/components/ui/Card";
 import CallToAction from "./CallToAction";

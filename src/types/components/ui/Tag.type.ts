@@ -1,6 +1,6 @@
-import { BaseProps } from "./Base.type";
+import { BaseProps, ClickableProps } from "./Base.type";
+import { JournalCategory } from "@/types/Journal.type";
 
-export interface TagProps extends BaseProps {
-  label: string;
-  onClick?: () => void;
-}
+export type TagProps =
+  | (BaseProps & ClickableProps & { type: "category"; children: JournalCategory })
+  | (BaseProps & ClickableProps & { type: "tag"; children: string });
