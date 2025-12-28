@@ -111,8 +111,14 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         LIMIT ? OFFSET ?
       `);
     }
-    const rows = stmt.all(limit, offset) as Array<Document>;
-    const data: Document[] = rows.map((row) => ({
+    const res = stmt.all(limit, offset) as Array<Document>;
+
+    // check for if stmt returned >= 1 row
+    if (!res) {
+      return NextResponse.json({ success: false, info: { code: 404, message: "No documents exist" } });
+    }
+
+    const data: Document[] = res.map((row) => ({
       ...row,
       tags: row.tags ? (row.tags as unknown as string).split(",") : [],
     }));
@@ -126,7 +132,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         total,
         hasMore: offset + limit < total,
       },
-      info: { code: 200, message: data.length === 0 ? `No ${data}s exist!` : "Documents fetched successfully" },
+      info: { code: 200, message: "Documents fetched successfully" },
     });
   } catch (err) {
     console.log(err);
