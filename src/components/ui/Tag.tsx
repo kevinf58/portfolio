@@ -17,7 +17,7 @@ const Tag = ({ children, type, className = "", ...props }: TagProps) => {
   if (type === "category") {
     colorClasses = categoryColorMap[children as JournalCategory];
   } else if (type === "tag") {
-    colorClasses = hasBg ? "" : "text-dark-white bg-white/15";
+    colorClasses = hasBg ? "" : "text-dark-white bg-white/15 hover:bg-white/25";
   }
 
   return (

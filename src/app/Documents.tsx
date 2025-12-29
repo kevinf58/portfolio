@@ -7,6 +7,7 @@ import { DOCUMENT_TYPE } from "@/types/Document.type";
 import { DOCUMENTS_LOADED_LIMIT } from "@/utils/constants";
 import { useState, useEffect, useCallback } from "react";
 import { Document } from "@/types/Document.type";
+import { toast } from "react-toastify";
 
 const Documents = ({ type }: { type: (typeof DOCUMENT_TYPE)[keyof typeof DOCUMENT_TYPE] }) => {
   const [documents, setDocuments] = useState<Array<Document>>([]);
@@ -23,11 +24,11 @@ const Documents = ({ type }: { type: (typeof DOCUMENT_TYPE)[keyof typeof DOCUMEN
       const res = await getDocuments({ type, limit: DOCUMENTS_LOADED_LIMIT, offset });
 
       if (!res.success) {
+        toast.error(res.info.message);
         throw new Error(res.info.code + " " + res.info.message);
       }
 
       setDocuments((prev) => [...prev, ...res.data]);
-      console.log(res.meta);
 
       if (res.meta && res.meta.total <= res.meta.offset + DOCUMENTS_LOADED_LIMIT) {
         setHasMore(false);
@@ -36,6 +37,7 @@ const Documents = ({ type }: { type: (typeof DOCUMENT_TYPE)[keyof typeof DOCUMEN
       setOffset((prev) => prev + DOCUMENTS_LOADED_LIMIT);
     } catch (err) {
       console.error(err);
+      toast.error("An unexpected error occurred. Please try again");
     } finally {
       setLoading(false);
     }
@@ -54,7 +56,7 @@ const Documents = ({ type }: { type: (typeof DOCUMENT_TYPE)[keyof typeof DOCUMEN
       ) : (
         <div className="flex flex-col items-center w-full max-w-6xl mx-auto">
           {documents.map((project) => (
-            <DocumentCard {...project} key={project.id} />
+            <DocumentCard {...project} key={`${type}-${project.id}`} />
           ))}
 
           {hasMore && (

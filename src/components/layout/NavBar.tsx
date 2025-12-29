@@ -22,7 +22,7 @@ const NavBar = () => {
           isScrolled && "shadow-default"
         }`}
       >
-        <Link className="flex items-center gap-2 text-lg text-tint" href={"/"} static>
+        <Link className="flex items-center gap-2 text-lg text-tint hover:text-tint/75 transition-colors duration-200" href={"/"} static>
           <FaCode />
           <h1>KF</h1>
         </Link>

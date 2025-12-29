@@ -89,28 +89,17 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ success: false, info: { code: 400, message: "Invalid document type" } });
     }
 
-    let stmt = null;
-    if (type === DOCUMENT_TYPE.JOURNAL) {
-      stmt = db.prepare(`
-        SELECT j.id, j.title, j.createdat AS createdAt, j.updatedat AS updatedAt, j.content, j.category, 'journal' AS type,
+    const stmt = db.prepare(`
+        SELECT d.id, d.title, d.createdat AS createdAt, d.updatedat AS updatedAt, d.content, ${
+          type === "journal" ? "d.category" : "NULL AS category"
+        }, '${type}' AS type, ${type === "project" ? "d.imagePreview" : "NULL AS imagePreview"}, '${type}' AS type,
         GROUP_CONCAT(t.tag) AS tags
-        FROM journal j
-        LEFT JOIN journal_tag t ON j.id = t.journal_id
-        GROUP BY j.id
-        ORDER BY j.createdat DESC
+        FROM ${type} d
+        LEFT JOIN ${type}_tag t ON d.id = t.${type}_id
+        GROUP BY d.id
+        ORDER BY d.createdat DESC
         LIMIT ? OFFSET ?
       `);
-    } else {
-      stmt = db.prepare(`
-        SELECT p.id, p.title, p.createdat AS createdAt, p.updatedat AS updatedAt, p.content, p.imagePreview, 'project' AS type,
-        GROUP_CONCAT(t.tag) AS tags
-        FROM project p
-        LEFT JOIN project_tag t ON p.id = t.project_id
-        GROUP BY p.id
-        ORDER BY p.createdat DESC
-        LIMIT ? OFFSET ?
-      `);
-    }
     const res = stmt.all(limit, offset) as Array<Document>;
 
     // check for if stmt returned >= 1 row
