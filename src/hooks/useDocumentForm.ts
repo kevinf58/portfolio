@@ -2,7 +2,7 @@ import { CreateDocumentPayload, DOCUMENT_TYPE, DocumentType } from "@/types/Docu
 import { DocumentFormActions, DocumentFormContextValue } from "@/types/DocumentForm.type";
 import { JournalCategory } from "@/types/Journal.type";
 import { getLocalDate } from "@/utils/dateUtils";
-import { createContext, useCallback, useContext, useMemo, useReducer } from "react";
+import { createContext, useCallback, useContext, useMemo, useReducer, useRef } from "react";
 
 const initialState = (type: DocumentType): CreateDocumentPayload =>
   type === DOCUMENT_TYPE.JOURNAL
@@ -66,14 +66,6 @@ const documentFormReducer = (state: CreateDocumentPayload, action: DocumentFormA
         ...state,
         category: action.payload,
       };
-    case "SET_IMAGE_PREVIEW":
-      if (state.type !== DOCUMENT_TYPE.PROJECT) {
-        return state;
-      }
-      return {
-        ...state,
-        imagePreview: action.payload,
-      };
     case "SET_TAGS":
       return {
         ...state,
@@ -99,11 +91,12 @@ export const useDocumentForm = (initialType: DocumentType) => {
   const toggleDocumentType = useCallback(() => dispatch({ type: "TOGGLE_DOCUMENT_TYPE" }), []);
   const setTitle = useCallback((title: string) => dispatch({ type: "SET_TITLE", payload: title }), []);
   const setDate = useCallback((date: string) => dispatch({ type: "SET_DATE", payload: date }), []);
-  const setCategory = useCallback((category: JournalCategory) => dispatch({ type: "SET_CATEGORY", payload: category }), []);
-  const setImagePreview = useCallback((imagePreview: string) => dispatch({ type: "SET_IMAGE_PREVIEW", payload: imagePreview }), []);
   const setTags = useCallback((tags: string[]) => dispatch({ type: "SET_TAGS", payload: tags }), []);
   const setContent = useCallback((content: string) => dispatch({ type: "SET_CONTENT", payload: content }), []);
   const resetFields = useCallback((type: DocumentType) => dispatch({ type: "RESET", payload: type }), []);
+
+  const setCategory = useCallback((category: JournalCategory) => dispatch({ type: "SET_CATEGORY", payload: category }), []);
+  const imageInputPreviewRef = useRef<HTMLInputElement>(null);
 
   const contextValue: DocumentFormContextValue = useMemo(() => {
     if (state.type === DOCUMENT_TYPE.JOURNAL) {
@@ -118,10 +111,11 @@ export const useDocumentForm = (initialType: DocumentType) => {
         toggleDocumentType,
         setTitle,
         setDate,
-        setCategory,
         setTags,
         setContent,
         resetFields,
+
+        setCategory,
       };
     } else {
       return {
@@ -135,13 +129,14 @@ export const useDocumentForm = (initialType: DocumentType) => {
         toggleDocumentType,
         setTitle,
         setDate,
-        setImagePreview,
         setTags,
         setContent,
         resetFields,
+
+        imageInputPreviewRef,
       };
     }
-  }, [state, toggleDocumentType, setTitle, setDate, setCategory, setImagePreview, setTags, setContent, resetFields]);
+  }, [state, toggleDocumentType, setTitle, setDate, setCategory, setTags, setContent, resetFields]);
 
   return contextValue;
 };
