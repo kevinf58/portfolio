@@ -13,7 +13,7 @@ const CategoryInput = () => {
   const { category, setCategory } = context;
 
   return (
-    <div className={`flex items-center gap-2 flex-wrap py-2 text-xs`}>
+    <div className={`flex items-center gap-2 flex-wrap text-xs`}>
       <span>Category</span>
       <Tag
         type="category"

@@ -4,6 +4,7 @@ import { JournalCategory } from "@/types/Journal.type";
 import { getLocalDate } from "@/utils/dateUtils";
 import { createContext, useCallback, useContext, useMemo, useReducer, useRef } from "react";
 
+//TODO: UPDATE THIS CONTEXT LATER ACCOMODATE AN EDITING FUNCTIONALITY AND ALLOW PROPS TO BE PASSED INSTEAD OF AN EMPTY INITIALSTATE
 const initialState = (type: DocumentType): CreateDocumentPayload =>
   type === DOCUMENT_TYPE.JOURNAL
     ? {
@@ -143,6 +144,6 @@ export const useDocumentForm = (initialType: DocumentType) => {
 
 export const useDocumentFormContext = () => {
   const context = useContext(DocumentFormContext);
-  if (!context) throw new Error("useDocumentFormContext must be used within a DocumentFormProvider");
+  if (!context) throw new Error("useDocumentFormContext is out of scope and must be used within a DocumentFormProvider");
   return context;
 };

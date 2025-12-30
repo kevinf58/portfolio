@@ -25,9 +25,13 @@ const Tag = ({ children, type, className = "", ...props }: TagProps) => {
   return (
     <div
       onClick={props.onClick}
-      className={`w-min h-min px-4 py-1.25 rounded-full text-xs cursor-pointer select-none transition-colors duration-200 whitespace-nowrap ${colorClasses}`}
+      className={`w-min h-min px-4 py-1.25 rounded-full text-xs cursor-pointer select-none transition-colors duration-200 whitespace-nowrap ${colorClasses} ${className}`}
     >
-      {type === "category" ? children.toUpperCase() : children.charAt(0).toUpperCase() + children.slice(1)}
+      {type === "category"
+        ? children.toUpperCase()
+        : typeof children === "string"
+        ? children.charAt(0).toUpperCase() + children.slice(1)
+        : children}
     </div>
   );
 };

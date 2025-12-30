@@ -8,5 +8,6 @@ export const DOCUMENT_CONTENT_MIN_LENGTH = 200;
 // Limit to the number of documents that can be loaded at a time
 export const DOCUMENTS_LOADED_LIMIT = 1;
 
-// limit to the number of tags that can be added to a document
+// limit to the number of tags and length of each tag that can be added to a document
 export const DOCUMENT_TAG_LIMIT = 3;
+export const DOCUMENT_TAG_MAX_LENGTH = 16;
