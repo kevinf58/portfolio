@@ -30,22 +30,22 @@ const documentFormReducer = (state: CreateDocumentPayload, action: DocumentFormA
     case "TOGGLE_DOCUMENT_TYPE":
       return state.type === DOCUMENT_TYPE.JOURNAL
         ? {
-            type: DOCUMENT_TYPE.JOURNAL,
-            title: state.title,
-            createdAt: state.createdAt,
-            updatedAt: state.updatedAt,
-            content: state.content,
-            tags: state.tags,
-            category: state.category,
-          }
-        : {
             type: DOCUMENT_TYPE.PROJECT,
             title: state.title,
             createdAt: state.createdAt,
             updatedAt: state.updatedAt,
             content: state.content,
             tags: state.tags,
-            imagePreview: state.imagePreview,
+            imagePreview: "",
+          }
+        : {
+            type: DOCUMENT_TYPE.JOURNAL,
+            title: state.title,
+            createdAt: state.createdAt,
+            updatedAt: state.updatedAt,
+            content: state.content,
+            tags: state.tags,
+            category: "daily",
           };
     case "SET_TITLE":
       return {
@@ -105,20 +105,43 @@ export const useDocumentForm = (initialType: DocumentType) => {
   const setContent = useCallback((content: string) => dispatch({ type: "SET_CONTENT", payload: content }), []);
   const resetFields = useCallback((type: DocumentType) => dispatch({ type: "RESET", payload: type }), []);
 
-  const contextValue = useMemo(
-    () => ({
-      state,
-      toggleDocumentType,
-      setTitle,
-      setDate,
-      setCategory,
-      setImagePreview,
-      setTags,
-      setContent,
-      resetFields,
-    }),
-    [state, toggleDocumentType, setTitle, setDate, setCategory, setImagePreview, setTags, setContent, resetFields]
-  );
+  const contextValue: DocumentFormContextValue = useMemo(() => {
+    if (state.type === DOCUMENT_TYPE.JOURNAL) {
+      return {
+        type: state.type,
+        title: state.title,
+        date: state.createdAt,
+        category: state.category,
+        tags: state.tags,
+        content: state.content,
+        state,
+        toggleDocumentType,
+        setTitle,
+        setDate,
+        setCategory,
+        setTags,
+        setContent,
+        resetFields,
+      };
+    } else {
+      return {
+        type: state.type,
+        title: state.title,
+        date: state.createdAt,
+        imagePreview: state.imagePreview,
+        tags: state.tags,
+        content: state.content,
+        state,
+        toggleDocumentType,
+        setTitle,
+        setDate,
+        setImagePreview,
+        setTags,
+        setContent,
+        resetFields,
+      };
+    }
+  }, [state, toggleDocumentType, setTitle, setDate, setCategory, setImagePreview, setTags, setContent, resetFields]);
 
   return contextValue;
 };

@@ -14,10 +14,12 @@ const Tag = ({ children, type, className = "", ...props }: TagProps) => {
   // check for whether or not colors have been provided in the className
   const hasBg = /\bbg-[^\s]+/.test(className);
 
+  const defaultTagStyles = "text-dark-white bg-white/15 hover:bg-white/25";
+
   if (type === "category") {
-    colorClasses = categoryColorMap[children as JournalCategory];
+    colorClasses = !hasBg && props.onClick ? defaultTagStyles : categoryColorMap[children as JournalCategory];
   } else if (type === "tag") {
-    colorClasses = hasBg ? "" : "text-dark-white bg-white/15 hover:bg-white/25";
+    colorClasses = hasBg ? "" : defaultTagStyles;
   }
 
   return (

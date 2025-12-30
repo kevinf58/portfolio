@@ -45,3 +45,5 @@ export const DeleteButton = ({ type, id }: DocumentIdentifierPayload) => {
     </Button>
   );
 };
+
+export const EditButtion = () => {};

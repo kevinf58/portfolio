@@ -31,6 +31,7 @@ const Documents = ({ type }: { type: DocumentType }) => {
 
       setDocuments((prev) => [...prev, ...res.data]);
 
+      // offset the number of documents already loaded
       if (res.meta && res.meta.total <= res.meta.offset + DOCUMENTS_LOADED_LIMIT) {
         setHasMore(false);
       }
