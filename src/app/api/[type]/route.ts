@@ -1,7 +1,7 @@
 import db from "@/lib/db";
 import { ApiResponse } from "@/types/api/api.type";
 import { CreateDocumentPayload } from "@/types/api/apiServices.type";
-import { DOCUMENT_TYPE, Document } from "@/types/Document.type";
+import { DOCUMENT_TYPE, Document, DocumentType } from "@/types/Document.type";
 import {
   DOCUMENT_CONTENT_MIN_LENGTH,
   DOCUMENT_TITLE_MAX_LENGTH,
@@ -85,14 +85,14 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     const { total } = countStmt.get() as { total: number };
 
     // error and sql injection handling
-    if (!Object.values(DOCUMENT_TYPE).includes(type as (typeof DOCUMENT_TYPE)[keyof typeof DOCUMENT_TYPE])) {
+    if (!Object.values(DOCUMENT_TYPE).includes(type as DocumentType)) {
       return NextResponse.json({ success: false, info: { code: 400, message: "Invalid document type" } });
     }
 
     const stmt = db.prepare(`
         SELECT d.id, d.title, d.createdat AS createdAt, d.updatedat AS updatedAt, d.content, ${
-          type === "journal" ? "d.category" : "NULL AS category"
-        }, '${type}' AS type, ${type === "project" ? "d.imagePreview" : "NULL AS imagePreview"}, '${type}' AS type,
+          type === DOCUMENT_TYPE.JOURNAL ? "d.category" : "NULL AS category"
+        }, '${type}' AS type, ${type === DOCUMENT_TYPE.PROJECT ? "d.imagePreview" : "NULL AS imagePreview"}, '${type}' AS type,
         GROUP_CONCAT(t.tag) AS tags
         FROM ${type} d
         LEFT JOIN ${type}_tag t ON d.id = t.${type}_id

@@ -4,7 +4,7 @@ import readingTime from "reading-time";
 import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 import summarizeContent from "@/utils/summarizeContent";
-import Tag from "./ui/Tag";
+import Tag from "../ui/Tag";
 
 const DocumentCard = (props: Document) => {
   const titleElem = <h1 className="text-2xl font-bold my-4">{props.title}</h1>;
@@ -32,7 +32,7 @@ const DocumentCard = (props: Document) => {
   return (
     <a href={`/${props.type}/${props.id}`} className="w-full">
       <div className="flex hover:bg-gray transition-colors duration-200 px-10 py-8 cursor-pointer group gap-4">
-        {props.type === "project" && props.imagePreview && (
+        {props.type === DOCUMENT_TYPE.PROJECT && props.imagePreview && (
           <div className="relative w-60 h-38 shrink-0 overflow-hidden rounded-sm">
             <Image
               src={props.imagePreview}
@@ -44,8 +44,8 @@ const DocumentCard = (props: Document) => {
         )}
         <div className="flex flex-col w-full">
           {props.type === DOCUMENT_TYPE.JOURNAL && conditionalElem}
-          <div className={`flex items-center ${props.type === "project" ? "justify-between" : "gap-2"}`}>
-            {props.type === "project" && conditionalElem}
+          <div className={`flex items-center ${props.type === DOCUMENT_TYPE.PROJECT ? "justify-between" : "gap-2"}`}>
+            {props.type === DOCUMENT_TYPE.PROJECT && conditionalElem}
           </div>
           {props.type === DOCUMENT_TYPE.JOURNAL && titleElem}
           <p className="text-sm font-light mb-3">{summarizeContent(props.content)}</p>

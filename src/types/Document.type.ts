@@ -10,6 +10,8 @@ export const DOCUMENT_TYPE = {
   PROJECT: "project",
 } as const;
 
+export type DocumentType = (typeof DOCUMENT_TYPE)[keyof typeof DOCUMENT_TYPE];
+
 export type BaseDocument = {
   id: DocumentID;
   title: string;
@@ -20,3 +22,5 @@ export type BaseDocument = {
 };
 
 export type Document = Journal | Project;
+
+export type CreateDocumentPayload = Omit<Journal, "id"> | Omit<Project, "id">;

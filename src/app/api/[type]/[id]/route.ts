@@ -1,6 +1,6 @@
 import { ApiResponse } from "@/types/api/api.type";
 import { NextRequest, NextResponse } from "next/server";
-import { Document, DOCUMENT_TYPE } from "@/types/Document.type";
+import { Document, DOCUMENT_TYPE, DocumentType } from "@/types/Document.type";
 import db from "@/lib/db";
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
@@ -8,14 +8,14 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     const [, , type, id] = req.nextUrl.pathname.split("/");
 
     // check for if type is of type DOCUMENT_TYPE
-    if (!Object.values(DOCUMENT_TYPE).includes(type as (typeof DOCUMENT_TYPE)[keyof typeof DOCUMENT_TYPE])) {
+    if (!Object.values(DOCUMENT_TYPE).includes(type as DocumentType)) {
       return NextResponse.json({ success: false, info: { code: 400, message: "Invalid document type" } });
     }
 
     const stmt = db.prepare(`
         SELECT d.id, d.title, d.content, d.createdat AS createdAt, d.updatedat AS updatedAt, ${
-          type === "journal" ? "d.category" : "NULL AS category"
-        }, '${type}' AS type, ${type === "project" ? "d.imagePreview" : "NULL AS imagePreview"},
+          type === DOCUMENT_TYPE.JOURNAL ? "d.category" : "NULL AS category"
+        }, '${type}' AS type, ${type === DOCUMENT_TYPE.PROJECT ? "d.imagePreview" : "NULL AS imagePreview"},
         GROUP_CONCAT(t.tag) AS tags
         FROM ${type} d
         LEFT JOIN ${type}_tag t ON t.${type}_id = d.id
@@ -47,7 +47,7 @@ export async function DELETE(req: NextRequest): Promise<NextResponse> {
     const [, , type, id] = req.nextUrl.pathname.split("/");
 
     // check for if type is of type DOCUMENT_TYPE
-    if (!Object.values(DOCUMENT_TYPE).includes(type as (typeof DOCUMENT_TYPE)[keyof typeof DOCUMENT_TYPE])) {
+    if (!Object.values(DOCUMENT_TYPE).includes(type as DocumentType)) {
       return NextResponse.json({ success: false, info: { code: 400, message: "Invalid document type" } });
     }
 

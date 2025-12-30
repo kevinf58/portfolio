@@ -6,6 +6,7 @@ import { SiTypescript, SiReact, SiPython, SiTailwindcss, SiNextdotjs } from "rea
 import Documents from "./Documents";
 import Card from "@/components/ui/Card";
 import CallToAction from "./CallToAction";
+import { DOCUMENT_TYPE } from "@/types/Document.type";
 
 export default function Home() {
   return (
@@ -67,8 +68,8 @@ export default function Home() {
         </div>
       </section>
       <section className="w-full flex flex-col items-center pt-32 bg-black shadow-default" id="scroll">
-        <Documents type="project" />
-        <Documents type="journal" />
+        <Documents type={DOCUMENT_TYPE.PROJECT} />
+        <Documents type={DOCUMENT_TYPE.JOURNAL} />
         <CallToAction />
       </section>
       {/* <section className='h-screen w-full bg-green-300' /> */}

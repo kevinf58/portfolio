@@ -1,6 +1,6 @@
 "use client";
 
-import DocumentCard from "@/components/DocumentCard";
+import DocumentCard from "@/components/documents/DocumentCard";
 import Button from "@/components/ui/Button";
 import { getDocuments } from "@/services/getDocuments.service";
 import { DOCUMENT_TYPE } from "@/types/Document.type";
@@ -8,8 +8,9 @@ import { DOCUMENTS_LOADED_LIMIT } from "@/utils/constants";
 import { useState, useEffect, useCallback } from "react";
 import { Document } from "@/types/Document.type";
 import { toast } from "react-toastify";
+import { DocumentType } from "@/types/Document.type";
 
-const Documents = ({ type }: { type: (typeof DOCUMENT_TYPE)[keyof typeof DOCUMENT_TYPE] }) => {
+const Documents = ({ type }: { type: DocumentType }) => {
   const [documents, setDocuments] = useState<Array<Document>>([]);
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
