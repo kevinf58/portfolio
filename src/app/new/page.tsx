@@ -10,24 +10,26 @@ import DateInput from "@/components/documents/createDocumentInputs/DateInput";
 import ConditionalInputs from "@/components/documents/createDocumentInputs/conditionalInputs/ConditionalInputs";
 import TagInput from "@/components/documents/createDocumentInputs/TagInput";
 import TempButton from "@/components/documents/createDocumentInputs/TempButton";
+import ContentEditor from "@/components/documents/createDocumentInputs/ContentEditor";
 
 const Page = () => {
   return (
     <DocumentFormProvider initialType={DOCUMENT_TYPE.JOURNAL}>
-      <section className="relative h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-dark-gray shadow-default">
-        <div className="h-full w-full flex flex-wrap justify-center space-x-10 p-8 pt-28">
-          <Card size="lg" className="flex flex-col w-full h-full">
+      <section className="relative min-h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-dark-gray shadow-default">
+        <div className="flex flex-wrap flex-1 justify-center space-x-10 p-8 pt-28">
+          <Card size="lg" className="flex flex-col">
             <div className="flex items-center gap-2">
               <FaRegEdit size={25} className="text-dark-white mr-1" />
               <DocumentTypeToggle />
             </div>
-            <div className="flex flex-col mx-10 my-6 gap-4">
+            <div className="h-full flex flex-col mx-10 my-6 gap-4">
               <div className="flex gap-2">
                 <TitleInput />
                 <DateInput />
               </div>
               <ConditionalInputs />
               <TagInput />
+              <ContentEditor />
             </div>
           </Card>
         </div>

@@ -1,7 +1,7 @@
 import ReadOnlyCrepe from "@/components/documentForm/ReadOnlyCrepe";
 import Button from "@/components/ui/Button";
 import Tag from "@/components/ui/Tag";
-import { getDocumentByID } from "@/services/getDocumentByID.service";
+import getDocumentByID from "@/services/getDocumentByID.service";
 import { DocumentIdentifierParams } from "@/types/api/DocumentIdentifierParams";
 import { Document } from "@/types/Document.type";
 import { dateToReadable } from "@/utils/dateUtils";

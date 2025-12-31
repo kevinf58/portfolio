@@ -3,7 +3,7 @@ import { Document } from "@/types/Document.type";
 import apiRequest from "../app/api/apiRequest";
 import { GetDocumentsPayload } from "@/types/api/apiServices.type";
 
-export const getDocuments = (payload: GetDocumentsPayload): Promise<ApiResponse<Document[]>> => {
+const getDocuments = (payload: GetDocumentsPayload): Promise<ApiResponse<Document[]>> => {
   const params = new URLSearchParams({
     limit: String(payload.limit),
     offset: String(payload.offset),
@@ -13,3 +13,5 @@ export const getDocuments = (payload: GetDocumentsPayload): Promise<ApiResponse<
 
   return apiRequest<Document[]>(url, { method: "GET" });
 };
+
+export default getDocuments;

@@ -11,14 +11,46 @@ const TempButton = () => {
     return (
       <Button
         onClick={() =>
-          console.log(context.type + "\n" + context.title + "\n" + context.date + "\n" + context.category + "\n" + context.tags)
+          console.log(
+            context.type +
+              "\n" +
+              context.title +
+              "\n" +
+              context.date +
+              "\n" +
+              context.category +
+              "\n" +
+              context.tags +
+              "\n" +
+              context.content
+          )
         }
       >
         Log Journal Contents
       </Button>
     );
   else if (context.type === DOCUMENT_TYPE.PROJECT)
-    return <Button onClick={() => console.log(context.imageInputPreviewRef.current)}>Log Project Contents</Button>;
+    return (
+      <Button
+        onClick={() =>
+          console.log(
+            context.type +
+              "\n" +
+              context.title +
+              "\n" +
+              context.date +
+              "\n" +
+              context.imageInputPreviewRef.current +
+              "\n" +
+              context.tags +
+              "\n" +
+              context.content
+          )
+        }
+      >
+        Log Project Contents
+      </Button>
+    );
 };
 
 export default TempButton;

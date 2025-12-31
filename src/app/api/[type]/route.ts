@@ -1,6 +1,6 @@
 import db from "@/lib/db";
 import { ApiResponse } from "@/types/api/api.type";
-import { CreateDocumentPayload } from "@/types/api/apiServices.type";
+import { CreateDocumentPayload } from "@/types/Document.type";
 import { DOCUMENT_TYPE, Document, DocumentType } from "@/types/Document.type";
 import {
   DOCUMENT_CONTENT_MIN_LENGTH,
@@ -103,7 +103,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     const res = stmt.all(limit, offset) as Array<Document>;
 
     // check for if stmt returned >= 1 row
-    if (!res) {
+    if (res.length === 0) {
       return NextResponse.json({ success: false, info: { code: 404, message: "No documents exist" } });
     }
 
