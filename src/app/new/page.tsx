@@ -1,9 +1,7 @@
 import { DocumentFormProvider } from "@/components/documents/DocumentFormProvider";
-import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import { DOCUMENT_TYPE } from "@/types/Document.type";
 import { FaRegEdit } from "react-icons/fa";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
 import DocumentTypeToggle from "@/components/documents/createDocumentComponents/DocumentTypeToggle";
 import TitleInput from "@/components/documents/createDocumentComponents/TitleInput";
 import DateInput from "@/components/documents/createDocumentComponents/DateInput";
@@ -11,6 +9,8 @@ import ConditionalInputs from "@/components/documents/createDocumentComponents/c
 import TagInput from "@/components/documents/createDocumentComponents/TagInput";
 import ContentEditor from "@/components/documents/createDocumentComponents/ContentEditor";
 import PublishButton from "@/components/documents/createDocumentComponents/PublishButton";
+import PreviewButton from "@/components/documents/createDocumentComponents/PreviewButton";
+import ClearFormButton from "@/components/documents/createDocumentComponents/ClearFormButton";
 
 const Page = () => {
   return (
@@ -33,12 +33,12 @@ const Page = () => {
             </div>
           </Card>
         </div>
-        <div className="flex justify-end fixed bottom-0 left-1/2 -translate-x-1/2 space-x-2 px-6 py-4 bg-gray w-full max-w-4xl rounded-t-sm border-t-2 border-x-2 border-tint/10 shadow-xl">
-          <Button size="md" variant="secondary">
-            <MdOutlineRemoveRedEye size={18} />
-            <span>Preview</span>
-          </Button>
-          <PublishButton />
+        <div className="flex justify-between fixed bottom-0 left-1/2 -translate-x-1/2 space-x-2 px-6 py-4 bg-gray w-full max-w-4xl rounded-t-sm border-t-2 border-x-2 border-tint/10 shadow-xl">
+          <ClearFormButton />
+          <div className="flex space-x-2">
+            <PreviewButton />
+            <PublishButton />
+          </div>
         </div>
       </section>
     </DocumentFormProvider>

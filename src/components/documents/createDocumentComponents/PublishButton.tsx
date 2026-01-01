@@ -11,6 +11,7 @@ import { useState } from "react";
 import { MdSend } from "react-icons/md";
 import { toast } from "react-toastify";
 
+//TODO: CONSIDER MAKING THE IMAGE PREVIEW UPLOAD IN THE BACKEND SO THAT IT DOESN'T UPLOAD FIRST, AND THEN HAVE THE BACKEND RETURN AN ERROR
 const PublishButton = () => {
   const [loading, setLoading] = useState(false);
 

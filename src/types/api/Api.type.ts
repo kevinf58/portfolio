@@ -3,7 +3,6 @@ type Response = {
   message: string;
 };
 
-// TODO: MAY NOT NEED TOTAL PROP
 type PaginationData = {
   limit: number;
   offset: number;
