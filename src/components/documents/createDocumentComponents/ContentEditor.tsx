@@ -40,13 +40,12 @@ const CrepeEditor = () => {
 
             const res = await uploadImage(file);
 
-            //TODO: ALSO CHANGE THE DEFAULT FONT OF CONTENT EDITOR FROM SERIF TO SANS SERIF
             if (!res.success) {
               toast.error(res.info.message);
               throw new Error(res.info.code + " " + res.info.message);
             }
 
-            toast.success("Image upload successful");
+            toast.success(res.info.message);
             return res.data;
           },
         }));

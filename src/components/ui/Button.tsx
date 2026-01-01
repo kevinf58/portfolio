@@ -47,14 +47,8 @@ const Button = ({ variant = "primary", size = "md", ...props }: ButtonProps) => 
       }`}
     >
       <div className={`flex items-center justify-center gap-2 font-sans text-white whitespace-nowrap ${buttonSizeStyles}`}>
-        {props.loading ? (
-          <>
-            <span className="invisible">{props.children}</span>
-            <CgSpinner className="animate-spin text-white absolute" style={{ fontSize: "inherit" }} />
-          </>
-        ) : (
-          props.children
-        )}
+        {props.loading && <CgSpinner className="animate-spin text-white absolute" style={{ fontSize: "inherit" }} />}
+        <span className={`flex gap-2 ${props.loading ? "invisible" : ""}`}>{props.children}</span>
       </div>
     </button>
   );

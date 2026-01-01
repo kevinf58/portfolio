@@ -29,7 +29,7 @@ const Page = async ({ params }: DocumentIdentifierParams) => {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <h1 className="text-[48px] leading-12.5 font-semibold">{document.title}</h1>
-            <div className="space-x-2">
+            <div className="flex space-x-2">
               <Button size="sm">
                 <FaRegEdit size={14} className="shrink-0" />
                 <span className="font-medium">Edit</span>

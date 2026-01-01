@@ -19,43 +19,65 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       message = "Title too long";
     } else if (document.content.length < DOCUMENT_CONTENT_MIN_LENGTH) {
       message = `Please add sufficient content to make this a ${document.type}`;
-    } else if (document.type === DOCUMENT_TYPE.JOURNAL && !document.category) {
-      message = "No journal category selected";
     } else if (document.type === DOCUMENT_TYPE.PROJECT && !document.imagePreview) {
       message = "No project image preview provided";
     }
-    if (message) return NextResponse.json<ApiResponse<null>>({ success: false, info: { code: 400, message } });
+    if (message) {
+      return NextResponse.json<ApiResponse<null>>({ success: false, info: { code: 400, message } });
+    }
 
-    // create document
+    // titles of the same type of document need to be unique, so do a check for this
+    stmt = db.prepare(`SELECT 1 FROM ${document.type} WHERE title = ?`);
+    const res = stmt.get(document.title);
+    if (res) {
+      return NextResponse.json<ApiResponse<null>>({
+        success: false,
+        info: {
+          code: 409,
+          message: `A ${
+            document.type.charAt(0).toUpperCase() + document.type.slice(1)
+          } with this title already exists. Please think of another`,
+        },
+      });
+    }
+
     if (document.type === DOCUMENT_TYPE.JOURNAL) {
-      stmt = db.prepare(
-        `INSERT INTO journal (title, createdAt, tags, content, category)
-       VALUES (?, ?, ?, ?, ?)`
-      );
-      stmt.run(
+      // create document
+      stmt = db.prepare(`INSERT INTO journal (title, createdAt, updatedAt, content, category) VALUES (?, ?, ?, ?, ?)`);
+      const res = stmt.run(
         document.title,
         new Date(document.createdAt).toISOString(),
-        JSON.stringify(document.tags),
+        new Date(document.createdAt).toISOString(),
         document.content,
         document.category
       );
+      const journalID = res.lastInsertRowid;
 
-      message = "Journal added successfully";
+      // iterate tags into the journal tag table
+      stmt = db.prepare(`INSERT INTO journal_tag (journal_id, tag) VALUES (?, ?)`);
+      for (const tag of document.tags) {
+        stmt.run(journalID, tag);
+      }
+
+      message = "Journal created successfully";
     } else {
-      stmt = db.prepare(
-        `INSERT INTO project (title, createdAt, updatedAt, tags, content, imagePreview)
-       VALUES (?, ?, ?, ?, ?, ?)`
-      );
-      stmt.run(
+      stmt = db.prepare(`INSERT INTO project (title, createdAt, updatedAt, content, imagePreview) VALUES (?, ?, ?, ?, ?)`);
+      const res = stmt.run(
         document.title,
         new Date(document.createdAt).toISOString(),
         new Date(document.createdAt).toISOString(),
-        JSON.stringify(document.tags),
         document.content,
         document.imagePreview
       );
+      const projectID = res.lastInsertRowid;
 
-      message = "Project added successfully";
+      // iterate tags into the project tag table
+      stmt = db.prepare(`INSERT INTO project_tag (project_id, tag) VALUES (?, ?)`);
+      for (const tag of document.tags) {
+        stmt.run(projectID, tag);
+      }
+
+      message = "Project created successfully";
     }
 
     return NextResponse.json<ApiResponse<null>>({ success: true, data: null, info: { code: 201, message } });

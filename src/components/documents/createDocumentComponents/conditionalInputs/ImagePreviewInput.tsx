@@ -1,7 +1,9 @@
 import { useDocumentFormContext } from "@/hooks/useDocumentForm";
+import { MAX_IMAGE_SIZE } from "@/lib/constants";
 import { DOCUMENT_TYPE } from "@/types/Document.type";
 import { useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const ImagePreviewInput = () => {
   const [imageName, setImageName] = useState("");
@@ -18,6 +20,16 @@ const ImagePreviewInput = () => {
       setImageName("");
       return;
     }
+
+    // client side error handling
+    if (!file.type.startsWith("image/")) {
+      toast.error("Only image files are allowed");
+      throw new Error("Only image files are allowed");
+    } else if (file.size > MAX_IMAGE_SIZE) {
+      toast.error(`The image size of '${file.name}' exceeds the 2MB limit`);
+      throw new Error(`The image size of '${file.name}' exceeds the 2MB limit`);
+    }
+
     setImageName(file.name);
   };
 

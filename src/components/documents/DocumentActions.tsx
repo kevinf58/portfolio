@@ -31,7 +31,6 @@ export const DeleteButton = ({ type, id }: DocumentIdentifierPayload) => {
       toast.success(res.info.message);
       router.push("/");
     } catch (err) {
-      toast.error("An unexpected error occurred. Please try again");
       console.error(err);
     } finally {
       setLoading(false);

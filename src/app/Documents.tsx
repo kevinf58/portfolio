@@ -39,7 +39,6 @@ const Documents = ({ type }: { type: DocumentType }) => {
       setOffset((prev) => prev + DOCUMENTS_LOADED_LIMIT);
     } catch (err) {
       console.error(err);
-      toast.error("An unexpected error occurred. Please try again");
     } finally {
       setLoading(false);
     }
