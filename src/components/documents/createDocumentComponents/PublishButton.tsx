@@ -48,6 +48,8 @@ const PublishButton = () => {
         }
 
         toast.success(res.info.message);
+        router.push("/");
+
         return res.data;
       } else if (context.type === DOCUMENT_TYPE.PROJECT) {
         const { type, title, date, imageInputPreviewRef, tags, content } = context;

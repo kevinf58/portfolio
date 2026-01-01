@@ -39,7 +39,7 @@ const Button = ({ variant = "primary", size = "md", ...props }: ButtonProps) => 
         props.onClick?.(e);
       }}
       title={props.title}
-      className={`relative overflow-hidden group border-2 border-primary lg:hover:cursor-pointer hover:scale-[101%] active:transition-none active:scale-98 rounded-full transition-all duration-100 ease-in-out ${
+      className={`relative overflow-hidden min-w-fit group border-2 border-primary lg:hover:cursor-pointer hover:scale-[101%] active:transition-none active:scale-98 rounded-full transition-all duration-100 ease-in-out ${
         props.className
       }
       ${isDisabled && "pointer-events-none brightness-70"} ${
@@ -48,7 +48,7 @@ const Button = ({ variant = "primary", size = "md", ...props }: ButtonProps) => 
     >
       <div className={`flex items-center justify-center gap-2 font-sans text-white whitespace-nowrap ${buttonSizeStyles}`}>
         {props.loading && <CgSpinner className="animate-spin text-white absolute" style={{ fontSize: "inherit" }} />}
-        <span className={`flex gap-2 ${props.loading ? "invisible" : ""}`}>{props.children}</span>
+        <span className={`flex items-center gap-2 ${props.loading ? "invisible" : ""}`}>{props.children}</span>
       </div>
     </button>
   );
