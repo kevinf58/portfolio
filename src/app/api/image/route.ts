@@ -1,3 +1,4 @@
+import { MAX_IMAGE_SIZE } from "@/lib/constants";
 import { ApiResponse } from "@/types/api/api.type";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -11,6 +12,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       return NextResponse.json<ApiResponse<null>>({ success: false, info: { code: 400, message: "No file provided" } });
     } else if (!file.type.startsWith("image/")) {
       return NextResponse.json<ApiResponse<null>>({ success: false, info: { code: 400, message: "Only image files are allowed" } });
+    } else if (file.size > MAX_IMAGE_SIZE) {
+      return NextResponse.json<ApiResponse<null>>({
+        success: false,
+        info: { code: 400, message: `The image size of '${file.name}' exceeds the 2MB limit` },
+      });
     }
 
     // renaming file to a UUID
@@ -26,7 +32,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
     const content = await file.arrayBuffer();
-    const imagePreviewData = Buffer.from(content).toString("base64");
+    const imageData = Buffer.from(content).toString("base64");
 
     // uploading to git repo
     const res = await fetch(url, {
@@ -37,7 +43,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       },
       body: JSON.stringify({
         message: `Uploading ${file.name} to remote repo`,
-        content: imagePreviewData,
+        content: imageData,
       }),
     });
 

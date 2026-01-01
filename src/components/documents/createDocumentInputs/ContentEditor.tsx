@@ -7,6 +7,7 @@ import uploadImage from "@/services/uploadImage.service";
 import { imageBlockConfig } from "@milkdown/kit/component/image-block";
 import { useDocumentFormContext } from "@/hooks/useDocumentForm";
 import { toast } from "react-toastify";
+import { MAX_IMAGE_SIZE } from "@/lib/constants";
 
 const CrepeEditor = () => {
   const { setContent } = useDocumentFormContext();
@@ -28,8 +29,18 @@ const CrepeEditor = () => {
         crepe.editor.ctx.update(imageBlockConfig.key, (defaultConfig) => ({
           ...defaultConfig,
           onUpload: async (file: File) => {
+            // client side error handling
+            if (!file.type.startsWith("image/")) {
+              toast.error("Only image files are allowed");
+              throw new Error("Only image files are allowed");
+            } else if (file.size > MAX_IMAGE_SIZE) {
+              toast.error(`The image size of '${file.name}' exceeds the 2MB limit`);
+              throw new Error(`The image size of '${file.name}' exceeds the 2MB limit`);
+            }
+
             const res = await uploadImage(file);
 
+            //TODO: ALSO CHANGE THE DEFAULT FONT OF CONTENT EDITOR FROM SERIF TO SANS SERIF
             if (!res.success) {
               toast.error(res.info.message);
               throw new Error(res.info.code + " " + res.info.message);

@@ -1,7 +1,7 @@
 "use client";
 
 import { useDocumentFormContext } from "@/hooks/useDocumentForm";
-import { DOCUMENT_TITLE_MAX_LENGTH } from "@/utils/constants";
+import { DOCUMENT_TITLE_MAX_LENGTH } from "@/lib/constants";
 
 const TitleInput = () => {
   const { title, setTitle } = useDocumentFormContext();

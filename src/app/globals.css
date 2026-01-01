@@ -205,6 +205,10 @@ body {
   letter-spacing: 0.3px;
 }
 
+.milkdown .ProseMirror p::before {
+  font-family: var(--font-inter), Helvetica, sans-serif;
+}
+
 /**
  * css reset
 */

@@ -6,7 +6,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useDocumentFormContext } from "@/hooks/useDocumentForm";
 import { JournalCategory } from "@/types/Journal.type";
 import Tag from "@/components/ui/Tag";
-import { DOCUMENT_TAG_LIMIT, DOCUMENT_TAG_MAX_LENGTH } from "@/utils/constants";
+import { DOCUMENT_TAG_LIMIT, DOCUMENT_TAG_MAX_LENGTH } from "@/lib/constants";
 
 export default function TagInput() {
   const [isEditing, setIsEditing] = useState(false);

@@ -4,7 +4,7 @@ import DocumentCard from "@/components/documents/DocumentCard";
 import Button from "@/components/ui/Button";
 import getDocuments from "@/services/getDocuments.service";
 import { DOCUMENT_TYPE } from "@/types/Document.type";
-import { DOCUMENTS_LOADED_LIMIT } from "@/utils/constants";
+import { DOCUMENTS_LOADED_LIMIT } from "@/lib/constants";
 import { useState, useEffect, useCallback } from "react";
 import { Document } from "@/types/Document.type";
 import { toast } from "react-toastify";

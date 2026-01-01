@@ -11,3 +11,6 @@ export const DOCUMENTS_LOADED_LIMIT = 1;
 // limit to the number of tags and length of each tag that can be added to a document
 export const DOCUMENT_TAG_LIMIT = 3;
 export const DOCUMENT_TAG_MAX_LENGTH = 16;
+
+// max size for a preview image or images included in a document
+export const MAX_IMAGE_SIZE = 2 * 1024 * 1024;
