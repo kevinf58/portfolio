@@ -11,6 +11,7 @@ import ContentEditor from "@/components/documents/createDocumentComponents/Conte
 import PublishButton from "@/components/documents/createDocumentComponents/PublishButton";
 import PreviewButton from "@/components/documents/createDocumentComponents/PreviewButton";
 import ClearFormButton from "@/components/documents/createDocumentComponents/ClearFormButton";
+import TempButton from "@/components/documents/createDocumentComponents/TempButton";
 
 const Page = () => {
   return (
@@ -35,6 +36,8 @@ const Page = () => {
         </div>
         <div className="flex justify-between fixed bottom-0 left-1/2 -translate-x-1/2 space-x-2 px-6 py-4 bg-gray w-full max-w-4xl rounded-t-sm border-t-2 border-x-2 border-tint/10 shadow-xl">
           <ClearFormButton />
+          {/* TODO: TEMPORARY BUTTON */}
+          <TempButton />
           <div className="flex space-x-2">
             <PreviewButton />
             <PublishButton />

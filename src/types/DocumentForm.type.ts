@@ -36,6 +36,7 @@ type JournalDocumentFormContextValue = BaseDocumentFormContextValue & {
 type ProjectDocumentFormContextValue = BaseDocumentFormContextValue & {
   type: typeof DOCUMENT_TYPE.PROJECT;
   imagePreview: string;
+  setImagePreview: (imagePreview: string) => void;
   imageInputPreviewRef: RefObject<HTMLInputElement | null>;
 };
 

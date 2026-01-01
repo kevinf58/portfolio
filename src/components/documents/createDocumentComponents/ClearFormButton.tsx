@@ -2,15 +2,26 @@
 
 import Button from "@/components/ui/Button";
 import { useDocumentFormContext } from "@/hooks/useDocumentForm";
+import { DOCUMENT_TYPE } from "@/types/Document.type";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 
 const ClearFormButton = () => {
-  const { type, resetFields } = useDocumentFormContext();
+  const context = useDocumentFormContext();
+  const { type, resetFields } = context;
 
   const handleClearFields = () => {
+    if (type === DOCUMENT_TYPE.PROJECT) {
+      const { imageInputPreviewRef } = context;
+
+      // image preview input needs to be done separately as it's not a part of the state and is kept as a ref
+      if (imageInputPreviewRef.current) {
+        imageInputPreviewRef.current.value = "";
+      }
+    }
+
     resetFields(type);
-    toast.success("Input fields cleared");
+    toast.success("Fields cleared");
   };
 
   return (

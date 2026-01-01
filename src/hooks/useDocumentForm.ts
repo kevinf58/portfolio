@@ -4,7 +4,6 @@ import { JournalCategory } from "@/types/Journal.type";
 import { getLocalDate } from "@/utils/dateUtils";
 import { createContext, useCallback, useContext, useMemo, useReducer, useRef } from "react";
 
-//TODO: REMOVE IMAGEPREVIEW PROP
 //TODO: UPDATE THIS CONTEXT LATER ACCOMODATE AN EDITING FUNCTIONALITY AND ALLOW PROPS TO BE PASSED INSTEAD OF AN EMPTY INITIALSTATE
 const initialState = (type: DocumentType): CreateDocumentPayload =>
   type === DOCUMENT_TYPE.JOURNAL
@@ -68,6 +67,14 @@ const documentFormReducer = (state: CreateDocumentPayload, action: DocumentFormA
         ...state,
         category: action.payload,
       };
+    case "SET_IMAGE_PREVIEW":
+      if (state.type !== DOCUMENT_TYPE.PROJECT) {
+        return state;
+      }
+      return {
+        ...state,
+        imagePreview: action.payload,
+      };
     case "SET_TAGS":
       return {
         ...state,
@@ -98,6 +105,7 @@ export const useDocumentForm = (initialType: DocumentType) => {
   const resetFields = useCallback((type: DocumentType) => dispatch({ type: "RESET", payload: type }), []);
 
   const setCategory = useCallback((category: JournalCategory) => dispatch({ type: "SET_CATEGORY", payload: category }), []);
+  const setImagePreview = useCallback((imagePreview: string) => dispatch({ type: "SET_IMAGE_PREVIEW", payload: imagePreview }), []);
   const imageInputPreviewRef = useRef<HTMLInputElement>(null);
 
   const contextValue: DocumentFormContextValue = useMemo(() => {
@@ -135,10 +143,11 @@ export const useDocumentForm = (initialType: DocumentType) => {
         setContent,
         resetFields,
 
+        setImagePreview,
         imageInputPreviewRef,
       };
     }
-  }, [state, toggleDocumentType, setTitle, setDate, setCategory, setTags, setContent, resetFields]);
+  }, [state, toggleDocumentType, setTitle, setDate, setCategory, setImagePreview, setTags, setContent, resetFields]);
 
   return contextValue;
 };

@@ -8,12 +8,16 @@ import { imageBlockConfig } from "@milkdown/kit/component/image-block";
 import { useDocumentFormContext } from "@/hooks/useDocumentForm";
 import { toast } from "react-toastify";
 import { MAX_IMAGE_SIZE } from "@/lib/constants";
+import { useEffect, useRef } from "react";
+import { replaceAll } from "@milkdown/kit/utils";
 
 const CrepeEditor = () => {
-  const { setContent } = useDocumentFormContext();
+  const { content, setContent } = useDocumentFormContext();
+  const crepeRef = useRef<Crepe | null>(null);
 
   useEditor((root) => {
     const crepe = new Crepe({ root });
+    crepeRef.current = crepe;
 
     // listen for updates in crepe to invoke setMarkdown and send it back up the tree
     crepe.on((listener) => {
@@ -59,6 +63,13 @@ const CrepeEditor = () => {
 
     return crepe;
   }, []);
+
+  // bind crepe editor contents to the state value of content
+  useEffect(() => {
+    if (crepeRef.current && content !== crepeRef.current.getMarkdown()) {
+      crepeRef.current.editor.action(replaceAll(content));
+    }
+  }, [content]);
 
   return <Milkdown />;
 };
