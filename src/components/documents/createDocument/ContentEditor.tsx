@@ -53,6 +53,11 @@ const CrepeEditor = () => {
             return res.data;
           },
         }));
+
+        // prefill editor with value of content after mounting
+        if (content) {
+          crepe.editor.action(replaceAll(content));
+        }
       });
 
       listener.updated(() => {

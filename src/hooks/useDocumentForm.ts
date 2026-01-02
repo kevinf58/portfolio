@@ -4,6 +4,7 @@ import { JournalCategory } from "@/types/Journal.type";
 import { getLocalDate } from "@/utils/dateUtils";
 import { createContext, useCallback, useContext, useMemo, useReducer, useRef } from "react";
 
+//TODO: CONSIDER KEEPING A LOADING STATE HERE SO THAT WHEN EXPENSIVE COMPUTATIONS EXIST LIKE IMAGE UPLOADS, DOCUMENT CREATION REQUESTS, ETC, BUTTONS & INPUTS CAN DISABLE
 //TODO: UPDATE THIS CONTEXT LATER ACCOMODATE AN EDITING FUNCTIONALITY AND ALLOW PROPS TO BE PASSED INSTEAD OF AN EMPTY INITIALSTATE
 const initialState = (type: DocumentType): CreateDocumentPayload =>
   type === DOCUMENT_TYPE.JOURNAL

@@ -35,7 +35,7 @@ export default function RootLayout({
           <header className="sticky top-0 z-20">
             <NavBar />
           </header>
-          <main className="flex-grow z-10">{children}</main>
+          <main className="grow z-10">{children}</main>
           <Footer />
           <ToastContainer className="sm:mt-14" />
         </ClientWrapper>

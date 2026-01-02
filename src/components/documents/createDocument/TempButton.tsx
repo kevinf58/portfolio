@@ -32,11 +32,7 @@ const TempButton = () => {
       </Button>
     );
   else if (context.type === DOCUMENT_TYPE.PROJECT)
-    return (
-      <Button onClick={() => console.log(context.imageInputPreviewRef.current?.value.split("\\").pop()) + "\n" + context.content}>
-        Log Project Contents
-      </Button>
-    );
+    return <Button onClick={() => console.log(context.imagePreview) + "\n" + context.content}>Log Project Contents</Button>;
 };
 
 export default TempButton;

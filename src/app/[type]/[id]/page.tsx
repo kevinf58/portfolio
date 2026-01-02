@@ -1,4 +1,4 @@
-import ReadOnlyCrepe from "@/components/documentForm/ReadOnlyCrepe";
+import ReadOnlyCrepe from "@/components/documents/viewDocument/ReadOnlyCrepe";
 import Button from "@/components/ui/Button";
 import Tag from "@/components/ui/Tag";
 import getDocumentByID from "@/services/getDocumentByID.service";
@@ -20,8 +20,8 @@ const Page = async ({ params }: DocumentIdentifierParams) => {
   const document: Document = res.data;
 
   return (
-    <section className="relative flex justify-center min-h-[calc(100vh-4.75rem)] w-full bg-dark-gray shadow-default py-20 md:px-10 sm:px-6 px-2">
-      <div className="min-h-full max-w-260 w-full lg:px-34 sm:px-20 px-8 gap-1">
+    <section className="relative flex justify-center min-h-[calc(100vh-4.75rem)] w-full bg-dark-gray shadow-default md:px-10 sm:px-6 px-2">
+      <div className="min-h-full max-w-260 w-full lg:px-34 sm:px-20 px-8 py-28 gap-1">
         <div className="flex items-center text-sm text-white/50 mb-10">
           Home <MdKeyboardArrowRight size={18} /> {type.charAt(0).toUpperCase() + type.slice(1)}
           <MdKeyboardArrowRight size={18} /> {document.title}

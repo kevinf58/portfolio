@@ -4,10 +4,10 @@ import { ButtonProps } from "@/types/components/ui/Button.type";
 import { useRef } from "react";
 import { CgSpinner } from "react-icons/cg";
 
-const Button = ({ variant = "primary", size = "md", ...props }: ButtonProps) => {
+const Button = ({ variant = "primary", size = "md", loading = false, disabled = false, ...props }: ButtonProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const isDisabled = props.disabled || props.loading;
+  const isDisabled = disabled || loading;
 
   const createRipple = (event: React.MouseEvent) => {
     const button = buttonRef.current;
@@ -47,8 +47,8 @@ const Button = ({ variant = "primary", size = "md", ...props }: ButtonProps) => 
       }`}
     >
       <div className={`flex items-center justify-center gap-2 font-sans text-white whitespace-nowrap ${buttonSizeStyles}`}>
-        {props.loading && <CgSpinner className="animate-spin text-white absolute" style={{ fontSize: "inherit" }} />}
-        <span className={`flex items-center gap-2 ${props.loading ? "invisible" : ""}`}>{props.children}</span>
+        {loading && <CgSpinner className="animate-spin text-white absolute" style={{ fontSize: "inherit" }} />}
+        <span className={`flex items-center gap-2 ${loading ? "invisible" : ""}`}>{props.children}</span>
       </div>
     </button>
   );
