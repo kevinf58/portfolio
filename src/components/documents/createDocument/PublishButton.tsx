@@ -4,9 +4,12 @@ import Button from "@/components/ui/Button";
 import { useDocumentFormContext } from "@/hooks/useDocumentForm";
 import { DOCUMENT_CONTENT_MIN_LENGTH, DOCUMENT_TITLE_MAX_LENGTH, DOCUMENT_TITLE_MIN_LENGTH } from "@/lib/constants";
 import createDocument from "@/services/createDocument.Service";
+import updateDocument from "@/services/updateDocument.Service";
 import uploadImage from "@/services/uploadImage.service";
-import { CreateDocumentPayload, DOCUMENT_TYPE } from "@/types/Document.type";
-import { useRouter } from "next/navigation";
+import { ApiResponse } from "@/types/api/api.type";
+import { DocumentPayload, DOCUMENT_TYPE } from "@/types/Document.type";
+import { getLocalDate } from "@/utils/dateUtils";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { MdSend } from "react-icons/md";
 import { toast } from "react-toastify";
@@ -18,6 +21,12 @@ const PublishButton = () => {
   const context = useDocumentFormContext();
 
   const router = useRouter();
+
+  // the same form is used for editing and document creation functionality. One makes a post req, the other makes a patch req
+  // the url path is used to distinguish between the functionalities
+  const pathName = usePathname();
+  const segments = pathName.split("/").filter(Boolean);
+  const isEditing = !!segments[2];
 
   const publishDocument = async () => {
     try {
@@ -40,8 +49,22 @@ const PublishButton = () => {
           throw new Error(message);
         }
 
-        const payload: CreateDocumentPayload = { type, title, createdAt: date, updatedAt: date, category, tags, content };
-        const res = await createDocument(payload);
+        let res: ApiResponse<null> = {
+          success: false,
+          info: {
+            code: 0,
+            message: "",
+          },
+        };
+
+        //TODO: KEEP TRACK OF THE FIELDS THAT THE USER HAS UPDATED FOR THE PATCH REQ
+        if (isEditing) {
+          const payload: DocumentPayload = { type, title, createdAt: date, updatedAt: getLocalDate(), category, tags, content };
+          res = await updateDocument(payload);
+        } else {
+          const payload: DocumentPayload = { type, title, createdAt: date, updatedAt: date, category, tags, content };
+          res = await createDocument(payload);
+        }
 
         if (!res.success) {
           toast.error(res.info.message);
@@ -87,7 +110,7 @@ const PublishButton = () => {
 
         const imageResData = imageRes.data;
 
-        const payload: CreateDocumentPayload = { type, title, createdAt: date, updatedAt: date, imagePreview: imageResData, tags, content };
+        const payload: DocumentPayload = { type, title, createdAt: date, updatedAt: date, imagePreview: imageResData, tags, content };
         const res = await createDocument(payload);
 
         if (!res.success) {

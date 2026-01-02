@@ -1,33 +1,12 @@
-import { CreateDocumentPayload, DOCUMENT_TYPE, DocumentType } from "@/types/Document.type";
+import { DocumentPayload, DOCUMENT_TYPE, DocumentType } from "@/types/Document.type";
 import { DocumentFormActions, DocumentFormContextValue } from "@/types/DocumentForm.type";
 import { JournalCategory } from "@/types/Journal.type";
-import { getLocalDate } from "@/utils/dateUtils";
+import emptyState from "@/utils/emptyState";
 import { createContext, useCallback, useContext, useMemo, useReducer, useRef } from "react";
 
 //TODO: CONSIDER KEEPING A LOADING STATE HERE SO THAT WHEN EXPENSIVE COMPUTATIONS EXIST LIKE IMAGE UPLOADS, DOCUMENT CREATION REQUESTS, ETC, BUTTONS & INPUTS CAN DISABLE
 //TODO: UPDATE THIS CONTEXT LATER ACCOMODATE AN EDITING FUNCTIONALITY AND ALLOW PROPS TO BE PASSED INSTEAD OF AN EMPTY INITIALSTATE
-const initialState = (type: DocumentType): CreateDocumentPayload =>
-  type === DOCUMENT_TYPE.JOURNAL
-    ? {
-        type: DOCUMENT_TYPE.JOURNAL,
-        title: "",
-        createdAt: getLocalDate(),
-        updatedAt: getLocalDate(),
-        content: "",
-        tags: [],
-        category: "daily",
-      }
-    : {
-        type: DOCUMENT_TYPE.PROJECT,
-        title: "",
-        createdAt: getLocalDate(),
-        updatedAt: getLocalDate(),
-        content: "",
-        tags: [],
-        imagePreview: "",
-      };
-
-const documentFormReducer = (state: CreateDocumentPayload, action: DocumentFormActions): CreateDocumentPayload => {
+const documentFormReducer = (state: DocumentPayload, action: DocumentFormActions): DocumentPayload => {
   switch (action.type) {
     case "TOGGLE_DOCUMENT_TYPE":
       return state.type === DOCUMENT_TYPE.JOURNAL
@@ -87,7 +66,7 @@ const documentFormReducer = (state: CreateDocumentPayload, action: DocumentFormA
         content: action.payload,
       };
     case "RESET":
-      return initialState(action.payload);
+      return emptyState(action.payload);
     default:
       return state;
   }
@@ -95,8 +74,8 @@ const documentFormReducer = (state: CreateDocumentPayload, action: DocumentFormA
 
 export const DocumentFormContext = createContext<DocumentFormContextValue | null>(null);
 
-export const useDocumentForm = (initialType: DocumentType) => {
-  const [state, dispatch] = useReducer(documentFormReducer, initialState(initialType));
+export const useDocumentForm = (initialState: DocumentPayload) => {
+  const [state, dispatch] = useReducer(documentFormReducer, initialState);
 
   const toggleDocumentType = useCallback(() => dispatch({ type: "TOGGLE_DOCUMENT_TYPE" }), []);
   const setTitle = useCallback((title: string) => dispatch({ type: "SET_TITLE", payload: title }), []);

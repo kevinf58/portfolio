@@ -1,9 +1,8 @@
 "use client";
 
-import Button from "@/components/ui/Button";
-import { FaRegClock, FaRegEdit } from "react-icons/fa";
+import { FaRegClock } from "react-icons/fa";
 import { MdDateRange, MdKeyboardArrowRight } from "react-icons/md";
-import { DeleteButton } from "../DocumentActions";
+import { DeleteButton, EditButton } from "../DocumentActions";
 import { dateToReadable } from "@/utils/dateUtils";
 import Tag from "@/components/ui/Tag";
 import ReadOnlyCrepe from "./ReadOnlyCrepe";
@@ -23,10 +22,7 @@ const DocumentDisplay = ({ document }: { document: Document }) => {
           <h1 className="text-[48px] leading-12.5 font-semibold">{title}</h1>
           {id && (
             <div className="flex space-x-2">
-              <Button size="sm">
-                <FaRegEdit size={14} className="shrink-0" />
-                <span className="font-medium">Edit</span>
-              </Button>
+              <EditButton type={type} id={id} />
               <DeleteButton type={type} id={id} />
             </div>
           )}

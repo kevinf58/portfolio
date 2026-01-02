@@ -23,4 +23,4 @@ export type BaseDocument = {
 
 export type Document = Journal | Project;
 
-export type CreateDocumentPayload = Omit<Journal, "id"> | Omit<Project, "id">;
+export type DocumentPayload = Omit<Journal, "id"> | Omit<Project, "id">;

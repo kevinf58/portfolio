@@ -1,6 +1,6 @@
 import db from "@/lib/db";
 import { ApiResponse } from "@/types/api/api.type";
-import { CreateDocumentPayload } from "@/types/Document.type";
+import { DocumentPayload } from "@/types/Document.type";
 import { DOCUMENT_TYPE, Document, DocumentType } from "@/types/Document.type";
 import { DOCUMENT_CONTENT_MIN_LENGTH, DOCUMENT_TITLE_MAX_LENGTH, DOCUMENT_TITLE_MIN_LENGTH, DOCUMENTS_LOADED_LIMIT } from "@/lib/constants";
 import { NextRequest, NextResponse } from "next/server";
@@ -10,7 +10,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     let message: string = "";
     let stmt = null;
 
-    const document: CreateDocumentPayload = await req.json();
+    const document: DocumentPayload = await req.json();
 
     // error handling
     if (document.title.length < DOCUMENT_TITLE_MIN_LENGTH) {

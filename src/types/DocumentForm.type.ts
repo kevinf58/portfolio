@@ -1,5 +1,5 @@
-import React, { RefObject } from "react";
-import { CreateDocumentPayload, DocumentType } from "./Document.type";
+import { ReactNode, RefObject } from "react";
+import { DocumentPayload, DocumentType } from "./Document.type";
 import { JournalCategory } from "./Journal.type";
 import { DOCUMENT_TYPE } from "./Document.type";
 
@@ -18,7 +18,7 @@ type BaseDocumentFormContextValue = {
   date: string;
   tags: string[];
   content: string;
-  state: CreateDocumentPayload;
+  state: DocumentPayload;
   toggleDocumentType: () => void;
   setTitle: (title: string) => void;
   setDate: (date: string) => void;
@@ -43,6 +43,6 @@ type ProjectDocumentFormContextValue = BaseDocumentFormContextValue & {
 export type DocumentFormContextValue = JournalDocumentFormContextValue | ProjectDocumentFormContextValue;
 
 export type DocumentFormProviderProps = {
-  children: React.ReactNode;
-  initialType: DocumentType;
+  children: ReactNode;
+  initialState: DocumentPayload;
 };

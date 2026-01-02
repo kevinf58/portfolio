@@ -7,6 +7,7 @@ import { DocumentIdentifierPayload } from "@/types/api/apiServices.type";
 import deleteDocument from "@/services/deleteDocument.Service";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { FaRegEdit } from "react-icons/fa";
 
 export const DeleteButton = ({ type, id }: DocumentIdentifierPayload) => {
   const [loading, setLoading] = useState(false);
@@ -45,4 +46,21 @@ export const DeleteButton = ({ type, id }: DocumentIdentifierPayload) => {
   );
 };
 
-export const EditButtion = () => {};
+export const EditButton = ({ type, id }: DocumentIdentifierPayload) => {
+  const router = useRouter();
+
+  const handleEdit = async () => {
+    if (!confirm("Are you sure you want to edit this document?")) {
+      return;
+    }
+
+    router.push(`/${type}/${id}/edit`);
+  };
+
+  return (
+    <Button size="sm" onClick={handleEdit}>
+      <FaRegEdit size={14} className="shrink-0" />
+      <span className="font-medium">Edit</span>
+    </Button>
+  );
+};
