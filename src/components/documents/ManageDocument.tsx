@@ -1,29 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { DocumentFormProvider } from "../DocumentFormProvider";
-import { DocumentPayload } from "@/types/Document.type";
-import PreviewDocument from "../createDocument/PreviewDocument";
+import { DocumentFormProvider } from "./DocumentFormProvider";
+import PreviewDocument from "./createDocument/PreviewDocument";
 import Card from "@/components/ui/Card";
 import { FaRegEdit } from "react-icons/fa";
-import DocumentTypeToggle from "../createDocument/DocumentTypeToggle";
-import TitleInput from "../createDocument/TitleInput";
-import DateInput from "../createDocument/DateInput";
-import ConditionalInputs from "../createDocument/conditionalInputs/ConditionalInputs";
-import TagInput from "../createDocument/TagInput";
-import ContentEditor from "../createDocument/ContentEditor";
-import ClearFormButton from "../createDocument/ClearFormButton";
-import PreviewButton from "../createDocument/PreviewButton";
-import PublishButton from "../createDocument/PublishButton";
-import TempButton from "../createDocument/TempButton";
-import { usePathname } from "next/navigation";
+import DocumentTypeToggle from "./createDocument/DocumentTypeToggle";
+import TitleInput from "./createDocument/TitleInput";
+import DateInput from "./createDocument/DateInput";
+import ConditionalInputs from "./createDocument/conditionalInputs/ConditionalInputs";
+import TagInput from "./createDocument/TagInput";
+import ContentEditor from "./createDocument/ContentEditor";
+import ClearFormButton from "./createDocument/ClearFormButton";
+import PreviewButton from "./createDocument/PreviewButton";
+import PublishButton from "./createDocument/PublishButton";
+import TempButton from "./createDocument/TempButton";
+import { DOCUMENT_MODE, DocumentModeState } from "@/types/DocumentForm.type";
 
-const EditDocument = ({ initialState }: { initialState: DocumentPayload }) => {
+const ManageDocument = ({ initialState }: { initialState: DocumentModeState }) => {
   const [isPreview, setIsPreview] = useState(false);
-
-  const pathName = usePathname();
-  const segments = pathName.split("/").filter(Boolean);
-  const isEditing = !!segments[2];
 
   return (
     <DocumentFormProvider initialState={initialState}>
@@ -40,7 +35,7 @@ const EditDocument = ({ initialState }: { initialState: DocumentPayload }) => {
               <div className="h-full flex flex-col mx-10 my-6 gap-4">
                 <div className="flex gap-2">
                   <TitleInput />
-                  <DateInput isEditing={isEditing} />
+                  <DateInput isEditing={initialState.mode === DOCUMENT_MODE.EDIT} />
                 </div>
                 <ConditionalInputs />
                 <TagInput />
@@ -63,4 +58,4 @@ const EditDocument = ({ initialState }: { initialState: DocumentPayload }) => {
   );
 };
 
-export default EditDocument;
+export default ManageDocument;

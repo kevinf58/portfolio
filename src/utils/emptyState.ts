@@ -1,6 +1,7 @@
 import { DOCUMENT_TYPE, DocumentPayload, DocumentType } from "@/types/Document.type";
 import { getLocalDate } from "./dateUtils";
 
+// returns an empty state for the specified document type
 const emptyState = (type: DocumentType): DocumentPayload =>
   type === DOCUMENT_TYPE.JOURNAL
     ? {

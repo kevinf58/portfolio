@@ -5,34 +5,25 @@ import Button from "@/components/ui/Button";
 import { useDocumentFormContext } from "@/hooks/useDocumentForm";
 
 import { DOCUMENT_TYPE } from "@/types/Document.type";
+import { DOCUMENT_MODE } from "@/types/DocumentForm.type";
 
 const TempButton = () => {
   const context = useDocumentFormContext();
 
-  if (context.type === DOCUMENT_TYPE.JOURNAL)
-    return (
-      <Button
-        onClick={() =>
-          console.log(
-            context.type +
-              "\n" +
-              context.title +
-              "\n" +
-              context.date +
-              "\n" +
-              context.category +
-              "\n" +
-              context.tags +
-              "\n" +
-              context.content
-          )
+  return (
+    <Button
+      onClick={() => {
+        if (context.draft.type === DOCUMENT_TYPE.PROJECT) {
+          console.log("draft: " + context.draft.imagePreview);
+          if (context.mode === DOCUMENT_MODE.EDIT && context.original.type === DOCUMENT_TYPE.PROJECT) {
+            console.log("original: " + context.original.imagePreview);
+          }
         }
-      >
-        Log Journal Contents
-      </Button>
-    );
-  else if (context.type === DOCUMENT_TYPE.PROJECT)
-    return <Button onClick={() => console.log(context.imagePreview) + "\n" + context.content}>Log Project Contents</Button>;
+      }}
+    >
+      Log Contents
+    </Button>
+  );
 };
 
 export default TempButton;

@@ -1,5 +1,5 @@
 import getDocumentByID from "@/services/getDocumentByID.service";
-import { DocumentIdentifierParams } from "@/types/api/DocumentIdentifierParams";
+import { DocumentIdentifierParams } from "@/types/api/DocumentIdentifierParams.type";
 import { Document } from "@/types/Document.type";
 import { notFound } from "next/navigation";
 import DocumentDisplay from "@/components/documents/viewDocument/DocumentDisplay";
