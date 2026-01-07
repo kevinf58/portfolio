@@ -8,7 +8,6 @@ import Tag from "../ui/Tag";
 
 const DocumentCard = (props: Document) => {
   const titleElem = <h1 className="text-2xl font-bold my-4 white">{props.title}</h1>;
-  console.log(props.createdAt + " " + props.updatedAt);
 
   // conditional based on the type of document
   const conditionalElem =

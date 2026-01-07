@@ -1,4 +1,4 @@
-import { DocumentPayload, DOCUMENT_TYPE, DocumentType, Document } from "@/types/Document.type";
+import { DocumentPayload, DOCUMENT_TYPE, DocumentType } from "@/types/Document.type";
 import {
   BaseFormContextValue,
   DOCUMENT_MODE,
@@ -14,8 +14,6 @@ import emptyState from "@/utils/emptyState";
 import excludeDocumentID from "@/utils/excludeDocumentID";
 import { createContext, useCallback, useContext, useMemo, useReducer, useRef } from "react";
 
-//TODO: CONSIDER KEEPING A LOADING STATE HERE SO THAT WHEN EXPENSIVE COMPUTATIONS EXIST LIKE IMAGE UPLOADS, DOCUMENT CREATION REQUESTS, ETC, BUTTONS & INPUTS CAN DISABLE
-//TODO: UPDATE THIS CONTEXT LATER ACCOMODATE AN EDITING FUNCTIONALITY AND ALLOW PROPS TO BE PASSED INSTEAD OF AN EMPTY INITIALSTATE
 const documentDraftReducer = (state: DocumentPayload, action: DocumentDraftActions): DocumentPayload => {
   switch (action.type) {
     case "TOGGLE_DOCUMENT_TYPE":
@@ -138,9 +136,6 @@ export const useDocumentForm = (initialState: DocumentModeState) => {
     []
   );
 
-  const startEdit = useCallback((document: Document) => dispatch({ type: "START_EDIT", payload: document }), []);
-  const startCreate = useCallback((type: DocumentType) => dispatch({ type: "START_CREATE", payload: type }), []);
-
   const contextValue: FormContextValue = useMemo(() => {
     const { mode, draft } = state;
 
@@ -155,9 +150,6 @@ export const useDocumentForm = (initialState: DocumentModeState) => {
       setTags,
       setContent,
       resetFields,
-
-      startEdit,
-      startCreate,
     };
 
     // journal document handling
@@ -192,19 +184,7 @@ export const useDocumentForm = (initialState: DocumentModeState) => {
     }
 
     return { ...projectValue, mode: DOCUMENT_MODE.CREATE, draft };
-  }, [
-    state,
-    toggleDocumentType,
-    setTitle,
-    setDate,
-    setCategory,
-    setImagePreview,
-    setTags,
-    setContent,
-    resetFields,
-    startEdit,
-    startCreate,
-  ]);
+  }, [state, toggleDocumentType, setTitle, setDate, setCategory, setImagePreview, setTags, setContent, resetFields]);
 
   return contextValue;
 };

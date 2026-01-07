@@ -13,7 +13,7 @@ export type DocumentDraftActions =
   | { type: "SET_CONTENT"; payload: string }
   | { type: "RESET"; payload: DocumentType };
 
-type DraftActions = {
+export type BaseFormContextValue = {
   title: string;
   date: string;
   tags: string[];
@@ -25,11 +25,6 @@ type DraftActions = {
   setContent: (content: string) => void;
   resetFields: (type: DocumentType) => void;
 };
-type ModeActions = {
-  startEdit: (document: Document) => void;
-  startCreate: (type: DocumentType) => void;
-};
-export type BaseFormContextValue = DraftActions & ModeActions;
 
 export type JournalFormContextValue = BaseFormContextValue & {
   type: typeof DOCUMENT_TYPE.JOURNAL;

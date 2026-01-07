@@ -20,17 +20,23 @@ import { DOCUMENT_MODE, DocumentModeState } from "@/types/DocumentForm.type";
 const ManageDocument = ({ initialState }: { initialState: DocumentModeState }) => {
   const [isPreview, setIsPreview] = useState(false);
 
+  const DocumentTypeElem = (
+    <h3 className="font-sans font-bold text-xl text-white">
+      New {`${initialState.draft.type.charAt(0).toUpperCase() + initialState.draft.type.slice(1)}`}
+    </h3>
+  );
+
   return (
     <DocumentFormProvider initialState={initialState}>
-      <section className="relative min-h-[calc(100vh-4.75rem)] w-full flex flex-col items-center font-medium bg-dark-gray shadow-default">
+      <section className="relative min-h-[calc(100vh-4.75rem)] flex flex-col items-center font-medium bg-dark-gray shadow-default">
         {isPreview ? (
           <PreviewDocument />
         ) : (
-          <div className="flex flex-wrap flex-1 space-x-10 p-8 pt-28">
+          <div className="w-220 flex flex-wrap flex-1 space-x-10 p-8 pt-28">
             <Card size="lg" className="w-full flex flex-col">
               <div className="flex items-center gap-2">
                 <FaRegEdit size={25} className="text-dark-white mr-1" />
-                <DocumentTypeToggle />
+                {initialState.mode === DOCUMENT_MODE.CREATE ? <DocumentTypeToggle /> : DocumentTypeElem}
               </div>
               <div className="h-full flex flex-col mx-10 my-6 gap-4">
                 <div className="flex gap-2">
