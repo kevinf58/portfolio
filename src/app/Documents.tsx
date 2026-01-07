@@ -32,7 +32,7 @@ const Documents = ({ type }: { type: DocumentType }) => {
       setDocuments((prev) => [...prev, ...res.data]);
 
       // offset the number of documents already loaded
-      if (res.meta && res.meta.total <= res.meta.offset + DOCUMENTS_LOADED_LIMIT) {
+      if (!res.meta || (res.meta && res.meta.total <= res.meta.offset + DOCUMENTS_LOADED_LIMIT)) {
         setHasMore(false);
       }
 
@@ -52,7 +52,7 @@ const Documents = ({ type }: { type: DocumentType }) => {
     <section className="flex flex-col items-center w-full gap-2 py-20 px-6 bg-dark-gray">
       <span className="font-sans font-bold text-5xl text-tint">{type === DOCUMENT_TYPE.JOURNAL ? "Journals" : "Projects"}</span>
 
-      {!loading && !documents ? (
+      {!loading && documents.length === 0 ? (
         <div>No {type === DOCUMENT_TYPE.JOURNAL ? "Journals" : "Projects"} Found.</div>
       ) : (
         <div className="flex flex-col items-center w-full max-w-6xl mx-auto">
