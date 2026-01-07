@@ -3,7 +3,6 @@ import apiRequest from "../app/api/apiRequest";
 import { UploadDocumentPayload } from "@/types/api/UploadDocumentPayload.type";
 
 const updateDocument = async (payload: UploadDocumentPayload): Promise<ApiResponse<null>> => {
-  console.log(payload);
   return apiRequest<null>(`/api/${payload.identifier.type}/${payload.identifier.id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },

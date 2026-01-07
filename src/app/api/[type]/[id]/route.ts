@@ -111,7 +111,9 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
 
     // building the set clause for the update stmt
     const patched = applyPatch(res, mainOperations, true).newDocument;
-    patched.updatedAt = getLocalDate();
+    patched.updatedAt = new Date(getLocalDate()).toISOString();
+
+    console.log(patched.updatedAt);
     const cols = Object.keys(patched);
     const vals = Object.values(patched);
     const clause = cols.map((col) => `${col} = ?`).join(", ");

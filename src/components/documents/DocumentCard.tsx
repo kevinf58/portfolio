@@ -7,14 +7,15 @@ import summarizeContent from "@/utils/summarizeContent";
 import Tag from "../ui/Tag";
 
 const DocumentCard = (props: Document) => {
-  const titleElem = <h1 className="text-2xl font-bold my-4">{props.title}</h1>;
+  const titleElem = <h1 className="text-2xl font-bold my-4 white">{props.title}</h1>;
+  console.log(props.createdAt + " " + props.updatedAt);
 
   // conditional based on the type of document
   const conditionalElem =
     props.type === DOCUMENT_TYPE.JOURNAL ? (
       <div className="flex items-center gap-2">
         <Tag type="category">{props.category}</Tag>
-        <h6 className="text-xs text-dark-white">{dateToReadable(props.createdAt)}</h6>
+        <h6 className="text-xs text-dark-white whitespace-nowrap shrink-0">{dateToReadable(props.createdAt)}</h6>
         {props.createdAt !== props.updatedAt && (
           <h6 className="text-xs text-dark-white italic">{"(Edited " + dateToReadable(props.createdAt) + ")"}</h6>
         )}
@@ -25,7 +26,14 @@ const DocumentCard = (props: Document) => {
     ) : (
       <>
         {titleElem}
-        <h6 className="text-xs text-dark-white">{dateToReadable(props.createdAt)}</h6>
+        <div className="flex text-end gap-2">
+          <h6 className="text-xs text-dark-white whitespace-nowrap shrink-0">{dateToReadable(props.createdAt)}</h6>
+          {props.createdAt !== props.updatedAt && (
+            <h6 className="text-xs text-dark-white italic whitespace-nowrap shrink-0">
+              {"(Edited " + dateToReadable(props.updatedAt) + ")"}
+            </h6>
+          )}
+        </div>
       </>
     );
 

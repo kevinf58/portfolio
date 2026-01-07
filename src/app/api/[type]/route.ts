@@ -60,7 +60,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       }
 
       message = "Journal created successfully";
-    } else {
+    } else if (document.type === DOCUMENT_TYPE.PROJECT) {
       stmt = db.prepare(`INSERT INTO project (title, createdAt, updatedAt, content, imagePreview) VALUES (?, ?, ?, ?, ?)`);
       const res = stmt.run(
         document.title,
@@ -121,7 +121,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
     // check for if stmt returned >= 1 row
     if (res.length === 0) {
-      return NextResponse.json({ success: false, info: { code: 404, message: "No documents exist" } });
+      return NextResponse.json({ success: true, data: "", info: { code: 200, message: "No documents exist" } });
     }
 
     const data: Document[] = res.map((row) => ({
