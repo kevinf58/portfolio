@@ -81,7 +81,7 @@ const CrepeEditor = () => {
 
 const ContentEditor = () => {
   return (
-    <div className="rounded-sm cursor-text px-4 py-3 input-base bg-light-gray/0">
+    <div className="rounded-sm cursor-text px-4 py-3 input-base">
       <MilkdownProvider>
         <CrepeEditor />
       </MilkdownProvider>

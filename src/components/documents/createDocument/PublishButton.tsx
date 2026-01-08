@@ -3,7 +3,7 @@
 import Button from "@/components/ui/Button";
 import { useDocumentFormContext } from "@/hooks/useDocumentForm";
 import { DOCUMENT_CONTENT_MIN_LENGTH, DOCUMENT_TITLE_MAX_LENGTH, DOCUMENT_TITLE_MIN_LENGTH } from "@/lib/constants";
-import createDocument from "@/services/createDocument.Service";
+import createDocument from "@/services/createDocument.service";
 import updateDocument from "@/services/updateDocument.Service";
 import uploadImage from "@/services/uploadImage.service";
 import { ApiResponse } from "@/types/api/api.type";

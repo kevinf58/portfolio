@@ -4,7 +4,7 @@ import { MdDelete } from "react-icons/md";
 import Button from "../ui/Button";
 import { useState } from "react";
 import { DocumentIdentifierPayload } from "@/types/api/apiServices.type";
-import deleteDocument from "@/services/deleteDocument.Service";
+import deleteDocument from "@/services/deleteDocument.service";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { FaRegEdit } from "react-icons/fa";
