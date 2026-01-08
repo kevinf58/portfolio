@@ -6,42 +6,33 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint && prettier --write ."
+    "lint": "next lint && prettier --write .",
+    "seed": "tsx src/utils/seed.ts"
   },
   "dependencies": {
-    "@milkdown/crepe": "^7.15.5",
-    "@milkdown/kit": "^7.15.5",
-    "@milkdown/react": "^7.15.5",
-    "better-sqlite3": "^12.4.1",
-    "fast-average-color": "^9.5.0",
-    "motion": "^12.23.12",
-    "next": "^16.1.0",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
+    "@milkdown/crepe": "^7.17.3",
+    "@milkdown/react": "^7.17.3",
+    "better-sqlite3": "^12.5.0",
+    "fast-json-patch": "^3.1.1",
+    "motion": "^12.23.26",
+    "next": "16.1.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
     "react-icons": "^5.5.0",
     "react-toastify": "^11.0.5",
     "reading-time": "^1.5.0",
-    "remove-markdown": "^0.6.2",
-    "sqlite3": "^5.1.7"
+    "remove-markdown": "^0.6.2"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^20",
-    "@types/react": "19.1.13",
-    "@types/react-dom": "19.1.9",
-    "@types/sqlite3": "^3.1.11",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "^16.1.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
-    "prettier": "^3.6.2",
+    "eslint-config-next": "16.1.1",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
-  },
-  "overrides": {
-    "@types/react": "19.1.13",
-    "@types/react-dom": "19.1.9"
   }
 }

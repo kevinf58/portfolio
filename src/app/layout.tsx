@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, Inria_Sans } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/common/NavBar";
-import Footer from "@/components/common/Footer";
+import NavBar from "@/components/layout/NavBar";
+import Footer from "@/components/layout/Footer";
 import { ToastContainer } from "react-toastify";
-import ClientWrapper from "@/components/ClientWrapper";
+import ClientWrapper from "./ClientWrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,7 +35,7 @@ export default function RootLayout({
           <header className="sticky top-0 z-20">
             <NavBar />
           </header>
-          <main className="flex-grow z-10">{children}</main>
+          <main className="grow z-10">{children}</main>
           <Footer />
           <ToastContainer className="sm:mt-14" />
         </ClientWrapper>

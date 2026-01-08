@@ -1,72 +1,147 @@
+import db from "@/lib/db";
+import { ApiResponse } from "@/types/api/api.type";
+import { DocumentPayload } from "@/types/Document.type";
+import { DOCUMENT_TYPE, Document, DocumentType } from "@/types/Document.type";
+import { DOCUMENT_CONTENT_MIN_LENGTH, DOCUMENT_TITLE_MAX_LENGTH, DOCUMENT_TITLE_MIN_LENGTH, DOCUMENTS_LOADED_LIMIT } from "@/lib/constants";
 import { NextRequest, NextResponse } from "next/server";
-import { addDocument, getDocumentsPage } from "@/lib/documentQueries";
-import { DocumentType } from "@/types/Document.type";
-import { Document } from "@/types/Document.type";
-import { DocumentCollectionParams } from "@/types/api/Api.type";
-import { DOCUMENTS_PER_LOAD } from "@/utils/constants";
 
-export async function GET(request: NextRequest, { params }: DocumentCollectionParams) {
-  const { searchParams } = new URL(request.url);
-  const { type } = await params;
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  try {
+    let message: string = "";
+    let stmt = null;
 
-  const offset = Number(searchParams.get("offset") ?? 0);
-  const limit = Number(searchParams.get("limit") ?? DOCUMENTS_PER_LOAD);
+    const document: DocumentPayload = await req.json();
 
-  const { documents, hasMore } = getDocumentsPage(type as DocumentType, offset, limit);
-  return NextResponse.json({ documents, hasMore });
+    // error handling
+    if (document.title.length < DOCUMENT_TITLE_MIN_LENGTH) {
+      message = "Title too short";
+    } else if (document.title.length > DOCUMENT_TITLE_MAX_LENGTH) {
+      message = "Title too long";
+    } else if (document.content.length < DOCUMENT_CONTENT_MIN_LENGTH) {
+      message = `Please add sufficient content to make this a ${document.type}`;
+    } else if (document.type === DOCUMENT_TYPE.PROJECT && !document.imagePreview) {
+      message = "No project image preview provided";
+    }
+    if (message) {
+      return NextResponse.json<ApiResponse<null>>({ success: false, info: { code: 400, message } });
+    }
+
+    // titles of the same type of document need to be unique, so do a check for this
+    stmt = db.prepare(`SELECT 1 FROM ${document.type} WHERE title = ?`);
+    const res = stmt.get(document.title);
+    if (res) {
+      return NextResponse.json<ApiResponse<null>>({
+        success: false,
+        info: {
+          code: 409,
+          message: `A ${
+            document.type.charAt(0).toUpperCase() + document.type.slice(1)
+          } with this title already exists. Please think of another`,
+        },
+      });
+    }
+
+    if (document.type === DOCUMENT_TYPE.JOURNAL) {
+      // create document
+      stmt = db.prepare(`INSERT INTO journal (title, createdAt, updatedAt, content, category) VALUES (?, ?, ?, ?, ?)`);
+      const res = stmt.run(
+        document.title,
+        new Date(document.createdAt).toISOString(),
+        new Date(document.createdAt).toISOString(),
+        document.content,
+        document.category
+      );
+      const journalID = res.lastInsertRowid;
+
+      // iterate tags into the journal tag table
+      stmt = db.prepare(`INSERT INTO journal_tag (journal_id, tag) VALUES (?, ?)`);
+      for (const tag of document.tags) {
+        stmt.run(journalID, tag);
+      }
+
+      message = "Journal created successfully";
+    } else if (document.type === DOCUMENT_TYPE.PROJECT) {
+      stmt = db.prepare(`INSERT INTO project (title, createdAt, updatedAt, content, imagePreview) VALUES (?, ?, ?, ?, ?)`);
+      const res = stmt.run(
+        document.title,
+        new Date(document.createdAt).toISOString(),
+        new Date(document.createdAt).toISOString(),
+        document.content,
+        document.imagePreview
+      );
+      const projectID = res.lastInsertRowid;
+
+      // iterate tags into the project tag table
+      stmt = db.prepare(`INSERT INTO project_tag (project_id, tag) VALUES (?, ?)`);
+      for (const tag of document.tags) {
+        stmt.run(projectID, tag);
+      }
+
+      message = "Project created successfully";
+    }
+
+    return NextResponse.json<ApiResponse<null>>({ success: true, data: null, info: { code: 201, message } });
+  } catch (err) {
+    console.log(err);
+    return NextResponse.json<ApiResponse<null>>({ success: false, info: { code: 500, message: "Server failure. Please try again later" } });
+  }
 }
 
-export async function POST(request: NextRequest) {
+export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
-    const document: Document = await request.json();
+    const type = req.nextUrl.pathname.split("/").pop();
 
-    if (typeof document.title !== "string" || document.title.trim().length < 6) {
-      return NextResponse.json({ error: "Title too short" }, { status: 400 });
+    const limit = Number(req.nextUrl.searchParams.get("limit")) || DOCUMENTS_LOADED_LIMIT;
+    const offset = Number(req.nextUrl.searchParams.get("offset")) || 0;
+
+    const countStmt =
+      type === DOCUMENT_TYPE.JOURNAL
+        ? db.prepare(`SELECT COUNT(*) as total FROM journal`)
+        : db.prepare(`SELECT COUNT(*) as total FROM project`);
+
+    const { total } = countStmt.get() as { total: number };
+
+    // error and sql injection handling
+    if (!Object.values(DOCUMENT_TYPE).includes(type as DocumentType)) {
+      return NextResponse.json({ success: false, info: { code: 400, message: "Invalid document type" } });
     }
 
-    if (document.type === "project" && !document.imagePreviewLink) {
-      return NextResponse.json({ error: "Please add a project preview image!" }, { status: 400 });
+    const stmt = db.prepare(`
+        SELECT d.id, d.title, d.createdat AS createdAt, d.updatedat AS updatedAt, d.content, ${
+          type === DOCUMENT_TYPE.JOURNAL ? "d.category" : "NULL AS category"
+        }, '${type}' AS type, ${type === DOCUMENT_TYPE.PROJECT ? "d.imagePreview" : "NULL AS imagePreview"}, '${type}' AS type,
+        GROUP_CONCAT(t.tag) AS tags
+        FROM ${type} d
+        LEFT JOIN ${type}_tag t ON d.id = t.${type}_id
+        GROUP BY d.id
+        ORDER BY d.createdat DESC
+        LIMIT ? OFFSET ?
+      `);
+    const res = stmt.all(limit, offset) as Array<Document>;
+
+    // check for if stmt returned >= 1 row
+    if (res.length === 0) {
+      return NextResponse.json({ success: true, data: "", info: { code: 200, message: "No documents exist" } });
     }
 
-    if (document.type === "journal" && !document.category) {
-      return NextResponse.json({ error: "Please select a journal category!" }, { status: 400 });
-    }
+    const data: Document[] = res.map((row) => ({
+      ...row,
+      tags: row.tags ? (row.tags as unknown as string).split(",") : [],
+    }));
 
-    if (typeof document.markdown !== "string" || document.markdown.length < 200) {
-      return NextResponse.json({ error: "Please add sufficient text to your document!" }, { status: 400 });
-    }
-
-    if (document.type !== "journal" && document.type !== "project") {
-      return NextResponse.json({ error: "Invalid document type" }, { status: 400 });
-    }
-
-    const newDocument: Document = {
-      title: document.title.trim(),
-      markdown: document.markdown,
-      tags: Array.isArray(document.tags) ? document.tags : [],
-      type: document.type,
-      date: document.date,
-      ...(document.type === "project" && document.imagePreviewLink
-        ? { imagePreviewLink: document.imagePreviewLink }
-        : {}),
-      ...(document.type === "journal" && document.category ? { category: document.category } : {}),
-    };
-
-    const created = await addDocument(newDocument);
-
-    return NextResponse.json(created, { status: 201 });
-  } catch (err: unknown) {
-    console.error(err);
-
-    if (err instanceof Error) {
-      if (
-        ("code" in err && err.code === "SQLITE_CONSTRAINT_UNIQUE") ||
-        err.message.includes("UNIQUE constraint failed")
-      ) {
-        return NextResponse.json({ error: "A document with this title already exists." }, { status: 409 });
-      }
-    }
-
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json<ApiResponse<Document[]>>({
+      success: true,
+      data,
+      meta: {
+        limit,
+        offset,
+        total,
+        hasMore: offset + limit < total,
+      },
+      info: { code: 200, message: "Documents fetched successfully" },
+    });
+  } catch (err) {
+    console.log(err);
+    return NextResponse.json<ApiResponse<null>>({ success: false, info: { code: 500, message: "Server failure. Please try again later" } });
   }
 }

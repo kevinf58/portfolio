@@ -1,12 +1,12 @@
-import Link from "@/components/common/Link";
+import Link from "@/components/ui/Link";
 import { PiMapPinSimpleFill } from "react-icons/pi";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { IoMailSharp } from "react-icons/io5";
 import { SiTypescript, SiReact, SiPython, SiTailwindcss, SiNextdotjs } from "react-icons/si";
-import Journals from "@/components/sections/Journals";
-import Projects from "@/components/sections/Projects";
-import Card from "@/components/common/cards/Card";
-import CallToAction from "@/components/sections/CallToAction";
+import Documents from "./Documents";
+import Card from "@/components/ui/Card";
+import CallToAction from "./CallToAction";
+import { DOCUMENT_TYPE } from "@/types/Document.type";
 
 export default function Home() {
   return (
@@ -22,9 +22,7 @@ export default function Home() {
               <PiMapPinSimpleFill />
             </div>
           </div>
-          <span className="font-serif sm:text-3xl text-2xl">
-            Computer Science Student @ The University of Western Ontario
-          </span>
+          <span className="font-serif sm:text-3xl text-2xl">Computer Science Student @ The University of Western Ontario</span>
           <ul className="flex flex-col space-y-1 mt-10 text-sm">
             <li>
               <Link href={"https://ca.linkedin.com/"} target="_blank">
@@ -47,31 +45,31 @@ export default function Home() {
           </ul>
         </div>
         <div className="flex flex-wrap group w-full absolute bottom-6 sm:px-28 px-6 font-sans text-xs gap-4">
-          <Card href="" className="items-center">
+          <Card className="items-center">
             <SiTypescript color="#2F6CB4" />
             <span>TypeScript</span>
           </Card>
-          <Card href="" className="items-center">
+          <Card className="items-center">
             <SiReact color="#66DBFB" />
             <span>React</span>
           </Card>
-          <Card href="" className="items-center">
+          <Card className="items-center">
             <SiPython />
             <span>Python</span>
           </Card>
-          <Card href="" className="items-center">
+          <Card className="items-center">
             <SiTailwindcss color="#3FBFF8" />
             <span>Tailwind CSS</span>
           </Card>
-          <Card href="" className="items-center">
+          <Card className="items-center">
             <SiNextdotjs color="#080808" />
             <span>Next JS</span>
           </Card>
         </div>
       </section>
       <section className="w-full flex flex-col items-center pt-32 bg-black shadow-default" id="scroll">
-        <Projects />
-        <Journals />
+        <Documents type={DOCUMENT_TYPE.PROJECT} />
+        <Documents type={DOCUMENT_TYPE.JOURNAL} />
         <CallToAction />
       </section>
       {/* <section className='h-screen w-full bg-green-300' /> */}
