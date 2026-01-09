@@ -4,8 +4,11 @@ import Link from "../ui/Link";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { MdMail } from "react-icons/md";
 import copyText from "@/utils/copyText";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const Footer = () => {
+  const { data: session } = useSession();
+
   return (
     <footer className="sticky bottom-0 w-full items-center md:px-18 md:py-10 lg:px-40 px-4 py-6 bg-dark-gray font-medium text-xs">
       <div className="max-w-7xl mx-auto">
@@ -36,6 +39,15 @@ const Footer = () => {
               Click here!
             </Link>
           </div>
+          {session ? (
+            <a className="hover:cursor-pointer underline" onClick={() => signOut()}>
+              Log Out of Github
+            </a>
+          ) : (
+            <a className="hover:cursor-pointer underline" onClick={() => signIn("github")}>
+              Login with Github
+            </a>
+          )}
         </div>
         <hr className="max-w-7xl h-0.5 bg-light-gray rounded-full sm:mx-20 mt-6 mb-10" />
         <div className="w-full relative flex md:flex-row md:justify-between md:gap-0 md:mb-8 sm:scale-100 flex-col items-center justify-center gap-4 scale-70">

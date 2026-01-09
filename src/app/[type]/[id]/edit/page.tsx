@@ -5,9 +5,17 @@ import { notFound } from "next/navigation";
 import { Document } from "@/types/Document.type";
 import { isoToLocalDate } from "@/utils/dateUtils";
 import { DOCUMENT_MODE, DocumentModeState } from "@/types/DocumentForm.type";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/auth";
 
 const Page = async ({ params }: DocumentIdentifierParams) => {
   const { type, id } = await params;
+  const session = await getServerSession(authOptions);
+
+  // auth check
+  if (!session) {
+    return notFound();
+  }
 
   const res = await getDocumentByID({ type, id });
 

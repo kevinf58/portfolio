@@ -7,9 +7,11 @@ import { dateToReadable } from "@/utils/dateUtils";
 import Tag from "@/components/ui/Tag";
 import ReadOnlyCrepe from "./ReadOnlyCrepe";
 import { Document } from "@/types/Document.type";
+import { useSession } from "next-auth/react";
 
 const DocumentDisplay = ({ document }: { document: Document }) => {
   const { id, type, title, createdAt, updatedAt, tags, content } = document;
+  const { data: session } = useSession();
 
   return (
     <div className="max-w-260 w-full lg:px-34 sm:px-20 px-8 py-28 gap-1">
@@ -20,7 +22,7 @@ const DocumentDisplay = ({ document }: { document: Document }) => {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="text-[48px] leading-12.5 font-semibold">{title}</h1>
-          {id && (
+          {id && session && (
             <div className="flex space-x-2">
               <EditButton type={type} id={id} />
               <DeleteButton type={type} id={id} />
