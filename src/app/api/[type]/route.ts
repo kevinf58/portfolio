@@ -1,5 +1,5 @@
 import db from "@/lib/db";
-import { ApiResponse } from "@/types/api/api.type";
+import { ApiResponse } from "@/types/api/Api.type";
 import { DocumentPayload } from "@/types/Document.type";
 import { DOCUMENT_TYPE, Document, DocumentType } from "@/types/Document.type";
 import { DOCUMENT_CONTENT_MIN_LENGTH, DOCUMENT_TITLE_MAX_LENGTH, DOCUMENT_TITLE_MIN_LENGTH, DOCUMENTS_LOADED_LIMIT } from "@/lib/constants";

@@ -1,4 +1,4 @@
-import { ApiResponse } from "@/types/api/api.type";
+import { ApiResponse } from "@/types/api/Api.type";
 import { NextRequest, NextResponse } from "next/server";
 import { Document, DOCUMENT_TYPE, DocumentType } from "@/types/Document.type";
 import db from "@/lib/db";

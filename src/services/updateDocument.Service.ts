@@ -1,4 +1,4 @@
-import { ApiResponse } from "@/types/api/api.type";
+import { ApiResponse } from "@/types/api/Api.type";
 import apiRequest from "../app/api/apiRequest";
 import { UploadDocumentPayload } from "@/types/api/UploadDocumentPayload.type";
 

@@ -1,6 +1,6 @@
 import { authOptions } from "@/auth";
 import { MAX_IMAGE_SIZE } from "@/lib/constants";
-import { ApiResponse } from "@/types/api/api.type";
+import { ApiResponse } from "@/types/api/Api.type";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
