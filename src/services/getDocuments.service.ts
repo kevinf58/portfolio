@@ -1,4 +1,4 @@
-import { ApiResponse } from "@/types/api/api.type";
+import { ApiResponse } from "@/types/api/Api.type";
 import { Document } from "@/types/Document.type";
 import apiRequest from "../app/api/apiRequest";
 import { GetDocumentsPayload } from "@/types/api/apiServices.type";

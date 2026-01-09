@@ -1,5 +1,5 @@
 import apiRequest from "@/app/api/apiRequest";
-import { ApiResponse } from "@/types/api/api.type";
+import { ApiResponse } from "@/types/api/Api.type";
 
 const uploadImage = (payload: File): Promise<ApiResponse<string>> => {
   const data = new FormData();

@@ -1,16 +1,24 @@
 import db from "@/lib/db";
-import { ApiResponse } from "@/types/api/api.type";
+import { ApiResponse } from "@/types/api/Api.type";
 import { DocumentPayload } from "@/types/Document.type";
 import { DOCUMENT_TYPE, Document, DocumentType } from "@/types/Document.type";
 import { DOCUMENT_CONTENT_MIN_LENGTH, DOCUMENT_TITLE_MAX_LENGTH, DOCUMENT_TITLE_MIN_LENGTH, DOCUMENTS_LOADED_LIMIT } from "@/lib/constants";
 import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/auth";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     let message: string = "";
     let stmt = null;
 
+    const session = getServerSession(authOptions);
     const document: DocumentPayload = await req.json();
+
+    // auth check
+    if (!session) {
+      return NextResponse.json({ success: false, info: { code: 401, message: "Unauthorized" } });
+    }
 
     // error handling
     if (document.title.length < DOCUMENT_TITLE_MIN_LENGTH) {

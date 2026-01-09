@@ -6,7 +6,7 @@ import { DOCUMENT_CONTENT_MIN_LENGTH, DOCUMENT_TITLE_MAX_LENGTH, DOCUMENT_TITLE_
 import createDocument from "@/services/createDocument.service";
 import updateDocument from "@/services/updateDocument.Service";
 import uploadImage from "@/services/uploadImage.service";
-import { ApiResponse } from "@/types/api/api.type";
+import { ApiResponse } from "@/types/api/Api.type";
 import { UploadDocumentPayload } from "@/types/api/UploadDocumentPayload.type";
 import { DocumentPayload, DOCUMENT_TYPE } from "@/types/Document.type";
 import { DOCUMENT_MODE } from "@/types/DocumentForm.type";

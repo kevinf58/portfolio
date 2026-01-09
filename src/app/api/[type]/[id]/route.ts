@@ -1,9 +1,11 @@
-import { ApiResponse } from "@/types/api/api.type";
+import { ApiResponse } from "@/types/api/Api.type";
 import { NextRequest, NextResponse } from "next/server";
 import { Document, DOCUMENT_TYPE, DocumentType } from "@/types/Document.type";
 import db from "@/lib/db";
 import { applyPatch, Operation, validate } from "fast-json-patch";
 import { getLocalDate } from "@/utils/dateUtils";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/auth";
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
@@ -46,7 +48,13 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
 export async function DELETE(req: NextRequest): Promise<NextResponse> {
   try {
+    const session = getServerSession(authOptions);
     const [, , type, id] = req.nextUrl.pathname.split("/");
+
+    // auth check
+    if (!session) {
+      return NextResponse.json({ success: false, info: { code: 401, message: "Unauthorized" } });
+    }
 
     // check for if type is of type DOCUMENT_TYPE
     if (!Object.values(DOCUMENT_TYPE).includes(type as DocumentType)) {
@@ -73,8 +81,14 @@ export async function DELETE(req: NextRequest): Promise<NextResponse> {
 
 export async function PATCH(req: NextRequest): Promise<NextResponse> {
   try {
+    const session = getServerSession(authOptions);
     const [, , type, id] = req.nextUrl.pathname.split("/");
     const diff: Operation[] = await req.json();
+
+    // auth check
+    if (!session) {
+      return NextResponse.json({ success: false, info: { code: 401, message: "Unauthorized" } });
+    }
 
     // check for if type is of type DOCUMENT_TYPE and validating patch data
     const validationError = validate(diff);

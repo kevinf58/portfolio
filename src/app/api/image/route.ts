@@ -1,11 +1,20 @@
+import { authOptions } from "@/auth";
 import { MAX_IMAGE_SIZE } from "@/lib/constants";
-import { ApiResponse } from "@/types/api/api.type";
+import { ApiResponse } from "@/types/api/Api.type";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     const formData = await req.formData();
     const file = formData.get("file") as File;
+
+    const session = getServerSession(authOptions);
+
+    // auth check
+    if (!session) {
+      return NextResponse.json({ success: false, info: { code: 401, message: "Unauthorized" } });
+    }
 
     // error handling
     if (!file) {

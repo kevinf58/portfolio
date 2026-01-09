@@ -1,4 +1,4 @@
-import { ApiResponse } from "@/types/api/api.type";
+import { ApiResponse } from "@/types/api/Api.type";
 
 const apiRequest = async <T>(endpoint: string, options?: RequestInit): Promise<ApiResponse<T>> => {
   try {
