@@ -1,4 +1,4 @@
-import { BaseProps, ClickableProps } from "./Base.type";
+import { BaseProps, ClickableProps } from "../../Base.type";
 
 export interface LinkProps extends BaseProps, ClickableProps {
   href: string;

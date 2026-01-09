@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { BaseProps, ClickableProps } from "./Base.type";
+import { BaseProps, ClickableProps } from "../../Base.type";
 import { JournalCategory } from "@/types/Journal.type";
 
 export type TagProps =
