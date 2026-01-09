@@ -5,7 +5,7 @@ import db from "@/lib/db";
 import { applyPatch, Operation, validate } from "fast-json-patch";
 import { getLocalDate } from "@/utils/dateUtils";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/auth";
+import { authOptions } from "@/app/auth";
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
   try {

@@ -6,7 +6,7 @@ import { Document } from "@/types/Document.type";
 import { isoToLocalDate } from "@/utils/dateUtils";
 import { DOCUMENT_MODE, DocumentModeState } from "@/types/DocumentForm.type";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/auth";
+import { authOptions } from "@/app/auth";
 
 const Page = async ({ params }: DocumentIdentifierParams) => {
   const { type, id } = await params;

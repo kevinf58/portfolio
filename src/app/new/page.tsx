@@ -4,7 +4,7 @@ import emptyState from "@/utils/emptyState";
 import { DOCUMENT_MODE, DocumentModeState } from "@/types/DocumentForm.type";
 import { notFound } from "next/navigation";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/auth";
+import { authOptions } from "../auth";
 
 const Page = async () => {
   const session = await getServerSession(authOptions);
