@@ -1,4 +1,4 @@
-import { BaseProps, ClickableProps, Size } from "./Base.type";
+import { BaseProps, ClickableProps, Size } from "../../Base.type";
 
 export interface CardProps extends BaseProps, ClickableProps {
   size?: Size;

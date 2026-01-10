@@ -1,4 +1,4 @@
-import { Journal } from "./Journal.type";
+import { Journal, JournalCategory } from "./Journal.type";
 import { Project } from "./Project.type";
 
 export type ISODateString = string;
@@ -24,3 +24,9 @@ export type BaseDocument = {
 export type Document = Journal | Project;
 
 export type DocumentPayload = Omit<Journal, "id"> | Omit<Project, "id">;
+
+export type DocumentsProps = {
+  type: DocumentType;
+  category?: JournalCategory;
+  className?: string;
+};

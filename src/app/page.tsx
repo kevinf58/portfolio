@@ -69,7 +69,7 @@ export default function Home() {
       </section>
       <section className="w-full flex flex-col items-center pt-32 bg-black shadow-default" id="scroll">
         <Documents type={DOCUMENT_TYPE.PROJECT} />
-        <Documents type={DOCUMENT_TYPE.JOURNAL} />
+        <Documents type={DOCUMENT_TYPE.JOURNAL} className="bg-dark-gray" />
         <CallToAction />
       </section>
       {/* <section className='h-screen w-full bg-green-300' /> */}

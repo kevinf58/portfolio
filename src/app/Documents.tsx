@@ -3,18 +3,19 @@
 import DocumentCard from "@/components/documents/DocumentCard";
 import Button from "@/components/ui/Button";
 import getDocuments from "@/services/getDocuments.service";
-import { DOCUMENT_TYPE } from "@/types/Document.type";
+import { DOCUMENT_TYPE, DocumentsProps } from "@/types/Document.type";
 import { DOCUMENTS_LOADED_LIMIT } from "@/lib/constants";
 import { useState, useEffect, useCallback } from "react";
 import { Document } from "@/types/Document.type";
 import { toast } from "react-toastify";
-import { DocumentType } from "@/types/Document.type";
 
-const Documents = ({ type }: { type: DocumentType }) => {
+const Documents = (props: DocumentsProps) => {
   const [documents, setDocuments] = useState<Array<Document>>([]);
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+
+  const { type } = props;
 
   const loadDocuments = useCallback(async () => {
     try {
@@ -49,16 +50,23 @@ const Documents = ({ type }: { type: DocumentType }) => {
   }, []);
 
   return (
-    <section className="flex flex-col items-center w-full gap-2 py-20 px-6 bg-dark-gray">
+    <section className={`flex flex-col items-center w-full gap-2 py-20 px-6 ${props.className}`}>
       <span className="font-sans font-bold text-5xl text-tint">{type === DOCUMENT_TYPE.JOURNAL ? "Journals" : "Projects"}</span>
 
       {!loading && documents.length === 0 ? (
         <div>No {type === DOCUMENT_TYPE.JOURNAL ? "Journals" : "Projects"} Found.</div>
       ) : (
         <div className="flex flex-col items-center w-full max-w-6xl mx-auto">
-          {documents.map((project) => (
-            <DocumentCard {...project} key={`${type}-${project.id}`} />
-          ))}
+          {documents
+            .filter((document) => {
+              if (document.type !== DOCUMENT_TYPE.JOURNAL) return true;
+              if (!props.category) return true;
+
+              return document.category === props.category;
+            })
+            .map((document) => (
+              <DocumentCard key={`${type}-${document.id}`} {...document} />
+            ))}
 
           {hasMore && (
             <Button onClick={loadDocuments} variant="secondary" loading={loading} className="mt-2">

@@ -1,6 +1,6 @@
 "use client";
 
-import { BaseProps } from "@/types/components/ui/Base.type";
+import { BaseProps } from "@/types/Base.type";
 import { SessionProvider } from "next-auth/react";
 
 const ClientWrapper = (props: BaseProps) => {
