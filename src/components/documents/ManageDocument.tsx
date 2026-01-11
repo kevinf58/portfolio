@@ -16,6 +16,7 @@ import PreviewButton from "./createDocument/PreviewButton";
 import PublishButton from "./createDocument/PublishButton";
 import TempButton from "./createDocument/TempButton";
 import { DOCUMENT_MODE, DocumentModeState } from "@/types/DocumentForm.type";
+import VisibilityToggle from "./createDocument/conditionalInputs/VisibilityToggle";
 
 const ManageDocument = ({ initialState }: { initialState: DocumentModeState }) => {
   const [isPreview, setIsPreview] = useState(false);
@@ -34,9 +35,12 @@ const ManageDocument = ({ initialState }: { initialState: DocumentModeState }) =
         ) : (
           <div className="w-220 flex flex-wrap flex-1 space-x-10 p-8 pt-28">
             <Card size="lg" className="w-full flex flex-col">
-              <div className="flex items-center gap-2">
-                <FaRegEdit size={25} className="text-dark-white mr-1" />
-                {initialState.mode === DOCUMENT_MODE.CREATE ? <DocumentTypeToggle /> : DocumentTypeElem}
+              <div className="flex items-center justify-between pr-10">
+                <div className="flex items-center gap-2">
+                  <FaRegEdit size={25} className="text-dark-white mr-1" />
+                  {initialState.mode === DOCUMENT_MODE.CREATE ? <DocumentTypeToggle /> : DocumentTypeElem}
+                </div>
+                <VisibilityToggle />
               </div>
               <div className="h-full flex flex-col mx-10 my-6 gap-4">
                 <div className="flex gap-2">
