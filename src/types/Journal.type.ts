@@ -10,7 +10,15 @@ export const JOURNAL_CATEGORY = {
   DEVELOPMENT: "development",
 } as const;
 
+export const VISIBILITY_VALUES = {
+  PUBLIC: "public",
+  PRIVATE: "private",
+} as const;
+
+export type Visibility = (typeof VISIBILITY_VALUES)[keyof typeof VISIBILITY_VALUES];
+
 export interface Journal extends BaseDocument {
   type: typeof DOCUMENT_TYPE.JOURNAL;
   category: JournalCategory;
+  visibility: Visibility;
 }

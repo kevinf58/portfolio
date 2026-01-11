@@ -1,6 +1,6 @@
 import { ReactNode, RefObject } from "react";
 import { DocumentPayload, DocumentType } from "./Document.type";
-import { JournalCategory } from "./Journal.type";
+import { JournalCategory, Visibility } from "./Journal.type";
 import { DOCUMENT_TYPE, Document } from "./Document.type";
 
 export type DocumentDraftActions =
@@ -8,6 +8,7 @@ export type DocumentDraftActions =
   | { type: "SET_TITLE"; payload: string }
   | { type: "SET_DATE"; payload: string }
   | { type: "SET_CATEGORY"; payload: JournalCategory }
+  | { type: "TOGGLE_VISIBILITY" }
   | { type: "SET_IMAGE_PREVIEW"; payload: string }
   | { type: "SET_TAGS"; payload: string[] }
   | { type: "SET_CONTENT"; payload: string }
@@ -29,7 +30,9 @@ export type BaseFormContextValue = {
 export type JournalFormContextValue = BaseFormContextValue & {
   type: typeof DOCUMENT_TYPE.JOURNAL;
   category: JournalCategory;
+  visibility: Visibility;
   setCategory: (category: JournalCategory) => void;
+  toggleVisibility: () => void;
 };
 export type ProjectFormContextValue = BaseFormContextValue & {
   type: typeof DOCUMENT_TYPE.PROJECT;

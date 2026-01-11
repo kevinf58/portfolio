@@ -1,5 +1,6 @@
 import { DOCUMENT_TYPE, DocumentPayload, DocumentType } from "@/types/Document.type";
 import { getLocalDate } from "./dateUtils";
+import { VISIBILITY_VALUES } from "@/types/Journal.type";
 
 // returns an empty state for the specified document type
 const emptyState = (type: DocumentType): DocumentPayload =>
@@ -12,6 +13,7 @@ const emptyState = (type: DocumentType): DocumentPayload =>
         content: "",
         tags: [],
         category: "daily",
+        visibility: VISIBILITY_VALUES.PRIVATE,
       }
     : {
         type: DOCUMENT_TYPE.PROJECT,

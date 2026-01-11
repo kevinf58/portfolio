@@ -18,6 +18,8 @@ const TempButton = () => {
           if (context.mode === DOCUMENT_MODE.EDIT && context.original.type === DOCUMENT_TYPE.PROJECT) {
             console.log("original: " + context.original.imagePreview);
           }
+        } else if (context.draft.type === DOCUMENT_TYPE.JOURNAL) {
+          console.log(context.draft.visibility);
         }
       }}
     >
