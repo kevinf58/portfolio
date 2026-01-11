@@ -88,7 +88,7 @@ const Footer = () => {
               MIT License
             </Link>
           </h6>
-          <h6>© 2025 Kevin Feng. All rights reserved.</h6>
+          <h6>© 2026 Kevin Feng. All rights reserved.</h6>
         </div>
       </div>
     </footer>

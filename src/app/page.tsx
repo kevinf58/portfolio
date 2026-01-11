@@ -7,23 +7,28 @@ import Documents from "./Documents";
 import Card from "@/components/ui/Card";
 import CallToAction from "./CallToAction";
 import { DOCUMENT_TYPE } from "@/types/Document.type";
+import { TextAnimation } from "@/components/ui/TextAnimation";
 
 export default function Home() {
   return (
     <>
       <section className="relative h-[calc(100vh-4.75rem)] w-full flex flex-col justify-center font-medium bg-dark-gray shadow-default">
         <div className="2xl:w-[40%] xl:w-[55%] lg:w-[60%] md:w-[80%] w-full sm:px-28 px-6">
-          <div className="flex items-end">
-            <h1 className="sm:text-7xl text-5xl font-bold text-tint">Kevin Feng</h1>
-          </div>
-          <div className="flex sm:flex-row sm:items-center sm:justify-start flex-col justify-center mb-16">
-            <div className="flex items-center gap-1.5 whitespace-nowrap font-serif">
-              Toronto, ON
-              <PiMapPinSimpleFill />
+          <TextAnimation element="div">
+            <div className="flex items-end">
+              <h1 className="sm:text-7xl text-5xl font-bold text-tint">Kevin Feng</h1>
             </div>
-          </div>
-          <span className="font-serif sm:text-3xl text-2xl">Computer Science Student @ The University of Western Ontario</span>
-          <ul className="flex flex-col space-y-1 mt-10 text-sm">
+            <div className="flex sm:flex-row sm:items-center sm:justify-start flex-col justify-center mb-16">
+              <div className="flex items-center gap-1.5 whitespace-nowrap font-serif">
+                Toronto, ON
+                <PiMapPinSimpleFill />
+              </div>
+            </div>
+          </TextAnimation>
+          <TextAnimation element="span" delay={0.1} className="font-serif sm:text-3xl text-2xl">
+            Computer Science Student @ The University of Western Ontario
+          </TextAnimation>
+          <TextAnimation element="ul" delay={0.25} className="flex flex-col space-y-1 mt-10 text-sm">
             <li>
               <Link href={"https://ca.linkedin.com/"} target="_blank">
                 <FaLinkedin className="h-full" />
@@ -42,7 +47,7 @@ export default function Home() {
                 <span>kevinfng12@gmail.com</span>
               </Link>
             </li>
-          </ul>
+          </TextAnimation>
         </div>
         <div className="flex flex-wrap group w-full absolute bottom-6 sm:px-28 px-6 font-sans text-xs gap-4">
           <Card className="items-center">

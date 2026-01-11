@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${inriaSans.variable} antialiased selection:bg-secondary`}>
+      <body className={`${inter.variable} ${inriaSans.variable} antialiased`}>
         <ClientWrapper>
           <header className="sticky top-0 z-20">
             <NavBar />
