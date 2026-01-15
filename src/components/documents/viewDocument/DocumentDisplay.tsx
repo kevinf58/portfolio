@@ -31,7 +31,7 @@ const DocumentDisplay = ({ document }: { document: Document }) => {
             </div>
           )}
         </div>
-        <div className="text-white/50 space-y-2">
+        <div className="text-white/50 space-y-1.5">
           <div className="flex items-center gap-x-4">
             <div className="flex space-x-1">
               <MdDateRange />
