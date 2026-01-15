@@ -9,7 +9,6 @@ import { TextAnimation } from "../ui/TextAnimation";
 import { RiDoorLockBoxLine } from "react-icons/ri";
 import { VISIBILITY_VALUES } from "@/types/Journal.type";
 
-//TODO: ADD CONDITIONALLY RENDERED ICONS IN PREVIEW AND FOCUS PAGES
 const DocumentCard = (props: Document) => {
   const titleElem = (
     <h1 className="flex items-center gap-2 text-2xl font-bold my-4 white">
