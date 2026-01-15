@@ -7,7 +7,6 @@ import { getLocalDate } from "@/utils/dateUtils";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/auth";
 
-//TODO: FIGURE OUT WHY ISAUTHORIZED IS NULL FOR THIS ENDPOINT ONLY!!! SSR -> SSR??? I DON'T KNOW BRO
 export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
     const [, , type, id] = req.nextUrl.pathname.split("/");
@@ -23,7 +22,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
     const stmt = db.prepare(`
         SELECT d.id, d.title, d.content, d.createdat AS createdAt, d.updatedat AS updatedAt, ${
-          type === DOCUMENT_TYPE.JOURNAL ? "d.category" : "NULL AS category"
+          type === DOCUMENT_TYPE.JOURNAL ? "d.category, d.visibility" : "NULL AS category, NULL AS visibility"
         }, '${type}' AS type, ${type === DOCUMENT_TYPE.PROJECT ? "d.imagePreview" : "NULL AS imagePreview"},
         GROUP_CONCAT(t.tag) AS tags
         FROM ${type} d
