@@ -6,9 +6,19 @@ import { FaArrowRight } from "react-icons/fa";
 import summarizeContent from "@/utils/summarizeContent";
 import Tag from "../ui/Tag";
 import { TextAnimation } from "../ui/TextAnimation";
+import { RiDoorLockBoxLine } from "react-icons/ri";
+import { VISIBILITY_VALUES } from "@/types/Journal.type";
 
+//TODO: ADD CONDITIONALLY RENDERED ICONS IN PREVIEW AND FOCUS PAGES
 const DocumentCard = (props: Document) => {
-  const titleElem = <h1 className="text-2xl font-bold my-4 white">{props.title}</h1>;
+  const titleElem = (
+    <h1 className="flex items-center gap-2 text-2xl font-bold my-4 white">
+      <span>{props.title}</span>
+      {props.type === DOCUMENT_TYPE.JOURNAL && props.visibility === VISIBILITY_VALUES.PRIVATE && <RiDoorLockBoxLine size={20} />}
+    </h1>
+  );
+
+  console.log(props);
 
   // conditional based on the type of document
   const conditionalElem =
