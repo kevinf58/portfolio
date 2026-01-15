@@ -17,7 +17,8 @@ db.exec(`
     createdat TEXT NOT NULL,
     updatedat TEXT NOT NULL,
     content TEXT NOT NULL,
-    category TEXT NOT NULL CHECK(category IN ('daily', 'learning', 'development', 'recruiting', 'trading'))
+    category TEXT NOT NULL CHECK(category IN ('daily', 'learning', 'development', 'recruiting', 'trading')),
+    visibility TEXT CHECK(visibility IN ('public', 'private')) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS project (

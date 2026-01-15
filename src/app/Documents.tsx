@@ -25,6 +25,10 @@ const Documents = (props: DocumentsProps) => {
 
       const res = await getDocuments({ type, limit: DOCUMENTS_LOADED_LIMIT, offset });
 
+      if (res.success) {
+        console.log(res.meta?.hasMore, res.meta?.limit, res.meta?.offset, res.meta?.total);
+      }
+
       if (!res.success) {
         toast.error(res.info.message);
         throw new Error(res.info.code + " " + res.info.message);
