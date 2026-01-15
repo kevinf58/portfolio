@@ -12,11 +12,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     let message: string = "";
     let stmt = null;
 
-    const session = getServerSession(authOptions);
     const document: DocumentPayload = await req.json();
 
     // auth check
-    if (!session) {
+    const isAuthorized = await getServerSession(authOptions);
+    if (!isAuthorized) {
       return NextResponse.json({ success: false, info: { code: 401, message: "Unauthorized" } });
     }
 
@@ -51,13 +51,14 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     if (document.type === DOCUMENT_TYPE.JOURNAL) {
       // create document
-      stmt = db.prepare(`INSERT INTO journal (title, createdAt, updatedAt, content, category) VALUES (?, ?, ?, ?, ?)`);
+      stmt = db.prepare(`INSERT INTO journal (title, createdAt, updatedAt, content, category, visibility) VALUES (?, ?, ?, ?, ?, ?)`);
       const res = stmt.run(
         document.title,
         new Date(document.createdAt).toISOString(),
         new Date(document.createdAt).toISOString(),
         document.content,
-        document.category
+        document.category,
+        document.visibility
       );
       const journalID = res.lastInsertRowid;
 
@@ -102,9 +103,13 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     const limit = Number(req.nextUrl.searchParams.get("limit")) || DOCUMENTS_LOADED_LIMIT;
     const offset = Number(req.nextUrl.searchParams.get("offset")) || 0;
 
+    // clause to add to conditionally filter out private journals
+    const isAuthorized = await getServerSession(authOptions);
+    const whereClause = type === DOCUMENT_TYPE.JOURNAL && !isAuthorized ? "WHERE d.visibility = 'public'" : "";
+
     const countStmt =
       type === DOCUMENT_TYPE.JOURNAL
-        ? db.prepare(`SELECT COUNT(*) as total FROM journal`)
+        ? db.prepare(`SELECT COUNT(*) as total FROM journal d ${whereClause}`)
         : db.prepare(`SELECT COUNT(*) as total FROM project`);
 
     const { total } = countStmt.get() as { total: number };
@@ -116,11 +121,12 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
     const stmt = db.prepare(`
         SELECT d.id, d.title, d.createdat AS createdAt, d.updatedat AS updatedAt, d.content, ${
-          type === DOCUMENT_TYPE.JOURNAL ? "d.category" : "NULL AS category"
-        }, '${type}' AS type, ${type === DOCUMENT_TYPE.PROJECT ? "d.imagePreview" : "NULL AS imagePreview"}, '${type}' AS type,
+          type === DOCUMENT_TYPE.JOURNAL ? "d.category, d.visibility" : "NULL AS category, NULL as visibility"
+        }, ${type === DOCUMENT_TYPE.PROJECT ? "d.imagePreview" : "NULL AS imagePreview"}, '${type}' AS type,
         GROUP_CONCAT(t.tag) AS tags
         FROM ${type} d
         LEFT JOIN ${type}_tag t ON d.id = t.${type}_id
+        ${whereClause}
         GROUP BY d.id
         ORDER BY d.createdat DESC
         LIMIT ? OFFSET ?

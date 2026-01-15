@@ -6,8 +6,10 @@ import { DeleteButton, EditButton } from "../DocumentActions";
 import { dateToReadable } from "@/utils/dateUtils";
 import Tag from "@/components/ui/Tag";
 import ReadOnlyCrepe from "./ReadOnlyCrepe";
-import { Document } from "@/types/Document.type";
+import { Document, DOCUMENT_TYPE } from "@/types/Document.type";
 import { useSession } from "next-auth/react";
+import { RiDoorLockBoxLine } from "react-icons/ri";
+import { VISIBILITY_VALUES } from "@/types/Journal.type";
 
 const DocumentDisplay = ({ document }: { document: Document }) => {
   const { id, type, title, createdAt, updatedAt, tags, content } = document;
@@ -29,15 +31,23 @@ const DocumentDisplay = ({ document }: { document: Document }) => {
             </div>
           )}
         </div>
-        <div className="flex gap-x-4 text-white/50">
-          <div className="flex space-x-1">
-            <MdDateRange />
-            <p className="text-xs font-light">{dateToReadable(createdAt)}</p>
-          </div>
-          {createdAt !== updatedAt && (
+        <div className="text-white/50 space-y-1.5">
+          <div className="flex items-center gap-x-4">
             <div className="flex space-x-1">
-              <FaRegClock />
-              <h6 className="text-xs text-dark-white italic">{"Last Edited " + dateToReadable(createdAt)}</h6>
+              <MdDateRange />
+              <p className="text-xs font-light">{dateToReadable(createdAt)}</p>
+            </div>
+            {createdAt !== updatedAt && (
+              <div className="flex space-x-1">
+                <FaRegClock />
+                <h6 className="text-xs text-dark-white italic">{"Last Edited " + dateToReadable(createdAt)}</h6>
+              </div>
+            )}
+          </div>
+          {type === DOCUMENT_TYPE.JOURNAL && document.visibility === VISIBILITY_VALUES.PRIVATE && (
+            <div className="flex items-center gap-1 text-xs">
+              <RiDoorLockBoxLine size={15} />
+              <span>Private Journal</span>
             </div>
           )}
         </div>

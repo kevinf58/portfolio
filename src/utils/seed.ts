@@ -1,5 +1,7 @@
 import db from "../lib/db";
 
+db.pragma("foreign_keys = ON");
+
 // sample data
 const journals = [
   {
@@ -9,6 +11,7 @@ const journals = [
     content: "Today I started working on my personal journaling app. The goal is to keep things simple and fast.",
     tags: ["personal", "thoughts", "app"],
     category: "trading",
+    visibility: "private",
   },
   {
     title: "Learning SQLite",
@@ -17,6 +20,7 @@ const journals = [
     content: "I spent some time learning how SQLite works with better-sqlite3. It feels lightweight and perfect for small projects.",
     tags: ["sqlite", "learning", "backend"],
     category: "learning",
+    visibility: "public",
   },
   {
     title: "Reflection",
@@ -24,7 +28,7 @@ const journals = [
     updatedAt: "2025-01-12T20:15:00.000Z",
     content: "This week was productive. I managed to add tagging and categories to my journal entries.",
     tags: ["reflection", "weekly", "progress"],
-    category: "daily",
+    visibility: "private",
   },
 ];
 
@@ -58,8 +62,8 @@ const projects = [
 // statements
 const insertJournal = db.prepare(`
   INSERT OR IGNORE INTO journal
-  (title, createdat, updatedat, content, category)
-  VALUES (?, ?, ?, ?, ?)
+  (title, createdat, updatedat, content, category, visibility)
+  VALUES (?, ?, ?, ?, ?, ?)
 `);
 
 const insertJournalTag = db.prepare(`
@@ -80,9 +84,10 @@ const insertProjectTag = db.prepare(`
 
 // insertions
 for (const j of journals) {
-  const result = insertJournal.run(j.title, j.createdAt, j.updatedAt, j.content, j.category);
+  const result = insertJournal.run(j.title, j.createdAt, j.updatedAt, j.content, j.category, j.visibility);
   const journalId = result.lastInsertRowid;
   for (const tag of j.tags) {
+    console.log(tag);
     insertJournalTag.run(journalId, tag);
   }
 }

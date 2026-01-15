@@ -9,7 +9,7 @@ import {
   JournalFormContextValue,
   ProjectFormContextValue,
 } from "@/types/DocumentForm.type";
-import { JournalCategory } from "@/types/Journal.type";
+import { JournalCategory, VISIBILITY_VALUES } from "@/types/Journal.type";
 import emptyState from "@/utils/emptyState";
 import excludeDocumentID from "@/utils/excludeDocumentID";
 import { createContext, useCallback, useContext, useMemo, useReducer, useRef } from "react";
@@ -35,6 +35,7 @@ const documentDraftReducer = (state: DocumentPayload, action: DocumentDraftActio
             content: state.content,
             tags: state.tags,
             category: "daily",
+            visibility: VISIBILITY_VALUES.PRIVATE,
           };
     case "SET_TITLE":
       return {
@@ -54,6 +55,15 @@ const documentDraftReducer = (state: DocumentPayload, action: DocumentDraftActio
       return {
         ...state,
         category: action.payload,
+      };
+
+    case "TOGGLE_VISIBILITY":
+      if (state.type !== DOCUMENT_TYPE.JOURNAL) {
+        return state;
+      }
+      return {
+        ...state,
+        visibility: state.visibility === VISIBILITY_VALUES.PRIVATE ? VISIBILITY_VALUES.PUBLIC : VISIBILITY_VALUES.PRIVATE,
       };
     case "SET_IMAGE_PREVIEW":
       if (state.type !== DOCUMENT_TYPE.PROJECT) {
@@ -131,6 +141,7 @@ export const useDocumentForm = (initialState: DocumentModeState) => {
     (category: JournalCategory) => dispatch({ type: "UPDATE_DRAFT", payload: { type: "SET_CATEGORY", payload: category } }),
     []
   );
+  const toggleVisibility = useCallback(() => dispatch({ type: "UPDATE_DRAFT", payload: { type: "TOGGLE_VISIBILITY" } }), []);
   const setImagePreview = useCallback(
     (imagePreview: string) => dispatch({ type: "UPDATE_DRAFT", payload: { type: "SET_IMAGE_PREVIEW", payload: imagePreview } }),
     []
@@ -158,7 +169,9 @@ export const useDocumentForm = (initialState: DocumentModeState) => {
         ...base,
         type: DOCUMENT_TYPE.JOURNAL,
         category: draft.category,
+        visibility: draft.visibility,
         setCategory,
+        toggleVisibility,
       };
 
       if (mode === DOCUMENT_MODE.EDIT) {
@@ -184,7 +197,7 @@ export const useDocumentForm = (initialState: DocumentModeState) => {
     }
 
     return { ...projectValue, mode: DOCUMENT_MODE.CREATE, draft };
-  }, [state, toggleDocumentType, setTitle, setDate, setCategory, setImagePreview, setTags, setContent, resetFields]);
+  }, [state, toggleDocumentType, setTitle, setDate, setCategory, toggleVisibility, setImagePreview, setTags, setContent, resetFields]);
 
   return contextValue;
 };

@@ -11,6 +11,10 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
     const [, , type, id] = req.nextUrl.pathname.split("/");
 
+    // clause to add if I am logged in as admin
+    const isAuthorized = await getServerSession(authOptions);
+    const visibilityClause = type === DOCUMENT_TYPE.JOURNAL && !isAuthorized ? "AND d.visibility = 'public'" : "";
+
     // check for if type is of type DOCUMENT_TYPE
     if (!Object.values(DOCUMENT_TYPE).includes(type as DocumentType)) {
       return NextResponse.json({ success: false, info: { code: 400, message: "Invalid document type" } });
@@ -18,12 +22,13 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
     const stmt = db.prepare(`
         SELECT d.id, d.title, d.content, d.createdat AS createdAt, d.updatedat AS updatedAt, ${
-          type === DOCUMENT_TYPE.JOURNAL ? "d.category" : "NULL AS category"
+          type === DOCUMENT_TYPE.JOURNAL ? "d.category, d.visibility" : "NULL AS category, NULL AS visibility"
         }, '${type}' AS type, ${type === DOCUMENT_TYPE.PROJECT ? "d.imagePreview" : "NULL AS imagePreview"},
         GROUP_CONCAT(t.tag) AS tags
         FROM ${type} d
         LEFT JOIN ${type}_tag t ON t.${type}_id = d.id
         WHERE d.id = ?
+        ${visibilityClause}
         GROUP BY d.id;
       `);
     const res = stmt.get(id) as Document;
@@ -48,11 +53,11 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
 export async function DELETE(req: NextRequest): Promise<NextResponse> {
   try {
-    const session = getServerSession(authOptions);
     const [, , type, id] = req.nextUrl.pathname.split("/");
 
     // auth check
-    if (!session) {
+    const isAuthorized = await getServerSession(authOptions);
+    if (!isAuthorized) {
       return NextResponse.json({ success: false, info: { code: 401, message: "Unauthorized" } });
     }
 
@@ -81,12 +86,12 @@ export async function DELETE(req: NextRequest): Promise<NextResponse> {
 
 export async function PATCH(req: NextRequest): Promise<NextResponse> {
   try {
-    const session = getServerSession(authOptions);
+    const isAuthorized = await getServerSession(authOptions);
     const [, , type, id] = req.nextUrl.pathname.split("/");
     const diff: Operation[] = await req.json();
 
     // auth check
-    if (!session) {
+    if (!isAuthorized) {
       return NextResponse.json({ success: false, info: { code: 401, message: "Unauthorized" } });
     }
 
@@ -127,7 +132,6 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
     const patched = applyPatch(res, mainOperations, true).newDocument;
     patched.updatedAt = new Date(getLocalDate()).toISOString();
 
-    console.log(patched.updatedAt);
     const cols = Object.keys(patched);
     const vals = Object.values(patched);
     const clause = cols.map((col) => `${col} = ?`).join(", ");

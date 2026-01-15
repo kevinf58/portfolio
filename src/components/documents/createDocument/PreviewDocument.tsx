@@ -16,6 +16,7 @@ const PreviewDocument = () => {
           updatedAt: context.date,
           tags: context.tags,
           category: context.category,
+          visibility: context.visibility,
         }
       : {
           id: "",
