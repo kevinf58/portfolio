@@ -17,8 +17,6 @@ const DocumentCard = (props: Document) => {
     </h1>
   );
 
-  console.log(props);
-
   // conditional based on the type of document
   const conditionalElem =
     props.type === DOCUMENT_TYPE.JOURNAL ? (

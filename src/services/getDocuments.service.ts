@@ -9,6 +9,11 @@ const getDocuments = (payload: GetDocumentsPayload): Promise<ApiResponse<Documen
     offset: String(payload.offset),
   });
 
+  // add category to params if filtering journals by category
+  if (payload.category) {
+    params.set("category", payload.category);
+  }
+
   const url = `${process.env.NEXT_PUBLIC_API_URL}/${payload.type}?${params}`;
 
   return apiRequest<Document[]>(url, { method: "GET" });
