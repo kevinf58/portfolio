@@ -46,7 +46,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       info: { code: 200, message: "Document fetched successfully" },
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return NextResponse.json<ApiResponse<null>>({ success: false, info: { code: 500, message: "Server failure. Please try again later" } });
   }
 }
@@ -79,7 +79,7 @@ export async function DELETE(req: NextRequest): Promise<NextResponse> {
       info: { code: 200, message: "Document deleted successfully" },
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return NextResponse.json<ApiResponse<null>>({ success: false, info: { code: 500, message: "Server failure. Please try again later" } });
   }
 }
@@ -175,7 +175,7 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
       info: { code: 200, message: "Document Edited successfully" },
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return NextResponse.json<ApiResponse<null>>({ success: false, info: { code: 500, message: "Server failure. Please try again later" } });
   }
 }

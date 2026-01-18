@@ -64,7 +64,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const dataURL = data.content?.download_url;
     return NextResponse.json({ success: true, data: dataURL, info: { code: 201, message: "Image upload successful" } });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return NextResponse.json<ApiResponse<null>>({ success: false, info: { code: 500, message: "Server failure. Please try again later" } });
   }
 }

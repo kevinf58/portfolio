@@ -92,7 +92,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     return NextResponse.json<ApiResponse<null>>({ success: true, data: null, info: { code: 201, message } });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return NextResponse.json<ApiResponse<null>>({ success: false, info: { code: 500, message: "Server failure. Please try again later" } });
   }
 }
@@ -177,7 +177,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       info: { code: 200, message: "Documents fetched successfully" },
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return NextResponse.json<ApiResponse<null>>({ success: false, info: { code: 500, message: "Server failure. Please try again later" } });
   }
 }
