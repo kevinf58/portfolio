@@ -6,6 +6,7 @@ import { DOCUMENT_CONTENT_MIN_LENGTH, DOCUMENT_TITLE_MAX_LENGTH, DOCUMENT_TITLE_
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/auth";
+import { JournalCategory } from "@/types/Journal.type";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
@@ -58,7 +59,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         new Date(document.createdAt).toISOString(),
         document.content,
         document.category,
-        document.visibility
+        document.visibility,
       );
       const journalID = res.lastInsertRowid;
 
@@ -76,7 +77,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         new Date(document.createdAt).toISOString(),
         new Date(document.createdAt).toISOString(),
         document.content,
-        document.imagePreview
+        document.imagePreview,
       );
       const projectID = res.lastInsertRowid;
 
@@ -100,19 +101,35 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
     const type = req.nextUrl.pathname.split("/").pop();
 
+    // pagination params
     const limit = Number(req.nextUrl.searchParams.get("limit")) || DOCUMENTS_LOADED_LIMIT;
     const offset = Number(req.nextUrl.searchParams.get("offset")) || 0;
+    // optional journal category param
+    const category: JournalCategory = (req.nextUrl.searchParams.get("category") as JournalCategory) || undefined;
 
-    // clause to add to conditionally filter out private journals
+    // constructing conditional WHERE clause
     const isAuthorized = await getServerSession(authOptions);
-    const whereClause = type === DOCUMENT_TYPE.JOURNAL && !isAuthorized ? "WHERE d.visibility = 'public'" : "";
+    const conditions: string[] = [];
+    const params: string[] = [];
+
+    // visibility condition
+    if (type === DOCUMENT_TYPE.JOURNAL && !isAuthorized) {
+      conditions.push("d.visibility = ?");
+      params.push("public");
+    }
+    // category condition
+    if (category !== undefined) {
+      conditions.push("d.category = ?");
+      params.push(category);
+    }
+    const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
 
     const countStmt =
       type === DOCUMENT_TYPE.JOURNAL
         ? db.prepare(`SELECT COUNT(*) as total FROM journal d ${whereClause}`)
         : db.prepare(`SELECT COUNT(*) as total FROM project`);
 
-    const { total } = countStmt.get() as { total: number };
+    const { total } = countStmt.get(...params) as { total: number };
 
     // error and sql injection handling
     if (!Object.values(DOCUMENT_TYPE).includes(type as DocumentType)) {
@@ -131,11 +148,16 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         ORDER BY d.createdat DESC
         LIMIT ? OFFSET ?
       `);
-    const res = stmt.all(limit, offset) as Array<Document>;
+    const res = stmt.all(...params, limit, offset) as Array<Document>;
 
     // check for if stmt returned >= 1 row
     if (res.length === 0) {
-      return NextResponse.json({ success: true, data: "", info: { code: 200, message: "No documents exist" } });
+      return NextResponse.json({
+        success: true,
+        data: [],
+        meta: { limit, offset, total, hasMore: false },
+        info: { code: 200, message: "No documents exist" },
+      });
     }
 
     const data: Document[] = res.map((row) => ({

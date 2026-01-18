@@ -15,15 +15,40 @@ const Documents = (props: DocumentsProps) => {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
-  const { type } = props;
+  const { type, category } = props;
 
-  const loadDocuments = useCallback(async () => {
+  const initialLoad = async () => {
+    try {
+      setLoading(true);
+      setHasMore(true);
+
+      const res = await getDocuments({ type, limit: DOCUMENTS_LOADED_LIMIT, offset: 0, category });
+
+      if (!res.success) {
+        toast.error(res.info.message);
+        throw new Error(res.info.code + " " + res.info.message);
+      }
+
+      setDocuments(res.data);
+
+      // offset the number of documents already loaded
+      if (!res.meta || (res.meta && res.meta.total <= res.meta.offset + DOCUMENTS_LOADED_LIMIT)) {
+        setHasMore(false);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setOffset(DOCUMENTS_LOADED_LIMIT);
+      setLoading(false);
+    }
+  };
+
+  const loadMore = useCallback(async () => {
     try {
       if (!hasMore) return;
-
       setLoading(true);
 
-      const res = await getDocuments({ type, limit: DOCUMENTS_LOADED_LIMIT, offset });
+      const res = await getDocuments({ type, limit: DOCUMENTS_LOADED_LIMIT, offset, category });
 
       if (!res.success) {
         toast.error(res.info.message);
@@ -43,11 +68,11 @@ const Documents = (props: DocumentsProps) => {
     } finally {
       setLoading(false);
     }
-  }, [hasMore, offset, type]);
+  }, [category, hasMore, offset, type]);
 
   useEffect(() => {
-    loadDocuments();
-  }, []);
+    initialLoad();
+  }, [category]);
 
   return (
     <section className={`flex flex-col items-center w-full gap-2 py-20 px-6 ${props.className}`}>
@@ -57,19 +82,12 @@ const Documents = (props: DocumentsProps) => {
         <div>No {type === DOCUMENT_TYPE.JOURNAL ? "Journals" : "Projects"} Found.</div>
       ) : (
         <div className="flex flex-col items-center w-full max-w-6xl mx-auto">
-          {documents
-            .filter((document) => {
-              if (document.type !== DOCUMENT_TYPE.JOURNAL) return true;
-              if (!props.category) return true;
-
-              return document.category === props.category;
-            })
-            .map((document) => (
-              <DocumentCard key={`${type}-${document.id}`} {...document} />
-            ))}
+          {documents.map((document) => (
+            <DocumentCard key={`${type}-${document.id}`} {...document} />
+          ))}
 
           {hasMore && (
-            <Button onClick={loadDocuments} variant="secondary" loading={loading} className="mt-2">
+            <Button onClick={loadMore} variant="secondary" loading={loading} className="mt-2">
               Load More
             </Button>
           )}
