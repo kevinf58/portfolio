@@ -5,7 +5,7 @@ import Button from "@/components/ui/Button";
 import getDocuments from "@/services/getDocuments.service";
 import { DOCUMENT_TYPE, DocumentsProps } from "@/types/Document.type";
 import { DOCUMENTS_LOADED_LIMIT } from "@/lib/constants";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Document } from "@/types/Document.type";
 import { toast } from "react-toastify";
 
@@ -43,14 +43,12 @@ const Documents = (props: DocumentsProps) => {
     }
   };
 
-  const loadMore = async () => {
+  const loadMore = useCallback(async () => {
     try {
       if (!hasMore) return;
       setLoading(true);
 
       const res = await getDocuments({ type, limit: DOCUMENTS_LOADED_LIMIT, offset, category });
-
-      console.log("more");
 
       if (!res.success) {
         toast.error(res.info.message);
@@ -70,7 +68,7 @@ const Documents = (props: DocumentsProps) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [category, hasMore, offset, type]);
 
   useEffect(() => {
     initialLoad();
